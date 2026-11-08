@@ -1,9 +1,0 @@
-You are rebuilding the Tachyon Lab site under design system v2. Read /Users/ldpleo/tachyon-v1/DESIGN.md first — it is the full source of truth and wins over any earlier instruction. Also read /Users/ldpleo/tachyon-v1/DELEGATION.md for model-routing rules.
-
-Global hard constraints for every page:
-- 100% vanilla single HTML file, Google Fonts only (Archivo 400/500/600/700, Instrument Serif italic 400, IBM Plex Mono 400/500). No frameworks, no external JS, no CSS gradients, no blue/cyan/teal/purple.
-- Palette exactly: --paper #F2EFE9, --paper-hi #FBFAF7, --ink #111114, --ink-2 #55524B, --ink-3 #8C887F, --rule #DED9CE, --graticule #E8E3D8, --void #08080A, --void-2 #0E0E11, --beam #E5310E, --phase #D4FF00, --amber #FF9F1C. On paper: ink + hairlines + one red only. Spectrum lives inside black viewports only.
-- Signature: 1px vertical --beam line at left margin x=64px desktop / 16px mobile, full height, with tick marks + mono figure numbers at each section.
-- Sentence case headlines, short human copy, no marketing verbs (unlock/supercharge/seamless/powerful/next-gen), no pricing/signup/demo/testimonials/metrics, no box/hardware/model-spec/lab-rig mentions. Every readout labelled simulated, never measured.
-- Nav (paper, hairline bottom, 60px): TACHYON wordmark + mono LAB LIGHT-ALPHA, links FIELD 01 CONE 02 DISSIPATE 03 FRINGE 04 MANIFOLD 05 TRACE with current marked. Responsive mobile, prefers-reduced-motion respected.
-- Write the COMPLETE file to disk at the assigned path, no truncation. Verify with `node --check` equivalent or by opening logic mentally; keep JS vanilla and robust. Then write report to OUTDIR/<slug>/report.md describing what was built.

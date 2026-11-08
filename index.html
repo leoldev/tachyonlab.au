@@ -1,256 +1,1529 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#070706">
-<title>Tachyon Lab — Local-first AI</title>
-<meta name="description" content="Independent research lab in Brisbane building local-first AI that runs on your machine. Tachyon-V1 is in light-alpha.">
+<title>Tachyon Lab | Driving the Australian Frontier</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<link rel="canonical" href="https://tachyonlab.au/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tachyon Lab — Local-first AI">
-<meta property="og:description" content="Local-first AI that runs on your machine, not in the cloud. Tachyon-V1 is in light-alpha.">
-<meta property="og:url" content="https://tachyonlab.au/">
-<meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070706'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23F4F3EE'/%3E%3Ccircle cx='16' cy='16' r='5.5' fill='none' stroke='%23F4F3EE'/%3E%3Crect x='14.5' y='14.5' width='3' height='3' fill='%23FF3B00'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="src/site.css">
-<style>#boot{position:fixed;inset:0;background:#070706;z-index:9999}</style>
-<noscript><style>#boot{display:none}.entry__title .line>span,.panel__content{transform:none!important;opacity:1!important}</style></noscript>
-<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' js';</script>
+<style>
+@font-face{
+  font-family:'Tachyon Archivo Heavy';
+  src:url('brand/fonts/TachyonArchivo-Heavy.ttf') format('truetype');
+  font-weight:800;font-style:normal;font-display:block;
+}
+
+:root{
+  --void:#050506;
+  --pitch:#0A0A0C;
+  --graphite:#141418;
+  --ash:#26262C;
+  --iron:#3C3C46;
+  --smoke:#7A7A88;
+  --bone:#EFECE4;
+
+  --signal:#FF2E63;
+  --signal-deep:#D8003F;
+  --phosphor:#3DF5C4;
+  --amber:#FFB020;
+  --azure:#4D7CFF;
+
+  --sans:'Archivo',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --tech:'Martian Mono','IBM Plex Mono',ui-monospace,monospace;
+
+  --ease:cubic-bezier(.16,.84,.24,1);
+  --io:cubic-bezier(.4,0,.2,1);
+  --land:cubic-bezier(.22,1.1,.3,1);
+
+  --rail:66px;
+  --rail-open:184px;
+  --pad:clamp(20px,3.2vw,48px);
+  --dock-h:54px;
+  --dock-r:22px;
+  --mx0:42.21;--mx1:98.05;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--void);color:var(--bone);
+  font-family:var(--sans);-webkit-font-smoothing:antialiased;
+  overflow:hidden;position:relative;
+}
+*{scrollbar-width:thin;scrollbar-color:var(--signal-deep) var(--void)}
+*::-webkit-scrollbar{width:10px;height:10px}
+*::-webkit-scrollbar-track{background:var(--void)}
+*::-webkit-scrollbar-thumb{background:var(--signal-deep);border:3px solid var(--void)}
+*::-webkit-scrollbar-thumb:hover{background:var(--signal)}
+*::-webkit-scrollbar-corner{background:var(--void)}
+::selection{background:var(--signal);color:var(--void)}
+
+/* ───────── stage ───────── */
+.stage{
+  position:relative;height:100svh;
+  padding:clamp(22px,3.4vh,44px) calc(var(--rail) + clamp(16px,2vw,30px)) calc(var(--dock-h) + clamp(40px,5vh,64px)) var(--pad);
+  display:flex;flex-direction:column;justify-content:flex-start;gap:0;
+  transition:padding-right .44s var(--ease);
+}
+body.menu .stage{padding-right:calc(var(--rail-open) + clamp(16px,2vw,30px))}
+.identity,.dir{transition:opacity .5s var(--io),transform .6s var(--ease)}
+.stage.is-form .identity,.stage.is-form .strip,.stage.is-form .dir{opacity:.09;transform:translateY(14px) scale(.99);pointer-events:none}
+
+/* ───────── YON matrix: 4x18, stationary cells, roaming colours ───────── */
+.mx{transform-box:fill-box;transform-origin:center bottom;fill:#26262C}
+.mx.lit{fill:var(--c)}
+.mx.hot{fill:var(--bone)}
+.js:not(.is-in) .mx:not(.dyn){opacity:0;transform:translateY(-30px)}
+.is-in .mx:not(.dyn){animation:cellfall .74s var(--land) both;animation-delay:var(--fd)}
+@keyframes cellfall{
+  0%{opacity:0;transform:translateY(-42px)}
+  52%{opacity:1;transform:translateY(0) scaleY(1)}
+  66%{opacity:1;transform:translateY(0) scaleY(.88)}
+  82%{opacity:1;transform:translateY(0) scaleY(1.06)}
+  100%{opacity:1;transform:translateY(0) scaleY(1)}
+}
+
+/* ───────── identity (small, top-left) ───────── */
+.identity{display:flex;align-items:flex-start;justify-content:flex-start;min-height:0;flex:none;margin-top:2px}
+.wm{display:block;width:100%;height:auto;overflow:visible}
+.wm text{font-family:'Tachyon Archivo Heavy','Archivo',sans-serif;font-size:200px;font-weight:800;fill:var(--bone)}
+.wm .sig{fill:var(--signal)}
+.wm .ring{fill:none;stroke:var(--bone);stroke-width:25;stroke-miterlimit:10;stroke-linejoin:miter;stroke-linecap:butt}
+.wm .strut{stroke:var(--bone);stroke-width:5;stroke-miterlimit:10;fill:none}
+.wm .disc{fill:var(--bone)}
+.g{animation:scanpass 11s linear infinite;animation-delay:calc(var(--i) * .08s)}
+@keyframes scanpass{0%,88%,100%{fill:var(--bone)}92%{fill:var(--phosphor)}96%{fill:var(--bone)}}
+.wm .sig{animation:none}
+#logoblock{animation:none}
+.settled .mx:not(.dyn){opacity:1;transform:none}
+.js .wm .g{opacity:0;transform:translateY(32px)}
+
+.js .wm .ring{stroke-dasharray:1;stroke-dashoffset:1}
+.is-in .wm .g{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .94s var(--ease);transition-delay:calc(.5s + var(--i) * .058s)}
+.is-in .wm .ring{stroke-dashoffset:0;transition:stroke-dashoffset 1.2s var(--ease) .78s}
+
+/* ───────── strip: carousel + 4 keys = row 3 of the 3x7 ───────── */
+.strip{display:grid;grid-template-columns:41.25% 1fr;gap:0;margin-top:clamp(2px,.8vh,10px);
+  border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);flex:none}
+.car{position:relative;min-height:184px;overflow:hidden}
+.slide{position:absolute;inset:0;padding:18px 20px 26px;opacity:0;transition:opacity .5s var(--io);pointer-events:none}
+.slide.on{opacity:1;pointer-events:auto}
+.slide__k{display:block;font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:10px}
+.slide p{margin:0;font-size:clamp(15px,1.5vw,19px);line-height:1.45;letter-spacing:-.01em;max-width:34ch}
+.slide a{color:inherit;text-decoration:none;border-bottom:1px solid var(--signal)}
+.slide{display:block;padding:0}
+.keys{padding-left:calc((var(--mx0,42.21) - 41.25)/58.75*100%);padding-right:calc((100 - var(--mx1,98.05))/58.75*100%)}
+#car .cdots{left:3.939%}
+.slide p{position:absolute;left:3.939%;top:50%;transform:translateY(-50%);width:61.45%;margin:0;min-width:0;max-width:none}
+.shot{position:absolute;top:50%;left:81.23%;transform:translate(-50%,-50%);width:clamp(104px,11vw,148px);max-width:40%;margin:0;pointer-events:none}
+.shot.links{pointer-events:auto;display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:12px;line-height:1.5}
+.shot.links a{color:inherit;text-decoration:none;border-bottom:1px solid var(--signal);align-self:flex-start}
+.shot svg{display:block;width:100%;height:auto}
+.flow-del{transform-box:fill-box;transform-origin:center;animation:delio 5s var(--io) infinite}
+@keyframes delio{0%,10%{opacity:0;transform:translateY(-4px)}22%,66%{opacity:1;transform:none}80%,100%{opacity:0;transform:translateY(4px)}}
+.cdots{position:absolute;left:20px;bottom:12px;display:flex;gap:8px}
+.cdots button{appearance:none;border:0;cursor:pointer;width:8px;height:8px;background:var(--iron);padding:0;transition:background .2s linear}
+.cdots button.on{background:var(--signal)}
+.cdots button:focus-visible{outline:2px solid var(--phosphor);outline-offset:2px}
+.keys{display:grid;grid-template-columns:repeat(4,1fr)}
+.key{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  min-height:184px;padding:16px 10px;text-align:center;
+  color:var(--bone);text-decoration:none}
+.key__ic{width:88px;height:88px;stroke:#B9B9C6;fill:none;stroke-width:2.6;stroke-linecap:square;stroke-linejoin:miter;transform-box:fill-box;transform-origin:center;transition:stroke .2s linear}
+.key{position:relative;overflow:hidden}
+.key::after{content:"";position:absolute;inset:0;background:var(--signal);transform:translateX(-101%)}
+.key.wipe-in::after{animation:wipeIn .45s var(--io)}
+.key.wipe-out::after{animation:wipeOut .45s var(--io)}
+@keyframes wipeIn{from{transform:translateX(-101%)}to{transform:none}}
+@keyframes wipeOut{from{transform:none}to{transform:translateX(101%)}}
+.key.active::after{transform:none}
+.key>*{position:relative;z-index:1}
+.key:hover,.key:focus-visible,.key.active{color:var(--void)}
+.key:hover .key__ic,.key:focus-visible .key__ic,.key.active .key__ic{stroke:var(--void)}
+/* about: person <-> australia. transitions reverse on unhover */
+.ab-person{transform-box:fill-box;transform-origin:center;transition:opacity .35s var(--io),transform .45s var(--io)}
+.ab-map{opacity:0;transform:scale(.65);transform-box:fill-box;transform-origin:center;transition:opacity .45s var(--io),transform .45s var(--io);stroke-linejoin:round;stroke-linecap:round}
+.ab-map .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s var(--io) .05s;stroke-width:1.7}
+.key:hover .ab-person,.key:focus-visible .ab-person,.dir__c:hover .ab-person,.dir__c:focus-visible .ab-person{opacity:0;transform:scale(.65)}
+.key:hover .ab-map,.key:focus-visible .ab-map,.dir__c:hover .ab-map,.dir__c:focus-visible .ab-map{opacity:1;transform:scale(1)}
+.key:hover .ab-map .draw,.key:focus-visible .ab-map .draw,.dir__c:hover .ab-map .draw,.dir__c:focus-visible .ab-map .draw{stroke-dashoffset:0}
+/* method: one quick spin, JS-driven so unhover completes then stops */
+.ic-method{transform-box:view-box;transform-origin:center}
+/* evidence: bars swap left<->right, bottoms stay aligned; reverses on unhover */
+.key .ev1,.key .ev2,.key .ev3,.dir__c .ev1,.dir__c .ev2,.dir__c .ev3{transform-box:fill-box;transition:transform .55s var(--io)}
+.key:hover .ev1,.key:focus-visible .ev1,.dir__c:hover .ev1,.dir__c:focus-visible .ev1{transform:translateX(14px)}
+.key:hover .ev2,.key:focus-visible .ev2,.dir__c:hover .ev2,.dir__c:focus-visible .ev2{transform:translateX(-7px)}
+.key:hover .ev3,.key:focus-visible .ev3,.dir__c:hover .ev3,.dir__c:focus-visible .ev3{transform:translateX(-7px)}
+/* connect: arrow fires into the ring; reverses on unhover */
+.cu-box{transform-box:fill-box;transform-origin:center;transition:opacity .35s var(--io),transform .45s var(--io)}
+.cu-arrow{transition:transform .5s var(--io)}
+.cu-ring{opacity:0;transform:scale(.4);transform-box:fill-box;transform-origin:center;transition:opacity .3s var(--io) .18s,transform .35s var(--io) .18s}
+.key:hover .cu-box,.key:focus-visible .cu-box,.dir__c:hover .cu-box,.dir__c:focus-visible .cu-box{opacity:0;transform:scale(.7)}
+.key:hover .cu-arrow,.key:focus-visible .cu-arrow,.dir__c:hover .cu-arrow,.dir__c:focus-visible .cu-arrow{transform:translate(-7px,7px)}
+.key:hover .cu-ring,.key:focus-visible .cu-ring,.dir__c:hover .cu-ring,.dir__c:focus-visible .cu-ring{opacity:1;transform:scale(1)}
+.key__t{font-size:clamp(17px,1.7vw,22px);font-weight:500;letter-spacing:-.02em}
+.key:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--phosphor)}
+.js .strip{opacity:0}
+.is-in .strip{opacity:1;transition:opacity .6s linear .95s}
+
+/* ───────── directory (mobile fallback) ───────── */
+.dir{display:none;grid-template-columns:repeat(4,minmax(0,1fr));align-content:end;border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);flex:none;margin-top:auto;align-self:flex-start;width:min(920px,100%)}
+.dir__c{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:12px;
+  min-height:148px;padding:16px 18px 18px;
+  border-left:1px solid var(--ash);color:var(--bone);text-decoration:none}
+.dir__c:first-child{border-left:0}
+
+.dir__ic{width:44px;height:44px;stroke:#B9B9C6;fill:none;stroke-width:2.6;stroke-linecap:square;stroke-linejoin:miter;transform-box:fill-box;transform-origin:center;transition:stroke .2s linear}
+.dir__t{font-size:clamp(19px,2.1vw,28px);font-weight:500;letter-spacing:-.03em;line-height:1}
+
+.dir__c:hover .dir__ic,.dir__c:focus-visible .dir__ic{stroke:var(--signal)}
+
+
+.dir__c:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--phosphor)}
+.js .dir__c{opacity:0}
+.is-in .dir__c{opacity:1;transition:opacity .55s linear}
+.is-in .dir__c:nth-child(1){transition-delay:.8s}
+.is-in .dir__c:nth-child(2){transition-delay:.88s}
+.is-in .dir__c:nth-child(3){transition-delay:.96s}
+.is-in .dir__c:nth-child(4){transition-delay:1.04s}
+
+/* ───────── right navbar ───────── */
+.rail{
+  position:fixed;right:0;top:0;bottom:0;z-index:40;
+  width:var(--rail);background:var(--pitch);border-left:1px solid var(--ash);
+  display:flex;flex-direction:column;
+  transition:width .44s var(--ease);
+  overflow:hidden;
+}
+.rail:hover,.rail:focus-within,.rail.pinned{width:var(--rail-open)}
+.rail__head{
+  height:var(--rail);flex:none;display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid var(--ash);padding:0;overflow:hidden;
+}
+.rail__head{
+  appearance:none;border:0;background:transparent;cursor:pointer;width:100%;
+  height:var(--rail);flex:none;display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid var(--ash);padding:0;overflow:hidden;
+}
+.rail__head svg{width:34px;height:auto;display:block;color:var(--bone)}
+.rail__head:focus-visible{outline:2px solid var(--phosphor);outline-offset:-4px}
+.rail__head:hover svg{color:var(--signal)}
+.rail__list{display:flex;flex-direction:column;flex:1;min-height:0}
+.rail__item{
+  position:relative;display:flex;align-items:center;gap:0;
+  height:clamp(58px,8.4vh,78px);flex:none;
+  border-bottom:1px solid var(--ash);
+  color:var(--bone);text-decoration:none;overflow:hidden;
+  transition:background .2s linear,color .2s linear;
+}
+.rail__ic{width:22px;height:22px;vertical-align:middle}
+.rail__no{
+  width:var(--rail);flex:none;text-align:center;
+  font-family:var(--tech);font-size:11px;font-weight:500;letter-spacing:.04em;color:#9A9AA8;
+  transition:color .2s linear;
+}
+.rail__lb{
+  font-size:16px;font-weight:500;letter-spacing:-.02em;white-space:nowrap;
+  opacity:0;transform:translateX(-10px);
+  transition:opacity .28s var(--io),transform .4s var(--ease);
+}
+.rail__ar{
+  margin-left:auto;margin-right:14px;width:14px;height:14px;flex:none;
+  stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:square;stroke-linejoin:miter;
+  opacity:0;transform:translateX(-8px);
+  transition:opacity .28s var(--io),transform .4s var(--ease);
+}
+.rail:hover .rail__lb,.rail:focus-within .rail__lb,.rail.pinned .rail__lb,
+.rail:hover .rail__ar,.rail:focus-within .rail__ar,.rail.pinned .rail__ar{opacity:1;transform:none}
+.rail__item:hover,.rail__item:focus-visible{background:var(--signal);color:var(--void);outline:none}
+.rail__item:hover .rail__no,.rail__item:focus-visible .rail__no{color:rgba(5,5,6,.6)}
+.rail__item:focus-visible{box-shadow:inset 0 0 0 2px var(--phosphor)}
+.rail__foot{margin-top:0;padding-left:22px;border-top:1px solid var(--ash);padding:12px 16px 14px;display:flex;flex-direction:column;gap:8px;font-family:var(--mono);font-size:10.5px;line-height:1.5;white-space:nowrap;opacity:0;transition:opacity .28s var(--io)}
+.rail:hover .rail__foot,.rail:focus-within .rail__foot,.rail.pinned .rail__foot{opacity:1}
+.rail__foot a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--signal);align-self:flex-start}
+.rail__foot span{color:var(--smoke)}
+.js .rail{opacity:0}
+.is-in .rail{opacity:1;transition:opacity .7s linear .3s,width .44s var(--ease)}
+
+/* ───────── dock ───────── */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  height:var(--dock-h);border-radius:var(--dock-r) var(--dock-r) 0 0;
+  background:var(--signal);color:var(--void);
+  display:flex;flex-direction:column;overflow:hidden;
+  transition:height .58s var(--ease),right .44s var(--ease),opacity .3s linear,transform .4s var(--ease);
+}
+body.form-open .rail{width:var(--rail);pointer-events:none;opacity:.38}
+body.form-open .stage{cursor:pointer}
+.dock.open{height:min(560px,calc(100svh - 132px))}
+.js .dock{opacity:0;transform:translateY(26px)}
+.is-in .dock{opacity:1;transform:none;transition:opacity .6s linear 1.1s,transform .8s var(--ease) 1.1s,height .58s var(--ease),right .44s var(--ease)}
+.entered .mx{animation:none!important}
+.entered .dock{transition:transform .3s var(--ease),height .58s var(--ease),opacity .3s linear}
+.dock__bar{
+  flex:none;height:var(--dock-h);display:flex;align-items:center;justify-content:space-between;
+  gap:20px;padding:0 clamp(18px,2.2vw,30px);cursor:pointer;
+}
+.dock:not(.open):hover{transform:translateY(-6px)}
+.dock__bar{transition:background .2s linear}
+.dock:not(.open) .dock__bar:hover{background:rgba(5,5,6,.14)}
+.dock__name{font-size:clamp(26px,3.3vw,44px);font-weight:600;letter-spacing:-.045em;line-height:1;white-space:nowrap}
+.dock__cta{
+  appearance:none;border:0;cursor:pointer;flex:none;
+  display:inline-flex;align-items:center;gap:13px;
+  background:var(--void);color:var(--signal);
+  padding:15px 24px;border-radius:12px;
+  font-family:var(--tech);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;
+  transition:background .2s linear,color .2s linear;
+}
+.dock__cta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:square;stroke-linejoin:miter;transition:transform .34s var(--ease)}
+.dock__cta:hover,.dock__cta:focus-visible{background:var(--bone);color:var(--void);outline:none}
+.dock__cta:hover svg,.dock__cta:focus-visible svg{transform:translate(3px,-3px)}
+.dock__cta:focus-visible{box-shadow:0 0 0 2px var(--signal),0 0 0 4px var(--void)}
+.dock.open .dock__cta svg{transform:none}
+.dock.open .dock__cta:hover svg{transform:rotate(90deg)}
+
+.dock__body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:clamp(24px,4vh,44px) clamp(18px,2.2vw,30px) clamp(36px,6vh,64px)}
+.dock__inner{opacity:0;transform:translateY(14px);transition:opacity .34s var(--io),transform .5s var(--ease)}
+.dock.open .dock__inner{opacity:1;transform:none;transition-delay:.16s}
+@keyframes frise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.dock.open .f{animation:frise .55s var(--ease) both}
+.dock.open .f:nth-child(2){animation-delay:.06s}
+.dock.open .f:nth-child(3){animation-delay:.12s}
+.dock.open .f:nth-child(4){animation-delay:.18s}
+.dock.open .f:nth-child(5){animation-delay:.24s}
+
+/* form */
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f--wide{grid-column:1 / -1}
+.f label{font-family:var(--tech);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(5,5,6,.72)}
+.f label .opt{color:rgba(5,5,6,.45);margin-left:6px}
+.f input,.f select,.f textarea{
+  font-family:var(--sans);font-size:17px;color:var(--bone);
+  background:var(--void);border:1px solid var(--void);border-radius:10px;
+  padding:14px 16px;width:100%;outline:none;
+  transition:border-color .18s linear,box-shadow .18s linear;
+}
+.f textarea{resize:vertical;min-height:96px;line-height:1.5}
+.f select{
+  appearance:none;cursor:pointer;padding-right:38px;
+  background-image:none;
+}
+.sel{position:relative}
+.sel::after{
+  content:"";position:absolute;right:15px;top:50%;width:7px;height:7px;
+  border-right:2px solid var(--signal);border-bottom:2px solid var(--signal);
+  transform:translateY(-70%) rotate(45deg);pointer-events:none;
+}
+.f input::placeholder,.f textarea::placeholder{color:#6E6E7A}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--phosphor);box-shadow:0 0 0 2px rgba(61,245,196,.28)}
+.f input[aria-invalid="true"],.f select[aria-invalid="true"],.f textarea[aria-invalid="true"]{border-color:var(--bone);box-shadow:0 0 0 2px rgba(239,236,228,.35)}
+.err{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--void);min-height:0;display:none}
+.err.on{display:block}
+.count{font-family:var(--mono);font-size:10px;color:rgba(5,5,6,.6);text-align:right}
+
+.actions{grid-column:1 / -1;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  position:sticky;bottom:0;z-index:2;background:var(--signal);
+  border-top:1px solid rgba(5,5,6,.28);margin-top:6px;padding:14px 0 clamp(16px,2vw,22px)}
+.btn{
+  appearance:none;cursor:pointer;border:0;border-radius:12px;
+  display:inline-flex;align-items:center;gap:11px;
+  font-family:var(--tech);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 24px;transition:background .2s linear,color .2s linear,transform .2s var(--ease);
+}
+.btn--send{background:var(--void);color:var(--signal)}
+.btn--send:hover,.btn--send:focus-visible{background:var(--bone);color:var(--void);outline:none}
+.btn--ghost{background:transparent;color:rgba(5,5,6,.7);border:1px solid rgba(5,5,6,.35)}
+.btn--ghost:hover,.btn--ghost:focus-visible{background:var(--void);color:var(--bone);border-color:var(--void);outline:none}
+.btn:focus-visible{box-shadow:0 0 0 2px var(--signal),0 0 0 4px var(--void)}
+.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:square;stroke-linejoin:miter;transition:transform .3s var(--ease)}
+.btn--send:hover svg{transform:translate(3px,-3px)}
+.note{grid-column:1 / -1;font-family:var(--mono);font-size:12px;line-height:1.6;color:rgba(5,5,6,.72);margin:2px 0 0;max-width:56ch}
+
+/* ready state */
+.ready{display:none;flex-direction:column;gap:14px;padding-bottom:0;padding-top:clamp(10px,4vh,40px)}
+.ready.on{display:flex}
+.form.off{display:none}
+.ready__h{font-size:clamp(22px,2.6vw,32px);font-weight:600;letter-spacing:-.035em;margin:0;line-height:1.05}
+.ready__p{margin:0;font-family:var(--mono);font-size:13px;line-height:1.65;color:rgba(5,5,6,.78);max-width:60ch}
+.receipt{
+  background:var(--void);color:var(--bone);border-radius:12px;padding:16px 18px;
+  font-family:var(--mono);font-size:12.5px;line-height:1.75;white-space:pre-wrap;word-break:break-word;
+  max-height:190px;overflow:auto;
+}
+.receipt b{color:var(--phosphor);font-weight:400}
+.copied{font-family:var(--tech);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--void);opacity:0;transition:opacity .2s linear}
+.copied.on{opacity:1}
+
+/* ───────── responsive ───────── */
+@media (max-width:1000px){
+  :root{--rail:56px;--rail-open:164px;--dock-h:54px}
+  .identity{flex:none}
+  .rail__lb{font-size:15px}
+  .rail__head svg{width:30px}
+}
+@media (max-width:760px){
+  :root{--rail:48px;--rail-open:170px;--pad:16px;--dock-h:52px;--dock-r:18px}
+  .stage{padding:18px calc(var(--rail) + 14px) calc(var(--dock-h) + 34px) var(--pad);gap:16px}
+  .identity{flex:none}
+  .dock{left:0;right:0;bottom:0}
+  body.menu .stage{padding-right:calc(var(--rail) + 14px)}
+  body.menu .identity,body.menu .dir{opacity:.2}
+  .dock.open{height:min(520px,calc(100svh - 104px))}
+  .dock__bar{padding:0 16px;gap:12px}
+  .dock__name{font-size:clamp(22px,6.4vw,30px)}
+  .dock__cta{padding:12px 15px;font-size:8.5px;letter-spacing:.12em;gap:9px;border-radius:10px}
+  .dock__body{padding:0 16px}
+  .wm{width:min(340px,84vw)}
+  .identity{margin-top:0}
+  .dir__c{min-height:64px;padding:12px 14px}
+  .dir__c{min-height:118px}
+  .dir__t{font-size:clamp(15px,4.4vw,19px)}
+  .dir__ic{width:34px;height:34px}
+  .strip{display:none}
+  .dir{display:grid;grid-template-columns:1fr 1fr;border-bottom:0}
+  .dir__c{min-height:118px;padding:14px 14px 16px;border-bottom:1px solid var(--ash)}
+  .dir__c:nth-child(odd){border-left:0;padding-left:0}
+  .dir__t{font-size:clamp(17px,4.8vw,21px)}
+  .form{grid-template-columns:1fr;gap:10px}
+  .f textarea{min-height:64px}
+  .f input,.f select,.f textarea{padding:10px 12px;font-size:14px}
+  .note{max-width:none;font-size:10px}
+  .actions{flex-wrap:nowrap;gap:10px;padding:12px 0 16px}
+  .btn{padding:13px 14px;font-size:8.5px;letter-spacing:.1em;gap:8px}
+  .btn--send{flex:1;justify-content:center}
+  .btn svg{width:12px;height:12px}
+  .copied{display:none}
+  .rail__item{height:64px}
+  .rail__no{font-size:10px}
+  .rail__lb{font-size:14px}
+  .rail__ar{margin-right:14px}
+}
+@media (max-width:420px){
+  .dock__cta span{display:none}
+  .dock__cta{padding:13px;gap:0}
+  .dock__cta svg{width:16px;height:16px}
+}
+@media (prefers-reduced-motion:reduce){
+.key::after{animation:none!important}
+.key:hover::after,.key:focus-visible::after{transform:none}
+
+  .g,.dir__ic,.mx,.key__ic{animation:none!important}
+  *{transition-duration:.01ms!important}
+}
+.settled *{animation:none!important;transition:none!important}
+.settled .wm .ring{stroke-dasharray:none}
+
+</style>
 </head>
 <body>
 
-<a class="skip" href="#identity">Skip to content</a>
-<div id="boot" aria-hidden="true"></div>
-<canvas id="field" aria-hidden="true"></canvas>
-<div class="grain" aria-hidden="true"></div>
+<main class="stage" id="stage">
 
-<svg class="sprite" aria-hidden="true" focusable="false">
-  <symbol id="g-identity" viewBox="0 0 32 32">
-    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor"/>
-    <circle cx="16" cy="16" r="8" fill="none" stroke="currentColor"/>
-    <circle cx="16" cy="16" r="3" fill="#FF3B00"/>
-  </symbol>
-  <symbol id="g-method" viewBox="0 0 32 32">
-    <rect x="6.5" y="6.5" width="19" height="19" fill="none" stroke="currentColor"/>
-    <rect x="4.5" y="4.5" width="4" height="4" fill="currentColor"/>
-    <rect x="23.5" y="4.5" width="4" height="4" fill="currentColor"/>
-    <rect x="4.5" y="23.5" width="4" height="4" fill="currentColor"/>
-    <rect x="23.5" y="23.5" width="4" height="4" fill="currentColor"/>
-    <rect x="14.5" y="14.5" width="3" height="3" fill="#FF3B00"/>
-  </symbol>
-  <symbol id="g-evidence" viewBox="0 0 32 32">
-    <path d="M4 27.5H28" fill="none" stroke="currentColor"/>
-    <path d="M8 27V20" fill="none" stroke="currentColor"/>
-    <path d="M14 27V13" fill="none" stroke="currentColor"/>
-    <path d="M20 27V17" fill="none" stroke="currentColor"/>
-    <path d="M26 27V8" fill="none" stroke="currentColor"/>
-    <rect x="25" y="5.5" width="2.5" height="2.5" fill="#FF3B00"/>
-  </symbol>
-  <symbol id="g-uplink" viewBox="0 0 32 32">
-    <path d="M6 26L26 6" fill="none" stroke="currentColor"/>
-    <path d="M15 6H26V17" fill="none" stroke="currentColor"/>
-    <circle cx="6" cy="26" r="2.2" fill="#FF3B00"/>
-  </symbol>
-</svg>
+  <div class="identity" id="identity">
+    <svg class="wm" viewBox="0 0 1200 400" role="img" aria-label="Tachyon Lab">
+      <g class="g" style="--i:0"><text x="19.5" y="182.7">T</text></g>
+      <g class="g" style="--i:1"><text x="152.09" y="182.7">A</text></g>
+      <g class="g" style="--i:2"><text x="317.5" y="182.7">C</text></g>
+      <g class="g" style="--i:3"><text x="490.69" y="182.7">H</text></g>
+      <g class="g" style="--i:4"><text x="672.3" y="182.7">Y</text></g>
+      <g class="g" style="--i:5">
+        <path class="ring" pathLength="1" d="M951.2,53.2h-64.2c-1.8,0-3.4,1-4.3,2.5l-32.1,55.6c-.9,1.5-.9,3.5,0,5l32.1,55.6c.9,1.5,2.5,2.5,4.3,2.5h64.2c1.8,0,3.4-1,4.3-2.5l32.1-55.6c.9-1.5.9-3.5,0-5l-32.1-55.6c-.9-1.5-2.5-2.5-4.3-2.5Z"/>
+        <defs><clipPath id="hexclip"><path d="M951.2,53.2h-64.2c-1.8,0-3.4,1-4.3,2.5l-32.1,55.6c-.9,1.5-.9,3.5,0,5l32.1,55.6c.9,1.5,2.5,2.5,4.3,2.5h64.2c1.8,0,3.4-1,4.3-2.5l32.1-55.6c.9-1.5.9-3.5,0-5l-32.1-55.6c-.9-1.5-2.5-2.5-4.3-2.5Z"/></clipPath></defs>
+        <g class="strut" clip-path="url(#hexclip)">
+          <line x1="876.4" y1="113.7" x2="898.7" y2="75.7"/>
+          <line x1="897" y1="151.8" x2="941.1" y2="151.8"/>
+          <line x1="939.4" y1="75.6" x2="961.5" y2="113.8"/>
+        </g>
+      </g>
+      <g class="g" style="--i:6"><text x="1011.1" y="185.1">N</text></g>
+      <g class="g" style="--i:7"><text x="8" y="353.7">L</text></g>
+      <g class="g" style="--i:8"><text x="152.09" y="353.7">A</text></g>
+      <g class="g" style="--i:9"><text x="317.5" y="353.7">B</text></g>
 
-<header class="bar" id="bar">
-  <a class="brand" href="#top" aria-label="Tachyon Lab, back to top">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor"/>
-      <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor"/>
-      <rect x="11" y="11" width="2" height="2" fill="#FF3B00"/>
+      <g class="g" id="logoblock" style="--i:10" aria-hidden="true">
+        <rect class="mx" style="--fd:0.00s;--ld:0.00s" x="506.6" y="216.3" width="36" height="29.6" data-c="0" data-r="0"/>
+        <rect class="mx" style="--fd:0.02s;--ld:0.11s" x="548.8" y="216.3" width="36" height="29.6" data-c="1" data-r="0"/>
+        <rect class="mx" style="--fd:0.04s;--ld:0.22s" x="591.1" y="216.3" width="36" height="29.6" data-c="2" data-r="0"/>
+        <rect class="mx" style="--fd:0.06s;--ld:0.33s" x="633.4" y="216.3" width="36" height="29.6" data-c="3" data-r="0"/>
+        <rect class="mx" style="--fd:0.08s;--ld:0.44s" x="675.6" y="216.3" width="36" height="29.6" data-c="4" data-r="0"/>
+        <rect class="mx" style="--fd:0.10s;--ld:0.55s" x="717.9" y="216.3" width="36" height="29.6" data-c="5" data-r="0"/>
+        <rect class="mx" style="--fd:0.12s;--ld:0.66s" x="760.2" y="216.3" width="36" height="29.6" data-c="6" data-r="0"/>
+        <rect class="mx" style="--fd:0.14s;--ld:0.77s" x="802.5" y="216.3" width="36" height="29.6" data-c="7" data-r="0"/>
+        <rect class="mx" style="--fd:0.16s;--ld:0.88s" x="844.7" y="216.3" width="36" height="29.6" data-c="8" data-r="0"/>
+        <rect class="mx" style="--fd:0.18s;--ld:0.99s" x="887.0" y="216.3" width="36" height="29.6" data-c="9" data-r="0"/>
+        <rect class="mx" style="--fd:0.20s;--ld:1.10s" x="929.3" y="216.3" width="36" height="29.6" data-c="10" data-r="0"/>
+        <rect class="mx" style="--fd:0.22s;--ld:1.21s" x="971.6" y="216.3" width="36" height="29.6" data-c="11" data-r="0"/>
+        <rect class="mx" style="--fd:0.24s;--ld:1.32s" x="1013.8" y="216.3" width="36" height="29.6" data-c="12" data-r="0"/>
+        <rect class="mx" style="--fd:0.26s;--ld:1.43s" x="1056.1" y="216.3" width="36" height="29.6" data-c="13" data-r="0"/>
+        <rect class="mx" style="--fd:0.28s;--ld:1.54s" x="1098.4" y="216.3" width="36" height="29.6" data-c="14" data-r="0"/>
+        <rect class="mx" style="--fd:0.30s;--ld:1.65s" x="1140.7" y="216.3" width="36" height="29.6" data-c="15" data-r="0"/>
+        <rect class="mx" style="--fd:0.00s;--ld:0.23s" x="506.6" y="252.2" width="36" height="29.6" data-c="0" data-r="1"/>
+        <rect class="mx" style="--fd:0.02s;--ld:0.34s" x="548.8" y="252.2" width="36" height="29.6" data-c="1" data-r="1"/>
+        <rect class="mx" style="--fd:0.04s;--ld:0.45s" x="591.1" y="252.2" width="36" height="29.6" data-c="2" data-r="1"/>
+        <rect class="mx" style="--fd:0.06s;--ld:0.56s" x="633.4" y="252.2" width="36" height="29.6" data-c="3" data-r="1"/>
+        <rect class="mx" style="--fd:0.08s;--ld:0.67s" x="675.6" y="252.2" width="36" height="29.6" data-c="4" data-r="1"/>
+        <rect class="mx" style="--fd:0.10s;--ld:0.78s" x="717.9" y="252.2" width="36" height="29.6" data-c="5" data-r="1"/>
+        <rect class="mx" style="--fd:0.12s;--ld:0.89s" x="760.2" y="252.2" width="36" height="29.6" data-c="6" data-r="1"/>
+        <rect class="mx" style="--fd:0.14s;--ld:1.00s" x="802.5" y="252.2" width="36" height="29.6" data-c="7" data-r="1"/>
+        <rect class="mx" style="--fd:0.16s;--ld:1.11s" x="844.7" y="252.2" width="36" height="29.6" data-c="8" data-r="1"/>
+        <rect class="mx" style="--fd:0.18s;--ld:1.22s" x="887.0" y="252.2" width="36" height="29.6" data-c="9" data-r="1"/>
+        <rect class="mx" style="--fd:0.20s;--ld:1.33s" x="929.3" y="252.2" width="36" height="29.6" data-c="10" data-r="1"/>
+        <rect class="mx" style="--fd:0.22s;--ld:1.44s" x="971.6" y="252.2" width="36" height="29.6" data-c="11" data-r="1"/>
+        <rect class="mx" style="--fd:0.24s;--ld:1.55s" x="1013.8" y="252.2" width="36" height="29.6" data-c="12" data-r="1"/>
+        <rect class="mx" style="--fd:0.26s;--ld:1.66s" x="1056.1" y="252.2" width="36" height="29.6" data-c="13" data-r="1"/>
+        <rect class="mx" style="--fd:0.28s;--ld:1.77s" x="1098.4" y="252.2" width="36" height="29.6" data-c="14" data-r="1"/>
+        <rect class="mx" style="--fd:0.30s;--ld:1.88s" x="1140.7" y="252.2" width="36" height="29.6" data-c="15" data-r="1"/>
+        <rect class="mx" style="--fd:0.00s;--ld:0.46s" x="506.6" y="288.2" width="36" height="29.6" data-c="0" data-r="2"/>
+        <rect class="mx" style="--fd:0.02s;--ld:0.57s" x="548.8" y="288.2" width="36" height="29.6" data-c="1" data-r="2"/>
+        <rect class="mx" style="--fd:0.04s;--ld:0.68s" x="591.1" y="288.2" width="36" height="29.6" data-c="2" data-r="2"/>
+        <rect class="mx" style="--fd:0.06s;--ld:0.79s" x="633.4" y="288.2" width="36" height="29.6" data-c="3" data-r="2"/>
+        <rect class="mx" style="--fd:0.08s;--ld:0.90s" x="675.6" y="288.2" width="36" height="29.6" data-c="4" data-r="2"/>
+        <rect class="mx" style="--fd:0.10s;--ld:1.01s" x="717.9" y="288.2" width="36" height="29.6" data-c="5" data-r="2"/>
+        <rect class="mx" style="--fd:0.12s;--ld:1.12s" x="760.2" y="288.2" width="36" height="29.6" data-c="6" data-r="2"/>
+        <rect class="mx" style="--fd:0.14s;--ld:1.23s" x="802.5" y="288.2" width="36" height="29.6" data-c="7" data-r="2"/>
+        <rect class="mx" style="--fd:0.16s;--ld:1.34s" x="844.7" y="288.2" width="36" height="29.6" data-c="8" data-r="2"/>
+        <rect class="mx" style="--fd:0.18s;--ld:1.45s" x="887.0" y="288.2" width="36" height="29.6" data-c="9" data-r="2"/>
+        <rect class="mx" style="--fd:0.20s;--ld:1.56s" x="929.3" y="288.2" width="36" height="29.6" data-c="10" data-r="2"/>
+        <rect class="mx" style="--fd:0.22s;--ld:1.67s" x="971.6" y="288.2" width="36" height="29.6" data-c="11" data-r="2"/>
+        <rect class="mx" style="--fd:0.24s;--ld:1.78s" x="1013.8" y="288.2" width="36" height="29.6" data-c="12" data-r="2"/>
+        <rect class="mx" style="--fd:0.26s;--ld:1.89s" x="1056.1" y="288.2" width="36" height="29.6" data-c="13" data-r="2"/>
+        <rect class="mx" style="--fd:0.28s;--ld:2.00s" x="1098.4" y="288.2" width="36" height="29.6" data-c="14" data-r="2"/>
+        <rect class="mx" style="--fd:0.30s;--ld:2.11s" x="1140.7" y="288.2" width="36" height="29.6" data-c="15" data-r="2"/>
+        <rect class="mx" style="--fd:0.00s;--ld:0.69s" x="506.6" y="324.1" width="36" height="29.6" data-c="0" data-r="3"/>
+        <rect class="mx" style="--fd:0.02s;--ld:0.80s" x="548.8" y="324.1" width="36" height="29.6" data-c="1" data-r="3"/>
+        <rect class="mx" style="--fd:0.04s;--ld:0.91s" x="591.1" y="324.1" width="36" height="29.6" data-c="2" data-r="3"/>
+        <rect class="mx" style="--fd:0.06s;--ld:1.02s" x="633.4" y="324.1" width="36" height="29.6" data-c="3" data-r="3"/>
+        <rect class="mx" style="--fd:0.08s;--ld:1.13s" x="675.6" y="324.1" width="36" height="29.6" data-c="4" data-r="3"/>
+        <rect class="mx" style="--fd:0.10s;--ld:1.24s" x="717.9" y="324.1" width="36" height="29.6" data-c="5" data-r="3"/>
+        <rect class="mx" style="--fd:0.12s;--ld:1.35s" x="760.2" y="324.1" width="36" height="29.6" data-c="6" data-r="3"/>
+        <rect class="mx" style="--fd:0.14s;--ld:1.46s" x="802.5" y="324.1" width="36" height="29.6" data-c="7" data-r="3"/>
+        <rect class="mx" style="--fd:0.16s;--ld:1.57s" x="844.7" y="324.1" width="36" height="29.6" data-c="8" data-r="3"/>
+        <rect class="mx" style="--fd:0.18s;--ld:1.68s" x="887.0" y="324.1" width="36" height="29.6" data-c="9" data-r="3"/>
+        <rect class="mx" style="--fd:0.20s;--ld:1.79s" x="929.3" y="324.1" width="36" height="29.6" data-c="10" data-r="3"/>
+        <rect class="mx" style="--fd:0.22s;--ld:1.90s" x="971.6" y="324.1" width="36" height="29.6" data-c="11" data-r="3"/>
+        <rect class="mx" style="--fd:0.24s;--ld:2.01s" x="1013.8" y="324.1" width="36" height="29.6" data-c="12" data-r="3"/>
+        <rect class="mx" style="--fd:0.26s;--ld:2.12s" x="1056.1" y="324.1" width="36" height="29.6" data-c="13" data-r="3"/>
+        <rect class="mx" style="--fd:0.28s;--ld:2.23s" x="1098.4" y="324.1" width="36" height="29.6" data-c="14" data-r="3"/>
+        <rect class="mx" style="--fd:0.30s;--ld:2.34s" x="1140.7" y="324.1" width="36" height="29.6" data-c="15" data-r="3"/>
+      </g>
     </svg>
-    <span>Tachyon Lab</span>
-  </a>
-  <a class="bar__access" href="mailto:apply@tachyonlab.au?subject=Tachyon-V1%20access">Request access <i aria-hidden="true">↗</i></a>
-</header>
+  </div>
 
-<main id="main">
-
-  <!-- 00 / ENTRY -->
-  <section class="entry" id="top" aria-labelledby="entry-title">
-    <div class="entry__main">
-      <h1 class="entry__title" id="entry-title">
-        <span class="line"><span>Tachyon</span></span>
-        <span class="line"><span>Lab<span class="acc">.</span></span></span>
-      </h1>
-
-      <div class="entry__head">
-        <nav class="glyphs" aria-label="Sections">
-          <a href="#identity">
-            <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#g-identity"></use></svg>
-            <span>Identity</span>
-          </a>
-          <a href="#method">
-            <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#g-method"></use></svg>
-            <span>Method</span>
-          </a>
-          <a href="#evidence">
-            <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#g-evidence"></use></svg>
-            <span>Evidence</span>
-          </a>
-          <a href="#uplink">
-            <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#g-uplink"></use></svg>
-            <span>Uplink</span>
-          </a>
-        </nav>
-
-        <a class="scrolldown" href="#identity">
-          <span>Scroll</span>
-          <i class="scrolldown__line" aria-hidden="true"></i>
-          <i class="scrolldown__arrow" aria-hidden="true">↓</i>
-        </a>
+  <div class="strip" id="strip">
+    <div class="car" id="car" aria-roledescription="carousel" aria-label="Sections overview">
+      <div class="slide on">
+        <p>Tachyon Lab is 「Leading the AI Frontier」 from Brisbane, Australia. <br> We believe in creating world-class local agents for personal privacy and productivity.</p>
+        <figure class="shot" aria-hidden="true"><svg viewBox="0 0 120 150" fill="none">
+          <g>
+            <rect x="47.5" y="14.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="43.0" y="18.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="18.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="43.0" y="23.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="23.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="43.0" y="27.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="27.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="27.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="43.0" y="32.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="32.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="32.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="32.0" width="3" height="3" fill="#72706D"/>
+            <rect x="38.5" y="36.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="36.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="36.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="36.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="36.5" width="3" height="3" fill="#72706D"/>
+            <rect x="38.5" y="41.0" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="41.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="41.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="41.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="41.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="41.0" width="3" height="3" fill="#83827E"/>
+            <rect x="38.5" y="45.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="45.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="45.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="45.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="45.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="45.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="45.5" width="3" height="3" fill="#95938F"/>
+            <rect x="34.0" y="50.0" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="50.0" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="50.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="50.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="50.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="50.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="50.0" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="50.0" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="50.0" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="34.0" y="54.5" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="54.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="54.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="54.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="54.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="54.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="54.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="54.5" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="54.5" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="34.0" y="59.0" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="59.0" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="59.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="59.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="59.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="59.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="59.0" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="59.0" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="59.0" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="59.0" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="34.0" y="63.5" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="63.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="63.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="63.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="63.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="63.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="63.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="63.5" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="63.5" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="63.5" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="79.0" y="63.5" width="3" height="3" fill="#CBC8C1"/>
+            <rect x="34.0" y="68.0" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="68.0" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="68.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="68.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="68.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="68.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="68.0" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="68.0" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="68.0" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="68.0" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="79.0" y="68.0" width="3" height="3" fill="#CBC8C1"/>
+            <rect x="29.5" y="72.5" width="3" height="3" fill="#070708"/>
+            <rect x="34.0" y="72.5" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="72.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="72.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="72.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="72.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="72.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="72.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="72.5" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="72.5" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="72.5" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="79.0" y="72.5" width="3" height="3" fill="#CBC8C1"/>
+            <rect x="83.5" y="72.5" width="3" height="3" fill="#DCDAD2"/>
+            <rect x="29.5" y="77.0" width="3" height="3" fill="#070708"/>
+            <rect x="34.0" y="77.0" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="77.0" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="77.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="77.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="77.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="77.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="77.0" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="77.0" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="77.0" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="77.0" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="79.0" y="77.0" width="3" height="3" fill="#CBC8C1"/>
+            <rect x="29.5" y="81.5" width="3" height="3" fill="#070708"/>
+            <rect x="34.0" y="81.5" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="81.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="81.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="81.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="81.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="81.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="81.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="81.5" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="81.5" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="81.5" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="79.0" y="81.5" width="3" height="3" fill="#CBC8C1"/>
+            <rect x="83.5" y="81.5" width="3" height="3" fill="#DCDAD2"/>
+            <rect x="29.5" y="86.0" width="3" height="3" fill="#070708"/>
+            <rect x="34.0" y="86.0" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="86.0" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="86.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="86.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="86.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="86.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="86.0" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="86.0" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="86.0" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="86.0" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="79.0" y="86.0" width="3" height="3" fill="#CBC8C1"/>
+            <rect x="83.5" y="86.0" width="3" height="3" fill="#DCDAD2"/>
+            <rect x="29.5" y="90.5" width="3" height="3" fill="#070708"/>
+            <rect x="34.0" y="90.5" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="90.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="90.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="90.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="90.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="90.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="90.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="90.5" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="90.5" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="90.5" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="79.0" y="90.5" width="3" height="3" fill="#CBC8C1"/>
+            <rect x="83.5" y="90.5" width="3" height="3" fill="#DCDAD2"/>
+            <rect x="29.5" y="95.0" width="3" height="3" fill="#070708"/>
+            <rect x="34.0" y="95.0" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="95.0" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="95.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="95.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="95.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="95.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="95.0" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="95.0" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="95.0" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="95.0" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="79.0" y="95.0" width="3" height="3" fill="#CBC8C1"/>
+            <rect x="29.5" y="99.5" width="3" height="3" fill="#070708"/>
+            <rect x="34.0" y="99.5" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="99.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="99.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="99.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="99.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="99.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="99.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="99.5" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="99.5" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="99.5" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="29.5" y="104.0" width="3" height="3" fill="#070708"/>
+            <rect x="34.0" y="104.0" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="104.0" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="104.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="104.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="104.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="104.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="104.0" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="104.0" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="104.0" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="104.0" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="34.0" y="108.5" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="108.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="108.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="108.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="108.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="108.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="108.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="108.5" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="108.5" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="74.5" y="108.5" width="3" height="3" fill="#B9B7B1"/>
+            <rect x="34.0" y="113.0" width="3" height="3" fill="#191919"/>
+            <rect x="38.5" y="113.0" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="113.0" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="113.0" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="113.0" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="113.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="113.0" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="113.0" width="3" height="3" fill="#95938F"/>
+            <rect x="70.0" y="113.0" width="3" height="3" fill="#A7A5A0"/>
+            <rect x="38.5" y="117.5" width="3" height="3" fill="#2B2A2A"/>
+            <rect x="43.0" y="117.5" width="3" height="3" fill="#3C3C3A"/>
+            <rect x="47.5" y="117.5" width="3" height="3" fill="#4E4D4B"/>
+            <rect x="52.0" y="117.5" width="3" height="3" fill="#605F5C"/>
+            <rect x="56.5" y="117.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="117.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="117.5" width="3" height="3" fill="#95938F"/>
+            <rect x="56.5" y="131.0" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="131.0" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="131.0" width="3" height="3" fill="#95938F"/>
+            <rect x="56.5" y="135.5" width="3" height="3" fill="#72706D"/>
+            <rect x="61.0" y="135.5" width="3" height="3" fill="#83827E"/>
+            <rect x="65.5" y="135.5" width="3" height="3" fill="#95938F"/>
+            <rect x="61.0" y="140.0" width="3" height="3" fill="#83827E"/>
+          </g>
+          <rect x="80.4" y="73.9" width="9.2" height="9.2" fill="none" stroke="#FF2E63" stroke-opacity=".45"/>
+          <rect x="83.2" y="76.7" width="3.6" height="3.6" fill="#FF2E63"/>
+          <text x="94" y="82" font-family="monospace" font-size="8" fill="#7A7A88">BNE</text>
+          <text x="88" y="106" font-family="monospace" font-size="8" fill="#7A7A88">SYD</text>
+          <text x="65" y="122" font-family="monospace" font-size="8" fill="#7A7A88">MEL</text>
+        </svg></figure>
       </div>
-
-      <div class="entry__body">
-        <p class="entry__line">Local-first AI that runs on your machine, not in the cloud.</p>
-
-        <a class="access" id="access" href="mailto:apply@tachyonlab.au?subject=Tachyon-V1%20access" aria-label="Request access to Tachyon-V1 light-alpha">
-          <span class="access__meta">Tachyon-V1 / light-alpha</span>
-          <span class="access__target" aria-hidden="true">
-            <svg viewBox="0 0 200 200">
-              <circle class="target__hair" cx="100" cy="100" r="94"></circle>
-              <circle class="target__dash" cx="100" cy="100" r="70"></circle>
-              <circle class="target__arc" cx="100" cy="100" r="70"></circle>
-              <circle class="target__inner" cx="100" cy="100" r="34"></circle>
-              <path class="target__cross" d="M4 100H196M100 4V196"></path>
-              <path class="target__ticks" d="M100 0V9M100 191V200M0 100H9M191 100H200M33.5 33.5L39.8 39.8M160.2 160.2L166.5 166.5M166.5 33.5L160.2 39.8M39.8 160.2L33.5 166.5"></path>
-            </svg>
-            <i class="access__core" aria-hidden="true"></i>
-          </span>
-          <span class="access__cta">Request access <i aria-hidden="true">↗</i></span>
-        </a>
+      <div class="slide">
+        <p>A 100% local agent that adapts to you, <br> and deletes data on request. Tying together the possibilities of local and cloud AI.</p>
+        <figure class="shot" aria-hidden="true"><svg viewBox="0 0 160 96" fill="none">
+          <g fill="#26262C">
+            <rect x="20" y="8" width="14" height="14"/><rect x="40" y="8" width="14" height="14"/><rect x="60" y="8" width="14" height="14"/><rect x="80" y="8" width="14" height="14"/><rect x="100" y="8" width="14" height="14"/><rect x="120" y="8" width="14" height="14"/>
+            <rect x="20" y="28" width="14" height="14"/><rect x="40" y="28" width="14" height="14"/><rect x="60" y="28" width="14" height="14"/><rect x="80" y="28" width="14" height="14"/><rect x="100" y="28" width="14" height="14"/><rect x="120" y="28" width="14" height="14"/>
+            <rect x="20" y="48" width="14" height="14"/><rect x="40" y="48" width="14" height="14"/><rect x="60" y="48" width="14" height="14"/><rect x="80" y="48" width="14" height="14"/><rect x="100" y="48" width="14" height="14"/><rect x="120" y="48" width="14" height="14"/>
+            <rect x="20" y="68" width="14" height="14"/><rect x="40" y="68" width="14" height="14"/><rect x="60" y="68" width="14" height="14"/><rect x="80" y="68" width="14" height="14"/><rect x="100" y="68" width="14" height="14"/><rect x="120" y="68" width="14" height="14"/>
+          </g>
+          <g opacity="0">
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.7;1" dur="4s" repeatCount="indefinite"/>
+            <animateTransform attributeName="transform" type="translate" values="20 28;20 28;60 28;60 28" keyTimes="0;.2;.7;1" dur="4s" repeatCount="indefinite"/>
+            <rect x="0" y="0" width="14" height="14" fill="#FF2E63"/><rect x="20" y="0" width="14" height="14" fill="#FF2E63"/>
+            <rect x="0" y="20" width="14" height="14" fill="#FF2E63"/><rect x="20" y="20" width="14" height="14" fill="#FF2E63"/>
+          </g>
+        </svg></figure>
       </div>
-    </div>
-  </section>
-
-  <!-- 01 / IDENTITY -->
-  <section class="panel" id="identity" aria-labelledby="identity-title">
-    <div class="panel__rail">
-      <svg class="panel__glyph" viewBox="0 0 32 32" aria-hidden="true"><use href="#g-identity"></use></svg>
-      <span class="panel__label">Identity</span>
-    </div>
-    <div class="panel__content">
-      <h2 id="identity-title">An independent lab for local-first AI.</h2>
-      <p>Brisbane, Australia. Self-funded. We build systems that learn on your hardware and can be erased on request.</p>
-    </div>
-  </section>
-
-  <!-- 02 / METHOD -->
-  <section class="panel" id="method" aria-labelledby="method-title">
-    <div class="panel__rail">
-      <svg class="panel__glyph" viewBox="0 0 32 32" aria-hidden="true"><use href="#g-method"></use></svg>
-      <span class="panel__label">Method</span>
-    </div>
-    <div class="panel__content">
-      <h2 id="method-title">The loop stays on your machine.</h2>
-      <div class="track">
-        <svg viewBox="0 0 900 160" aria-hidden="true">
-          <path class="track__ghost" d="M60 82C190 56 230 108 320 82S450 56 580 82S730 108 840 82"></path>
-          <path class="track__ghost" d="M60 70C190 44 230 96 320 70S450 44 580 70S730 96 840 70"></path>
-          <path class="track__rail" d="M60 96C190 70 230 122 320 96S450 70 580 96S730 122 840 96"></path>
-          <path class="track__return" d="M840 126V144H60V126"></path>
-          <g class="track__node"><rect x="55" y="91" width="10" height="10"></rect><rect x="58" y="94" width="4" height="4"></rect></g>
-          <g class="track__node"><rect x="315" y="91" width="10" height="10"></rect><rect x="318" y="94" width="4" height="4"></rect></g>
-          <g class="track__node"><rect x="575" y="91" width="10" height="10"></rect><rect x="578" y="94" width="4" height="4"></rect></g>
-          <g class="track__node"><rect x="835" y="91" width="10" height="10"></rect><rect x="838" y="94" width="4" height="4"></rect></g>
-          <circle class="track__packet" r="3">
-            <animateMotion dur="9s" repeatCount="indefinite" path="M60 96C190 70 230 122 320 96S450 70 580 96S730 122 840 96V144H60V96"></animateMotion>
-          </circle>
-        </svg>
-        <div class="track__labels" aria-hidden="true">
-          <span>Capture</span><span>Curate</span><span>Train</span><span>Delete</span>
+      <div class="slide">
+        <p>Open-Sourced Weights, Harness, Research, <br>  Tachyon Lab promises to deliver honest, third-party verified benchmark figures. </p>
+        <figure class="shot" aria-hidden="true"><svg viewBox="0 0 150 118" fill="none">
+          <g stroke="#26262C"><line x1="14" y1="25" x2="142" y2="25"/><line x1="14" y1="50" x2="142" y2="50"/><line x1="14" y1="75" x2="142" y2="75"/></g>
+          <path d="M14,8 L14,92 M14,92 L142,92" stroke="#3C3C46" stroke-width="2"/>
+          <g>
+            <rect x="24" y="70" width="16" height="22" fill="#B9B9C6"/>
+            <rect x="48" y="56" width="16" height="36" fill="#B9B9C6"/>
+            <rect x="72" y="44" width="16" height="48" fill="#B9B9C6"/>
+            <rect x="96" y="30" width="16" height="62" fill="#B9B9C6"/>
+            <rect x="120" y="14" width="16" height="78" fill="#FF2E63"/>
+          </g>
+          <svg x="116" y="96" width="24" height="10.2" viewBox="790 208 392 167"><path fill="#EFECE4" d="M888.4,354.4c-6.2,3.6-16.1,7.9-28.1,7.4-27.7-1.1-62.6-27.3-62.6-70s35-68.9,62.6-70c11.7-.5,21.4,3.6,27.5,7.1.2,41.8.4,83.6.6,125.4h0Z"/><path fill="#FF2E63" d="M915,242.6c-8.7,15.8-8.9,40.8-9,49.1,0,9-.3,34.7,8.5,50.6,27.1,49.1,144.8,14.7,200.3-8.9,26.3-11.1,60-25.8,59.7-44.9-.3-18.5-32.5-31.4-59.2-41.9-8.2-3.2-167.5-64.1-200.3-4.1h0Z"/></svg>
+        </svg></figure>
+      </div>
+      <div class="slide">
+        <p>We&rsquo;re hiring! (and raising!) <br>Join our team today. YCs welcome. <br><a href="mailto:apply@tachyonlab.au">Contact Us</a> for consumer inquiries.</p>
+        <div class="shot links" aria-label="Contact links">
+          <a href="mailto:apply@tachyon.au?subject=job%20inquiry">Jobs &rarr; apply@tachyon.au</a>
+          <a href="mailto:business@tachyon.au?subject=sponsorship">Sponsorship &rarr; business@tachyon.au</a>
         </div>
       </div>
-      <p>Every correction becomes a trace, then a weight. The loop runs locally. Delete removes the adapter, the traces, and the key.</p>
-    </div>
-  </section>
-
-  <!-- 03 / EVIDENCE -->
-  <section class="panel" id="evidence" aria-labelledby="evidence-title">
-    <div class="panel__rail">
-      <svg class="panel__glyph" viewBox="0 0 32 32" aria-hidden="true"><use href="#g-evidence"></use></svg>
-      <span class="panel__label">Evidence</span>
-    </div>
-    <div class="panel__content">
-      <h2 id="evidence-title">Pilot measurements.</h2>
-      <div class="metrics">
-        <div class="metric"><b>16.2</b><span>tok/s</span><small>decode @ 512</small></div>
-        <div class="metric"><b>14.6</b><span>tok/s</span><small>decode @ 16K</small></div>
-        <div class="metric"><b>0.800</b><span>RAG</span><small>base 0.317</small></div>
-        <div class="metric"><b class="metric__acc">0/400</b><span>canary</span><small>target, not a claim</small></div>
+      <div class="cdots" role="tablist" aria-label="Choose slide">
+        <button type="button" class="on" data-s="0" aria-label="About"></button><button type="button" data-s="1" aria-label="Method"></button><button type="button" data-s="2" aria-label="Evidence"></button><button type="button" data-s="3" aria-label="Connect"></button>
       </div>
-
-      <figure class="speed" aria-labelledby="speed-title">
-        <figcaption class="speed__head" id="speed-title">
-          <span>Idealised decode / tokens per second</span>
-          <span>24–32B dense · 4-bit · 16K</span>
-        </figcaption>
-        <div class="speed__plot">
-          <div class="speed__row speed__row--this">
-            <span class="speed__name">Tachyon</span>
-            <span class="speed__track">
-              <i class="speed__bar" style="--w:65.3%"></i>
-              <i class="speed__mark" style="--w:54%"></i>
-            </span>
-            <span class="speed__val">19.6</span>
-          </div>
-          <div class="speed__row">
-            <span class="speed__name">Mistral Small 3.2 24B</span>
-            <span class="speed__track"><i class="speed__bar" style="--w:61.3%"></i></span>
-            <span class="speed__val">18.4</span>
-          </div>
-          <div class="speed__row">
-            <span class="speed__name">Gemma 3 27B</span>
-            <span class="speed__track"><i class="speed__bar" style="--w:47.3%"></i></span>
-            <span class="speed__val">14.2</span>
-          </div>
-          <div class="speed__row">
-            <span class="speed__name">Qwen3 32B</span>
-            <span class="speed__track"><i class="speed__bar" style="--w:38.7%"></i></span>
-            <span class="speed__val">11.6</span>
-          </div>
-          <div class="speed__row">
-            <span class="speed__name">Llama 3.3 70B <em>reference</em></span>
-            <span class="speed__track"><i class="speed__bar" style="--w:21.3%"></i></span>
-            <span class="speed__val">6.4</span>
-          </div>
-        </div>
-        <div class="speed__scale" aria-hidden="true">
-          <span></span>
-          <div class="speed__ticks"><span>0</span><span>10</span><span>20</span><span>30</span></div>
-          <span></span>
-        </div>
-        <p class="fine">Synthetic parity estimates on one 48 GB machine. Tachyon's bar is its 19.6 tok/s bandwidth ceiling; the white tick is the measured 16.2 pilot. Comparisons are not benchmarks.</p>
-      </figure>
-
-      <p class="fine">20 synthetic tasks. 20.1 GB peak. Adapter not trained. Canary 0/400 is a target. G1: 16 November 2026.</p>
     </div>
-  </section>
+    <nav class="keys" aria-label="Sections">
+      <a class="key" href="about.html">
+        <svg class="key__ic ic-identity" viewBox="0 0 24 24" aria-hidden="true"><g class="ab-person"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.5c.8-3.8 3.2-5.5 6.5-5.5s5.7 1.7 6.5 5.5"/></g><g class="ab-map"><path class="draw" pathLength="1" d="M4.3,16.8Q2.3,12.5 2.4,8.9L4.6,7.3L6.4,6.4L8,5.2L9.5,4L10.5,4.6L10.6,3.1L12.5,3L14,3.4L14.6,4.6L14.3,6.5L15.6,6.3L15.9,4.8L16.2,4L16.5,2.2L17.2,3.4L18.1,5.5Q20.5,9 21.7,12.2Q21.5,14.5 20.8,16.1L19.8,17.5L18.6,18.2L17.7,18.5L17,19.2Q15.5,18.8 14.2,16.8Q12.5,15.5 11.3,14.9Q9,14.6 6,15.8Z"/><path class="draw" pathLength="1" d="M18.5,20.3L19.3,21L18.5,21.8L17.7,21Z"/></g></svg>
+        <span class="key__t">About</span>
+      </a>
+      <a class="key" href="method.html">
+        <svg class="key__ic ic-method" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.06,15.5 A7,7 0 1,1 18.06,8.5" style="stroke-linecap:butt"/><path d="M18.03,6.4 L18.06,8.5 L16.2,7.4"/></svg>
+        <span class="key__t">Method</span>
+      </a>
+      <a class="key" href="evidence.html">
+        <svg class="key__ic" viewBox="0 0 24 24" aria-hidden="true"><path class="ev1" d="M5 19.5v-6"/><path class="ev2" d="M12 19.5V4.5"/><path class="ev3" d="M19 19.5V9.5"/></svg>
+        <span class="key__t">Evidence</span>
+      </a>
+      <a class="key" href="connect.html">
+        <svg class="key__ic ic-uplink" viewBox="0 0 24 24" aria-hidden="true"><rect class="cu-box" x="3.5" y="8.5" width="11" height="12"/><g class="cu-arrow"><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></g><circle class="cu-ring" cx="17.5" cy="6.5" r="3"/></svg>
+        <span class="key__t">Connect</span>
+      </a>
+    </nav>
+  </div>
 
-  <!-- 04 / UPLINK -->
-  <section class="panel" id="uplink" aria-labelledby="uplink-title">
-    <div class="panel__rail">
-      <svg class="panel__glyph" viewBox="0 0 32 32" aria-hidden="true"><use href="#g-uplink"></use></svg>
-      <span class="panel__label">Uplink</span>
+  <nav class="dir" id="dir" aria-label="Sections">
+    <a class="dir__c" href="about.html">
+      <svg class="dir__ic ic-identity" viewBox="0 0 24 24" aria-hidden="true"><g class="ab-person"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.5c.8-3.8 3.2-5.5 6.5-5.5s5.7 1.7 6.5 5.5"/></g><g class="ab-map"><path class="draw" pathLength="1" d="M4.3,16.8Q2.3,12.5 2.4,8.9L4.6,7.3L6.4,6.4L8,5.2L9.5,4L10.5,4.6L10.6,3.1L12.5,3L14,3.4L14.6,4.6L14.3,6.5L15.6,6.3L15.9,4.8L16.2,4L16.5,2.2L17.2,3.4L18.1,5.5Q20.5,9 21.7,12.2Q21.5,14.5 20.8,16.1L19.8,17.5L18.6,18.2L17.7,18.5L17,19.2Q15.5,18.8 14.2,16.8Q12.5,15.5 11.3,14.9Q9,14.6 6,15.8Z"/><path class="draw" pathLength="1" d="M18.5,20.3L19.3,21L18.5,21.8L17.7,21Z"/></g></svg>
+      <span class="dir__t">About</span>
+    </a>
+    <a class="dir__c" href="method.html">
+      <svg class="dir__ic ic-method" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.06,15.5 A7,7 0 1,1 18.06,8.5"/><path d="M18.03,6.4 L18.06,8.5 L16.2,7.4"/></svg>
+      <span class="dir__t">Method</span>
+    </a>
+    <a class="dir__c" href="evidence.html">
+      <svg class="dir__ic" viewBox="0 0 24 24" aria-hidden="true"><path class="ev1" d="M5 19.5v-6"/><path class="ev2" d="M12 19.5V4.5"/><path class="ev3" d="M19 19.5V9.5"/></svg>
+      <span class="dir__t">Evidence</span>
+    </a>
+    <a class="dir__c" href="connect.html">
+      <svg class="dir__ic ic-uplink" viewBox="0 0 24 24" aria-hidden="true"><circle class="cu-ring" cx="17.5" cy="6.5" r="3"/><g class="cu-arrow"><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></g></svg>
+      <span class="dir__t">Connect</span>
+    </a>
+  </nav>
+
+  <section class="dock" id="dock" aria-label="light-alpha">
+    <div class="dock__bar">
+      <span class="dock__name">light-alpha, Dec 2026</span>
+      <button class="dock__cta" id="toggle" type="button" aria-expanded="false" aria-controls="dockbody" aria-label="Request access">
+        <span id="toggleLabel">Request access</span>
+        <svg id="toggleIcon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg>
+      </button>
     </div>
-    <div class="panel__content">
-      <h2 id="uplink-title">Request access.</h2>
-      <a class="mail" href="mailto:apply@tachyonlab.au?subject=Design%20partner">apply@tachyonlab.au <i aria-hidden="true">↗</i></a>
-      <p>Three design partners. Tell us what you are working on.</p>
-      <p class="fine">Brisbane, Australia</p>
+
+    <div class="dock__body" id="dockbody">
+      <div class="dock__inner">
+
+        <form class="form" id="form" novalidate>
+          <p class="note">We&rsquo;re excited to announce that we&rsquo;re building something new at Tachyon Lab. Sign up now to receive updates and be the first to try it out.</p>
+          <div class="f">
+            <label for="fname">Name</label>
+            <input id="fname" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+            <span class="err" id="e-name">Required</span>
+          </div>
+          <div class="f">
+            <label for="femail">Email</label>
+            <input id="femail" name="email" type="email" autocomplete="email" placeholder="you@domain.com" required>
+            <span class="err" id="e-email">Enter a valid email</span>
+          </div>
+          <div class="f">
+            <label for="forg">Organisation <span class="opt">optional</span></label>
+            <input id="forg" name="org" type="text" autocomplete="organization" placeholder="Lab, company, or independent">
+          </div>
+          <div class="f">
+            <label for="fhw">System Specs</label>
+            <input id="fhw" name="machine" type="text" autocomplete="off" placeholder="DGX Spark 128GB, Macbook M5 Pro 24GB&#8230;" required>
+            <span class="err" id="e-machine">Enter your system specs</span>
+          </div>
+          <div class="f f--wide">
+            <label for="fuse">What will you run on it?</label>
+            <textarea id="fuse" name="use" maxlength="400" placeholder="A sentence or two about the work." required></textarea>
+            <span class="count"><span id="cnt">0</span> / 400</span>
+            <span class="err" id="e-use">Tell us briefly</span>
+          </div>
+          <div class="actions">
+            <button class="btn btn--send" type="submit">
+              <span>Send application</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg>
+            </button>
+            <button class="btn btn--ghost" type="button" id="clear">Clear</button>
+          </div>
+        </form>
+
+        <div class="ready" id="ready" role="status" aria-live="polite">
+          <h2 class="ready__h">light-alpha, Dec 2026.</h2>
+          <p class="ready__p">Application received. We&rsquo;ll review it and reply by email.</p>
+        </div>
+
+      </div>
     </div>
   </section>
 
 </main>
 
-<script src="src/field.js"></script>
-<script src="src/intro.js"></script>
-<script src="src/app.js"></script>
+<nav class="rail" id="rail" aria-label="Sections">
+  <button class="rail__head" id="headbtn" type="button" aria-expanded="false" aria-label="Expand menu">
+      <svg viewBox="790 208 392 167" role="img" aria-label="Tachyon Lab mark">
+        <path fill="currentColor" d="M888.4,354.4c-6.2,3.6-16.1,7.9-28.1,7.4-27.7-1.1-62.6-27.3-62.6-70s35-68.9,62.6-70c11.7-.5,21.4,3.6,27.5,7.1.2,41.8.4,83.6.6,125.4h0Z"/>
+        <path fill="#FF2E63" d="M915,242.6c-8.7,15.8-8.9,40.8-9,49.1,0,9-.3,34.7,8.5,50.6,27.1,49.1,144.8,14.7,200.3-8.9,26.3-11.1,60-25.8,59.7-44.9-.3-18.5-32.5-31.4-59.2-41.9-8.2-3.2-167.5-64.1-200.3-4.1h0Z"/>
+      </svg>
+  </button>
+  <div class="rail__list">
+    <a class="rail__item" href="about.html">
+      <span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.5c.8-3.8 3.2-5.5 6.5-5.5s5.7 1.7 6.5 5.5"/></svg></span><span class="rail__lb">About</span>
+      <svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg>
+    </a>
+    <a class="rail__item" href="method.html">
+      <span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><path d="M18.06,15.5 A7,7 0 1,1 18.06,8.5"/><path d="M18.03,6.4 L18.06,8.5 L16.2,7.4"/></svg></span><span class="rail__lb">Method</span>
+      <svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg>
+    </a>
+    <a class="rail__item" href="evidence.html">
+      <span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 19.5v-6"/><path d="M12 19.5V4.5"/><path d="M19 19.5V9.5"/></svg></span><span class="rail__lb">Evidence</span>
+      <svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg>
+    </a>
+    <a class="rail__item" href="connect.html">
+      <span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="8.5" width="11" height="12"/><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></svg></span><span class="rail__lb">Connect</span>
+      <svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg>
+    </a>
+    <div class="rail__foot">
+      <a href="mailto:apply@tachyon.au?subject=hello">apply@tachyon.au</a>
+      <a href="mailto:business@tachyon.au?subject=hello">business@tachyon.au</a>
+      <a href="https://x.com/TachyonLabAI" target="_blank" rel="noopener">X — @TachyonLabAI</a>
+      <span>&copy; 2026 Tachyon Lab
+      <br>Brisbane, Australia</span>
+    </div>
+  </div>
+</nav>
+
+<script>
+(function(){
+  var root=document.documentElement,
+      reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,
+      still=location.search.indexOf('still')>-1||reduce;
+
+  /* ── YON matrix: measured grid, 16 seeds → 3 turns → 4 blocks ── */
+  var logoBlock=document.getElementById('logoblock');
+  var YPAL=['#FF2E63','#3DF5C4','#FFB020','#4D7CFF'];
+  var ROWS=4, CW=36, RH=29.6, RY0=216.3, RYG=6.33, RYP=35.93, FH=137.4;
+  var X0=506.55, X1=1176.65, P=(X1-X0-CW)/15;
+  var X=[];(function(){for(var c=0;c<16;c++)X.push(Math.round((X0+c*P)*10)/10)})();
+  function mxx(c){return X[c]}
+  function mxy(r){return Math.round((RY0+r*RYP)*10)/10}
+  function refitGrid(){
+    try{
+      var ts=logoBlock.ownerDocument.querySelectorAll('.wm text');
+      var H=ts[3].getBBox(), N=ts[6];
+      var Nb=N.getBBox();
+      var L=H.x, R=Nb.x+Nb.width;
+      if(!(L>300&&L<600&&R>1000&&R<1250))return;
+      var Hw=H.width, Yw=ts[4].getBBox().width, Nw=Nb.width, Ow=138.3;
+      try{Ow=logoBlock.ownerDocument.querySelector('.wm .ring').getBBox().width}catch(e){}
+      var sum=Hw+Yw+Ow+Nw;
+      if(!(sum>500&&sum<800))return;
+      var Cc=(L+R)/2;
+      X0=Math.round((Cc-sum/2)*10)/10; X1=Math.round((Cc+sum/2)*10)/10;
+      var capH=140;
+      try{
+        var cv=document.createElement('canvas').getContext('2d');
+        cv.font='200px "Tachyon Archivo Heavy","Archivo",sans-serif';
+        var m=cv.measureText('H');
+        if(m.actualBoundingBoxAscent>100&&m.actualBoundingBoxAscent<175)capH=m.actualBoundingBoxAscent;
+      }catch(e){}
+      X0=Math.round(L*10)/10; X1=Math.round(R*10)/10;
+      P=(X1-X0-CW)/15;
+      try{document.documentElement.style.setProperty('--mx0',(X0/12).toFixed(2))}catch(e){}
+      try{document.documentElement.style.setProperty('--mx1',(X1/12).toFixed(2))}catch(e){}
+      var top=Math.round((353.7-capH)*10)/10;
+      RY0=top; RH=Math.round(((353.7-top-3*6.33)/4)*10)/10;
+      RYP=Math.round((RH+6.33)*10)/10; FH=Math.round((3*RYP+RH)*10)/10;
+      X=[];for(var c=0;c<16;c++)X.push(Math.round((X0+c*P)*10)/10);
+      var rects=logoBlock.querySelectorAll('.mx:not(.dyn)');
+      Array.prototype.forEach.call(rects,function(el){
+        var c=+el.dataset.c, r=+el.dataset.r;
+        el.setAttribute('x',mxx(c));
+        el.setAttribute('y',mxy(r));
+        el.setAttribute('width',CW);
+        el.setAttribute('height',RH);
+      });
+    }catch(e){}
+  }
+  var jobs=[];
+  function easeIO(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+  function tick(now){
+    var rest=[];
+    for(var i=0;i<jobs.length;i++){var j=jobs[i];
+      var t=(now-j.t0)/j.dur;
+      if(t<0){rest.push(j);continue}
+      if(t>1)t=1;
+      var e=easeIO(t), k, v;
+      for(k in j.props){
+        v=j.from[k]+(j.props[k]-j.from[k])*e;
+        j.el.setAttribute(k==='w'?'width':(k==='h'?'height':k),Math.round(v*10)/10);
+      }
+      if(t<1)rest.push(j);else if(j.done)j.done();
+    }
+    jobs=rest;
+    if(jobs.length)requestAnimationFrame(tick);
+  }
+  function tw(el,props,dur,delay,done){
+    var from={}, k, t0=performance.now()+(delay||0);
+    for(k in props){
+      from[k]=parseFloat(el.getAttribute(k==='w'?'width':(k==='h'?'height':k)));
+    }
+    jobs.push({el:el,props:props,from:from,t0:t0,dur:dur||600,done:done});
+    if(jobs.length===1)requestAnimationFrame(tick);
+  }
+  var NS='http://www.w3.org/2000/svg';
+  function mkRect(x,y,w,h,fill){
+    var el=document.createElementNS(NS,'rect');
+    el.setAttribute('x',x);el.setAttribute('y',y);
+    el.setAttribute('width',w);el.setAttribute('height',h);
+    el.setAttribute('fill',fill);el.setAttribute('class','mx lit dyn');
+    el.style.setProperty('--c',fill);
+    logoBlock.appendChild(el);return el;
+  }
+  var blobs=[], bid=0, stageT=[];
+  function later(fn,ms){stageT.push(setTimeout(fn,ms))}
+  function clearStages(){stageT.forEach(clearTimeout);stageT=[]}
+  function inHome(b){return b.cc>=4*b.si&&b.cc+b.cw<=4*b.si+4}
+  function blobRect(b){return {x:mxx(b.cc),y:mxy(b.rr),w:(b.cw-1)*P+CW,h:(b.rh-1)*RYP+RH}}
+  function blobDraw(b,dur,delay){var u=blobRect(b);tw(b.el,{x:u.x,y:u.y,w:u.w,h:u.h},dur||500,delay||0)}
+  function touching(a,b){
+    var ox0=Math.max(a.cc,b.cc), ox1=Math.min(a.cc+a.cw,b.cc+b.cw);
+    var oy0=Math.max(a.rr,b.rr), oy1=Math.min(a.rr+b.rh,b.rr+b.rh);
+    if(ox1>ox0&&oy1>oy0)return true;
+    if(ox1===ox0&&oy1>oy0)return true;
+    if(oy1===oy0&&ox1>ox0)return true;
+    return false;
+  }
+  function combine(a,b){
+    var lane=-1;
+    for(var si=0;si<4;si++){
+      var cc=Math.min(a.cc,b.cc), rr=Math.min(a.rr,b.rr);
+      var ex=Math.max(a.cc+a.cw,b.cc+b.cw), ey=Math.max(a.rr+a.rh,b.rr+b.rh);
+      if(cc>=si*4&&ex<=si*4+4){lane=si;break}
+    }
+    if(lane<0)return false;
+    var cc2=Math.min(a.cc,b.cc), rr2=Math.min(a.rr,b.rr);
+    a.cc=cc2;a.rr=rr2;a.cw=Math.max(a.cc+a.cw,b.cc+b.cw)-cc2;a.rh=Math.max(a.rr+a.rh,b.rr+b.rh)-rr2;
+    b.el.remove();blobs.splice(blobs.indexOf(b),1);
+    blobDraw(a,450,0);
+    return true;
+  }
+  function occAt(c,r,self){
+    for(var i=0;i<blobs.length;i++){var o=blobs[i];if(o===self)continue;
+      if(c>=o.cc&&c<o.cc+o.cw&&r>=o.rr&&r<o.rr+o.rh)return o}
+    return null;
+  }
+  function glide(b,nc,nr,delay){b.cc=nc;b.rr=nr;tw(b.el,{x:mxx(nc),y:mxy(nr)},420,delay||0)}
+  function seed(){
+    blobs.forEach(function(b){b.el.remove()});blobs=[];
+    var taken={};
+    function freeCell(){
+      for(var t=0;t<400;t++){
+        var c=Math.floor(Math.random()*16), r=Math.floor(Math.random()*4);
+        if(!taken[c+','+r]){taken[c+','+r]=1;return [c,r]}
+      }
+      for(var c2=0;c2<16;c2++)for(var r2=0;r2<4;r2++)
+        if(!taken[c2+','+r2]){taken[c2+','+r2]=1;return [c2,r2]}
+      return [0,0];
+    }
+    YPAL.forEach(function(col,si){
+      var hc=si*4+1, hr=1;
+      taken[hc+','+hr]=1;
+      var spots=[[hc,hr]];
+      for(var k=0;k<3;k++)spots.push(freeCell());
+      spots.forEach(function(q,i){
+        var b={col:col,si:si,cc:hc,rr:hr,cw:1,rh:1,_id:++bid,_m:false,
+          el:mkRect(mxx(hc),mxy(hr),1,1,col)};
+        blobs.push(b);
+        (function(bb,qq,ii){
+          tw(bb.el,{x:mxx(hc),y:mxy(hr),w:CW,h:RH},420,ii*80+si*40,function(){
+            if(blobs.indexOf(bb)<0)return;
+            bb.cc=qq[0];bb.rr=qq[1];
+            glide(bb,qq[0],qq[1],0);
+          });
+        })(b,q,i);
+      });
+    });
+  }
+  function shuffleTick(){
+    blobs.forEach(function(b){b._m=false});
+    blobs.slice().sort(function(){return Math.random()-.5}).forEach(function(b){
+      if(b._m||b.cw>1||b.rh>1)return;
+      if(Math.random()>0.65)return;
+      var opts=[[1,0],[-1,0],[0,1],[0,-1]].map(function(d){return [b.cc+d[0],b.rr+d[1]]})
+        .filter(function(q){return q[0]>=0&&q[0]<16&&q[1]>=0&&q[1]<4});
+      if(!opts.length)return;
+      var q=opts[Math.floor(Math.random()*opts.length)];
+      var o=occAt(q[0],q[1],b);
+      if(!o){glide(b,q[0],q[1],0);b._m=true}
+      else if(o.cw===1&&o.rh===1&&!o._m){
+        var ac=b.cc, ar=b.rr;
+        glide(b,q[0],q[1],0);
+        glide(o,ac,ar,0);
+        b._m=true;o._m=true;
+      }
+    });
+  }
+  function migrateTick(turn){
+    blobs.forEach(function(b){b._m=false});
+    blobs.slice().sort(function(){return Math.random()-.5}).forEach(function(b,i){
+      if(b._m||b.cw>1||b.rh>1)return;
+      if(inHome(b))return;
+      var homeC=b.si*4+1.5, homeR=1.5;
+      var dist=Math.abs(b.cc-homeC)+Math.abs(b.rr-homeR);
+      if(dist<=4){
+        var best=null,bd=1e9;
+        [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){
+          var nc=b.cc+d[0],nr=b.rr+d[1];
+          if(nc<0||nc>15||nr<0||nr>3||occAt(nc,nr,b))return;
+          var nd=Math.abs(nc-homeC)+Math.abs(nr-homeR);
+          if(nd<bd-0.01){bd=nd;best=[nc,nr]}
+        });
+        if(best){glide(b,best[0],best[1],i*60);b._m=true}
+        return;
+      }
+      if(turn<3){
+        var opts=[[1,0],[-1,0],[0,1],[0,-1]].map(function(d){return [b.cc+d[0],b.rr+d[1]]})
+          .filter(function(q){return q[0]>=0&&q[0]<16&&q[1]>=0&&q[1]<4&&!occAt(q[0],q[1],b)});
+        if(!opts.length)return;
+        var q2=opts[Math.floor(Math.random()*opts.length)];
+        glide(b,q2[0],q2[1],i*60);b._m=true;
+        return;
+      }
+      (function(bb){
+        var cx=mxx(bb.cc)+CW/2, cy=mxy(bb.rr)+RH/2;
+        tw(bb.el,{x:cx,y:cy,w:1,h:1},320,i*30,function(){
+          bb.el.remove();var ix=blobs.indexOf(bb);if(ix>=0)blobs.splice(ix,1);
+          for(var t=0;t<60;t++){
+            var hc=bb.si*4+Math.floor(Math.random()*4), hr=Math.floor(Math.random()*4);
+            if(!occAt(hc,hr,null))break;
+          }
+          var nb={col:bb.col,si:bb.si,cc:hc,rr:hr,cw:1,rh:1,_id:++bid,_m:false,
+            el:mkRect(mxx(hc),mxy(hr),1,1,bb.col)};
+          blobs.push(nb);
+          tw(nb.el,{x:mxx(hc),y:mxy(hr),w:CW,h:RH},450,0);
+        });
+      })(b);
+      b._m=true;
+    });
+  }
+  function growTick(){
+    YPAL.forEach(function(col,si){
+      var mine=blobs.filter(function(b){return b.col===col});
+      for(var p=0;p<mine.length;p++)for(var q=p+1;q<mine.length;q++){
+        if(blobs.indexOf(mine[p])<0||blobs.indexOf(mine[q])<0)continue;
+        var A=mine[p], B=mine[q];
+        if(!touching(A,B))continue;
+        if(A.cw*A.rh>=B.cw*B.rh)combine(A,B);else combine(B,A);
+      }
+      var mine2=blobs.filter(function(b){return b.col===col})
+        .sort(function(a,b){return b.cw*b.rh-a.cw*a.rh});
+      var big=mine2[0];if(!big)return;
+      if(!inHome(big))return;
+      function cellsOf(b){var out=[];for(var x=0;x<b.cw;x++)for(var y=0;y<b.rh;y++)out.push([b.cc+x,b.rr+y]);return out}
+      function tryGrow(ax,dir){
+        var nc=big.cc, nr=big.rr, nw=big.cw, nh=big.rh;
+        if(ax==='w'){if(dir>0){if(big.cc+big.cw+1>si*4+4)return false;nw++}else{if(big.cc-1<si*4)return false;nc--;nw++}}
+        else{if(dir>0){if(big.rr+big.rh>=4)return false;nh++}else{if(big.rr-1<0)return false;nr--;nh++}}
+        var olds={};cellsOf(big).forEach(function(q){olds[q[0]+','+q[1]]=1});
+        var fresh=[];
+        for(var x=nc;x<nc+nw;x++)for(var y=nr;y<nr+nh;y++){if(!olds[x+','+y])fresh.push([x,y])}
+        var occs=[];
+        for(var f=0;f<fresh.length;f++){
+          var o=occAt(fresh[f][0],fresh[f][1],big);
+          if(o&&occs.indexOf(o)<0)occs.push(o);
+        }
+        for(var oi=0;oi<occs.length;oi++){
+          var ob=occs[oi];
+          if(ob.col!==big.col)return false;
+          var bc=cellsOf(ob), rem=[];
+          bc.forEach(function(q){
+            if(!(q[0]>=nc&&q[0]<nc+nw&&q[1]>=nr&&q[1]<nr+nh))rem.push(q);
+          });
+          if(rem.length>0){
+            var xs=rem.map(function(q){return q[0]}), ys=rem.map(function(q){return q[1]});
+            var x0=Math.min.apply(null,xs), x1=Math.max.apply(null,xs);
+            var y0=Math.min.apply(null,ys), y1=Math.max.apply(null,ys);
+            if((x1-x0+1)*(y1-y0+1)===rem.length){
+              ob.cc=x0;ob.rr=y0;ob.cw=x1-x0+1;ob.rh=y1-y0+1;
+              blobDraw(ob,300,0);
+            }else{
+              ob.el.remove();var obix=blobs.indexOf(ob);if(obix>=0)blobs.splice(obix,1);
+              rem.forEach(function(q){
+                var nb={col:ob.col,si:ob.si,cc:q[0],rr:q[1],cw:1,rh:1,_id:++bid,_m:true,
+                  el:mkRect(mxx(q[0]),mxy(q[1]),CW,RH,ob.col)};
+                blobs.push(nb);
+              });
+            }
+          }
+        }
+        blobs.slice().forEach(function(o){
+          if(o===big||o.col!==big.col)return;
+          if(o.cc>=nc&&o.cc+o.cw<=nc+nw&&o.rr>=nr&&o.rr+o.rh<=nr+nh){
+            o.el.remove();var ix=blobs.indexOf(o);if(ix>=0)blobs.splice(ix,1);
+          }
+        });
+        big.cc=nc;big.rr=nr;big.cw=nw;big.rh=nh;
+        blobDraw(big,480,0);
+        return true;
+      }
+      var axes=[['w',1],['w',-1],['h',1],['h',-1]].sort(function(){return Math.random()-.5});
+      for(var ai=0;ai<axes.length;ai++){if(tryGrow(axes[ai][0],axes[ai][1]))break}
+    });
+  }
+  function settlePhase(){
+    YPAL.forEach(function(col,si){
+      var lane=si*4;
+      var home=blobs.filter(function(b){return b.col===col&&b.cc>=lane&&b.cc+b.cw<=lane+4})
+        .sort(function(a,b){return b.cw*b.rh-a.cw*a.rh});
+      var big=home[0];
+      if(!big){
+        big={col:col,si:si,cc:lane,rr:0,cw:1,rh:1,_id:++bid,_m:false,
+          el:mkRect(mxx(lane),mxy(0),1,1,col)};
+        blobs.push(big);
+      }
+      blobs.filter(function(b){return b.col===col&&b!==big}).forEach(function(sm,idx){
+        (function(o,n){
+          var ocx=mxx(o.cc)+((o.cw-1)*P+CW)/2, ocy=mxy(o.rr)+((o.rh-1)*RYP+RH)/2;
+          tw(o.el,{x:ocx,y:ocy,w:1,h:1},320,n*70,function(){
+            o.el.remove();var ix=blobs.indexOf(o);if(ix>=0)blobs.splice(ix,1);
+          });
+        })(sm,idx);
+      });
+      later(function(){
+        if(blobs.indexOf(big)<0)return;
+        big.cc=lane;big.rr=0;big.cw=4;big.rh=4;
+        tw(big.el,{x:mxx(lane),y:RY0,
+          w:Math.round((3*P+CW)*10)/10,h:FH},650,0);
+      },700);
+    });
+  }
+  function collapsePhase(){
+    blobs.forEach(function(b,i){
+      var cx=mxx(b.cc)+((b.cw-1)*P+CW)/2;
+      var cy=mxy(b.rr)+((b.rh-1)*RYP+RH)/2;
+      tw(b.el,{x:cx,y:cy,w:1,h:1},400,i*25,function(){b.el.remove()});
+    });
+    later(function(){seed();cycle()},1200);
+  }
+  function cycle(){
+    clearStages();
+    for(var t=1;t<=3;t++){
+      later(shuffleTick,700+(t-1)*2600);
+      later(shuffleTick,1300+(t-1)*2600);
+      later((function(tt){return function(){migrateTick(tt)}})(t),1900+(t-1)*2600);
+      later(growTick,2500+(t-1)*2600);
+      later(growTick,3100+(t-1)*2600);
+    }
+    later(settlePhase,9000);
+    later(collapsePhase,13800);
+  }
+  function showFinaleStatic(){
+    var cells=logoBlock.querySelectorAll('.mx:not(.dyn)');
+    Array.prototype.forEach.call(cells,function(el){el.style.opacity='0'});
+    YPAL.forEach(function(col,si){
+      var el=mkRect(Math.round(mxx(4*si)*10)/10,Math.round(RY0*10)/10,
+        Math.round((3*P+CW)*10)/10,FH,col);
+      el.setAttribute('opacity','1');
+    });
+  }
+function yclearHot(){Array.prototype.forEach.call(logoBlock.querySelectorAll('.mx.hot'),function(e){e.classList.remove('hot')})}
+  logoBlock.addEventListener('pointermove',function(e){
+    var t=e.target;
+    if(!t.classList||!t.classList.contains('mx'))return;
+    if(t.dataset.slot!==undefined)return;
+    var c=+t.dataset.c, r=+t.dataset.r;
+    if(isNaN(c)||isNaN(r))return;
+    yclearHot();
+    for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++){
+      var rr=r+dr, cc=c+dc;
+      if(rr<0||rr>3||cc<0||cc>15)continue;
+      var el=logoBlock.querySelector('.mx[data-c="'+cc+'"][data-r="'+rr+'"]');
+      if(el)el.classList.add('hot');
+    }
+  },{passive:true});
+  logoBlock.addEventListener('pointerleave',yclearHot,{passive:true});
+  var booted=false;
+  function boot(){
+    if(booted)return; booted=true;
+    try{refitGrid()}catch(e){}
+    if(still||reduce){showFinaleStatic()}
+    else{seed();cycle()}
+  }
+  try{
+    if(document.fonts&&document.fonts.ready){
+      var bootTo=setTimeout(boot,1200);
+      document.fonts.ready.then(function(){clearTimeout(bootTo);refitGrid();boot()});
+    }else{boot()}
+  }catch(e){boot()}
+
+  /* ── right navbar ──────────────────────────────────────────── */
+  var rail=document.getElementById('rail'), headbtn=document.getElementById('headbtn');
+  function syncURL(){
+    try{
+      var u=new URL(location.href);
+      if(dock.classList.contains('open'))u.searchParams.set('apply','1');else u.searchParams.delete('apply');
+      if(rail.classList.contains('pinned'))u.searchParams.set('menu','1');else u.searchParams.delete('menu');
+      history.replaceState(null,'',u);
+    }catch(e){}
+  }
+  function setMenu(v){ document.body.classList.toggle('menu',v && !dock.classList.contains('open')); }
+  function setPinned(v){
+    rail.classList.toggle('pinned',v);
+    headbtn.setAttribute('aria-expanded',String(v));
+    headbtn.setAttribute('aria-label',v?'Collapse menu':'Expand menu');
+    setMenu(v); syncURL();
+  }
+  rail.addEventListener('pointerenter',function(){setMenu(true)});
+  rail.addEventListener('pointerleave',function(){if(!rail.classList.contains('pinned'))setMenu(false)});
+  rail.addEventListener('focusin',function(){setMenu(true)});
+  rail.addEventListener('focusout',function(e){
+    if(!rail.contains(e.relatedTarget)&&!rail.classList.contains('pinned'))setMenu(false);
+  });
+  headbtn.addEventListener('click',function(){setPinned(!rail.classList.contains('pinned'))});
+  rail.addEventListener('mouseleave',function(){if(!rail.contains(document.activeElement))setPinned(false)});
+  document.addEventListener('pointerdown',function(e){ if(rail.classList.contains('pinned')&&!rail.contains(e.target))setPinned(false); if(dock.classList.contains('open')&&!dock.contains(e.target))closeDock(); });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){ if(dock.classList.contains('open'))closeDock(); else setPinned(false); }
+  });
+
+  /* ── dock / application form ───────────────────────────────── */
+  var stage=document.getElementById('stage'), dock=document.getElementById('dock'),
+      identity=document.getElementById('identity'), dir=document.getElementById('dir'), strip=document.getElementById('strip'),
+      toggle=document.getElementById('toggle'), toggleLabel=document.getElementById('toggleLabel'),
+      toggleIcon=document.getElementById('toggleIcon'),
+      form=document.getElementById('form'), ready=document.getElementById('ready'),
+      body=document.getElementById('dockbody');
+
+  var ARROW='<path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/>';
+  var CROSS='<path d="M4 4 12 12"/><path d="M12 4 4 12"/>';
+
+  function openDock(){
+    dock.classList.add('open'); stage.classList.add('is-form');
+    document.body.classList.add('form-open'); setMenu(false); rail.classList.remove('pinned'); headbtn.setAttribute('aria-expanded','false'); headbtn.setAttribute('aria-label','Expand menu');
+    toggle.setAttribute('aria-expanded','true');
+    toggle.setAttribute('aria-label','Close');
+    toggleLabel.textContent='Close'; toggleIcon.innerHTML=CROSS;
+    identity.setAttribute('inert',''); dir.setAttribute('inert',''); strip.setAttribute('inert','');
+    setTimeout(function(){ var f=document.getElementById('fname'); if(f&&!ready.classList.contains('on'))f.focus({preventScroll:true}); body.scrollTop=0; },380);
+    syncURL();
+  }
+  function closeDock(){
+    dock.classList.remove('open'); stage.classList.remove('is-form');
+    document.body.classList.remove('form-open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','Request access');
+    toggleLabel.textContent='Request access'; toggleIcon.innerHTML=ARROW;
+    identity.removeAttribute('inert'); dir.removeAttribute('inert'); strip.removeAttribute('inert');
+    toggle.focus({preventScroll:true});
+    syncURL();
+  }
+  toggle.addEventListener('click',function(){ dock.classList.contains('open')?closeDock():openDock(); });
+  document.querySelector('.dock__bar').addEventListener('click',function(e){
+    if(e.target.closest('#toggle'))return;
+    dock.classList.contains('open')?closeDock():openDock();
+  });
+
+  /* draft persistence */
+  var KEY='tl-light-alpha-draft';
+  var fields=['fname','femail','forg','fhw','fuse'];
+  try{
+    var saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+    fields.forEach(function(id){ if(saved[id]!=null)document.getElementById(id).value=saved[id]; });
+  }catch(e){}
+  function saveDraft(){
+    var o={}; fields.forEach(function(id){o[id]=document.getElementById(id).value});
+    try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}
+  }
+  var st;
+  form.addEventListener('input',function(){clearTimeout(st);st=setTimeout(saveDraft,220)});
+
+  /* auto-detect specs: GPU + cores + OS as an editable guess.
+     deviceMemory is capped at 8 by browsers, so a capped value is
+     omitted entirely rather than shown as a misleading "8+ GB". */
+  (function(){
+    var f=document.getElementById('fhw');
+    if(!f||f.value.trim()!=='')return;
+    var gpu='';
+    try{
+      var cv=document.createElement('canvas');
+      var gl=cv.getContext('webgl')||cv.getContext('experimental-webgl');
+      if(gl){
+        var ext=gl.getExtension('WEBGL_debug_renderer_info');
+        var raw=ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):'';
+        if(!raw)raw=gl.getParameter(gl.RENDERER)||'';
+        gpu=String(raw||'');
+        var m=gpu.match(/Apple\s+(M\d[^,)]*)/)||gpu.match(/(GeForce[^,)]*|Radeon[^,)]*|Arc\s+A[^,)]*|Quadro[^,)]*)/);
+        if(m)gpu=m[0];
+        else{
+          var rr=gpu.match(/Renderer:\s*([^,)]+)/);
+          if(rr)gpu=rr[1];
+        }
+        gpu=gpu.trim().slice(0,48);
+        if(/ANGLE|^Mozilla|Masked|Generic|SwiftShader|llvmpipe|software/i.test(gpu)
+           &&!/Apple|GeForce|Radeon|Arc|Quadro|Mali|Adreno|M\d/i.test(gpu))gpu='';
+      }
+    }catch(e){gpu=''}
+    var parts=[];
+    if(gpu)parts.push(gpu);
+    try{
+      if(navigator.hardwareConcurrency&&navigator.hardwareConcurrency>=2){
+        parts.push(navigator.hardwareConcurrency+'-core CPU');
+      }
+    }catch(e){}
+    try{
+      if(navigator.deviceMemory&&navigator.deviceMemory<8){
+        parts.push(navigator.deviceMemory+' GB RAM');
+      }
+    }catch(e){}
+    if(parts.length){f.value=parts.join(' \u00b7 ');saveDraft()}
+  })();
+
+  var use=document.getElementById('fuse'), cnt=document.getElementById('cnt');
+  function syncCount(){cnt.textContent=String(use.value.length)}
+  use.addEventListener('input',syncCount); syncCount();
+
+  function err(id,on){
+    var input=document.getElementById(id), box=document.getElementById('e-'+(input.name));
+    if(box)box.classList.toggle('on',on);
+    input.setAttribute('aria-invalid',on?'true':'false');
+  }
+  ['fname','femail','fhw','fuse'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',function(){err(id,false)});
+    document.getElementById(id).addEventListener('change',function(){err(id,false)});
+  });
+
+  function validate(){
+    var bad=[];
+    var n=document.getElementById('fname'), e=document.getElementById('femail'),
+        h=document.getElementById('fhw'), u=document.getElementById('fuse');
+    var nOk=n.value.trim().length>1; err('fname',!nOk); if(!nOk)bad.push(n);
+    var eOk=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e.value.trim()); err('femail',!eOk); if(!eOk)bad.push(e);
+    var hOk=h.value.trim().length>0; err('fhw',!hOk); if(!hOk)bad.push(h);
+    err('fuse',false);
+    if(bad.length){bad[0].focus({preventScroll:false});return false}
+    return true;
+  }
+
+  var SHEET_URL='https://script.google.com/macros/s/AKfycbzk3p3sHcU4fiOM2Irdw0CIibCsZ-jSlStt3PZ-elbmrziHXJuz32ndIZT6Xc0-x7MoPQ/exec';
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    if(!validate())return;
+    var v=function(id){return document.getElementById(id).value.trim()};
+    if(SHEET_URL){
+      try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify({name:v('fname'),email:v('femail'),org:v('forg'),specs:v('fhw'),use:v('fuse'),at:new Date().toISOString()})}).catch(function(){})}catch(e){}
+    }
+    form.classList.add('off'); ready.classList.add('on');
+    body.scrollTop=0;
+    var h=document.querySelector('.ready__h');
+    if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}
+    saveDraft();
+  });
+
+  document.getElementById('clear').addEventListener('click',function(){
+    fields.forEach(function(id){document.getElementById(id).value=''});
+    ['fname','femail','fhw','fuse'].forEach(function(id){err(id,false)});
+    syncCount(); saveDraft();
+    document.getElementById('fname').focus({preventScroll:true});
+  });
+
+  /* ── addressable state ─────────────────────────────────────── */
+  var qs=new URLSearchParams(location.search);
+  if(qs.get('menu')==='1')setPinned(true);
+  if(qs.get('apply')==='1'){
+    dock.classList.add('open'); stage.classList.add('is-form');
+    document.body.classList.add('form-open'); setMenu(false); rail.classList.remove('pinned'); headbtn.setAttribute('aria-expanded','false'); headbtn.setAttribute('aria-label','Expand menu');
+    toggle.setAttribute('aria-expanded','true');
+    toggle.setAttribute('aria-label','Close');
+    toggleLabel.textContent='Close'; toggleIcon.innerHTML=CROSS;
+    identity.setAttribute('inert',''); dir.setAttribute('inert','');
+  }
+
+  /* ── carousel: 4 contents, auto-rotate ───────────────────────── */
+  var slides=Array.prototype.slice.call(document.querySelectorAll('#car .slide'));
+  var cdots=Array.prototype.slice.call(document.querySelectorAll('#car .cdots button'));
+  var keys=Array.prototype.slice.call(document.querySelectorAll('.keys .key'));
+  var sIdx=0, sTimer=null;
+  function wipeTo(k){k.classList.remove('wipe-out');void k.offsetWidth;k.classList.add('wipe-in')}
+  function wipeFrom(k){k.classList.remove('wipe-in');void k.offsetWidth;k.classList.add('wipe-out')}
+  function showSlide(i,instant){
+    sIdx=(i+slides.length)%slides.length;
+    slides.forEach(function(sl,k){sl.classList.toggle('on',k===sIdx)});
+    cdots.forEach(function(d,k){d.classList.toggle('on',k===sIdx)});
+    keys.forEach(function(k2,k){
+      var on=k===sIdx, was=k2.classList.contains('active');
+      k2.classList.toggle('active',on);
+      if(!instant&&on&&!was)wipeTo(k2);
+      if(!instant&&!on&&was)wipeFrom(k2);
+    });
+  }
+  keys.forEach(function(k2,k){
+    k2.addEventListener('pointerenter',function(){showSlide(k)},{passive:true});
+    k2.addEventListener('focus',function(){showSlide(k)});
+  });
+  showSlide(0,true);
+  function autoSlide(){clearInterval(sTimer);sTimer=setInterval(function(){showSlide(sIdx+1)},3600)}
+  cdots.forEach(function(d){d.addEventListener('click',function(){showSlide(+d.dataset.s);autoSlide()})});
+  strip.addEventListener('pointerenter',function(){clearInterval(sTimer)},{passive:true});
+  strip.addEventListener('pointerleave',autoSlide,{passive:true});
+  if(!reduce)autoSlide();
+
+  /* ── method icon: one quick spin, completes on unhover ─────── */
+  document.querySelectorAll('.keys .key, .dir .dir__c').forEach(function(k){
+    var m=k.querySelector('.ic-method');if(!m)return;
+    m.dataset.rot='0';
+    function spin(){
+      var r=parseFloat(m.dataset.rot||'0')+360;
+      m.dataset.rot=String(r);
+      m.style.transition='transform .9s cubic-bezier(.4,0,.2,1)';
+      m.style.transform='rotate('+r+'deg)';
+    }
+    k.addEventListener('pointerenter',spin,{passive:true});
+    k.addEventListener('focus',spin);
+    m.addEventListener('transitionend',function(){
+      var r=parseFloat(m.dataset.rot||'0');
+      if(r>=720){m.style.transition='none';var n=r-720;m.dataset.rot=String(n);
+        m.style.transform='rotate('+n+'deg)';void m.getBoundingClientRect();m.style.transition='';}
+    });
+  });
+
+  /* ── entrance ──────────────────────────────────────────────── */
+  if(still){ root.classList.add('is-in','settled'); }
+  else{
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      setTimeout(function(){root.classList.add('is-in')},40);
+    })});
+    setTimeout(function(){
+      root.classList.add('entered');
+      var ring=document.querySelector('.wm .ring');
+      if(ring)ring.style.strokeDasharray='none';
+    },2400);
+  }
+})();
+</script>
 </body>
 </html>
