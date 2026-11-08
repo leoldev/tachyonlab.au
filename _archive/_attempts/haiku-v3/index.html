@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#000000">
+<title>Tachyon Lab — AI that learns from your corrections, on your machine</title>
+<meta name="description" content="Tachyon-V1 keeps your corrections on your machine, trains a small adapter from the ones you approve, and deletes everything on request. Light-alpha.">
+<link rel="canonical" href="https://tachyonlab.au/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tachyon Lab">
+<meta property="og:description" content="AI that learns from your corrections, on your own machine.">
+<meta property="og:url" content="https://tachyonlab.au/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23000'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23FF3B00'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+<script>
+document.documentElement.classList.add('js');
+setTimeout(function () {
+  var h = document.documentElement;
+  if (!h.classList.contains('done')) {
+    h.classList.remove('js');
+    h.classList.add('go', 'done');
+  }
+}, 12000);
+</script>
+<style>
+:root{--ink:#0a0a0a;--ink-2:#4a4a4a;--ink-3:#8a8a8a;--rule:#dedede;--acc:#FF3B00;--pad:clamp(20px,4.4vw,64px);--max:1240px}
+*{box-sizing:border-box}
+html{background:#fff;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html.js{background:#000}
+html.done{background:#fff}
+body{margin:0;color:var(--ink);font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:19px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+h1,h2,h3,p{margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+#intro{position:fixed;inset:0;width:100%;height:100%;z-index:50;pointer-events:none}
+main{position:relative;min-height:100vh;background:#fff}
+html.js main{clip-path:circle(0px at 50% 50%)}
+html.done main{clip-path:none}
+html.js .rad{opacity:0;transform:translate3d(var(--dx,0),var(--dy,0),0)}
+html.go .rad{opacity:1;transform:none;transition:opacity .7s ease,transform 1.1s cubic-bezier(.2,.7,.1,1)}
+@media (prefers-reduced-motion:reduce){html.go .rad{transition:none!important}}
+
+.top{position:fixed;top:0;left:0;right:0;z-index:20;height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--pad);background:rgba(255,255,255,.97);border-bottom:1px solid var(--rule)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:19px;letter-spacing:-.01em}
+.brand svg{width:26px;height:26px;color:var(--ink)}
+.top__nav{display:flex;gap:32px}
+.top__nav a,.top__cta{font-size:17px;font-weight:500}
+.top__nav a:hover,.top__cta:hover{color:var(--acc)}
+.top__cta{border-bottom:1px solid currentColor;padding-bottom:2px}
+
+.open{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:112px;padding-bottom:96px}
+.kicker{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+.sq{display:inline-block;width:10px;height:10px;background:var(--acc)}
+h1{font-weight:600;font-size:clamp(46px,7vw,104px);line-height:.98;letter-spacing:-.04em;max-width:15ch}
+h1 span{color:var(--ink-2)}
+.lede{margin-top:40px;font-size:clamp(21px,2.1vw,27px);line-height:1.45;max-width:38ch;color:var(--ink-2)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px;margin-top:48px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:16px 26px;font-size:18px;font-weight:500}
+.btn:hover{background:var(--acc)}
+.link{font-size:18px;font-weight:500;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.link:hover{color:var(--acc);border-color:var(--acc)}
+
+.sec{border-top:1px solid var(--rule);padding-top:112px;padding-bottom:120px}
+.label{display:block;margin-bottom:24px}
+h2{font-weight:600;font-size:clamp(38px,4.8vw,66px);line-height:1.02;letter-spacing:-.035em;max-width:20ch}
+.sub{margin-top:20px;font-size:21px;color:var(--ink-2);max-width:48ch}
+
+.cmp{display:grid;grid-template-columns:1fr 1fr;margin-top:64px;border-top:1px solid var(--ink)}
+.cmp>div{padding:36px 40px 0 0}
+.cmp>div+div{padding-left:40px;padding-right:0;border-left:1px solid var(--rule)}
+.cmp h3{font-size:26px;font-weight:600;letter-spacing:-.02em;margin-bottom:16px}
+.cmp p{color:var(--ink-2);font-size:21px;line-height:1.5;max-width:34ch}
+.cmp .me h3{color:var(--acc)}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:64px;border-top:1px solid var(--ink)}
+.step{padding:32px 28px 0 0}
+.step+.step{padding-left:28px;border-left:1px solid var(--rule)}
+.step .mono{font-size:14px}
+.step h3{font-size:30px;font-weight:600;letter-spacing:-.025em;margin:16px 0 14px}
+.step p{color:var(--ink-2);font-size:18px;line-height:1.5}
+.step--end h3{color:var(--acc)}
+
+.demo{margin-top:56px;border:1px solid var(--ink);background:#fff}
+.demo__bar,.demo__meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;padding:16px 24px}
+.demo__bar{border-bottom:1px solid var(--rule)}
+.demo__meta{border-top:1px solid var(--rule);font-size:17px;color:var(--ink-2)}
+.demo__meta b{color:var(--ink);font-weight:600}
+.demo__out{padding:40px 24px 44px;min-height:190px;font-size:clamp(24px,2.8vw,36px);line-height:1.3;letter-spacing:-.015em;max-width:30ch}
+.demo__row{display:flex;flex-wrap:wrap;gap:12px;padding:0 24px 28px}
+.demo button{border:1px solid var(--ink);background:#fff;padding:14px 20px;font-size:17px;font-weight:500;cursor:pointer}
+.demo button:hover:not(:disabled){background:var(--ink);color:#fff}
+.demo button:disabled{opacity:.3;cursor:default}
+.demo button[data-act="delete"]{border-color:var(--acc);color:var(--acc)}
+.demo button[data-act="delete"]:hover:not(:disabled){background:var(--acc);color:#fff}
+.tag{display:inline-block;border:1px solid var(--ink-2);padding:3px 8px;font-size:13px}
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);margin-top:64px;border-top:1px solid var(--ink)}
+.metrics>div{padding:32px 24px 0 0}
+.metrics>div+div{padding-left:24px;border-left:1px solid var(--rule)}
+.metrics b{display:block;font-size:clamp(50px,6vw,88px);font-weight:600;letter-spacing:-.05em;line-height:1}
+.metrics b.acc-t{color:var(--acc)}
+.metrics span{display:block;margin-top:14px;font-size:18px;color:var(--ink-2);line-height:1.4}
+.fine{margin-top:40px;font-size:17px;color:var(--ink-2);max-width:70ch}
+
+.mail{display:inline-block;font-size:clamp(34px,5.6vw,82px);font-weight:600;letter-spacing:-.04em;line-height:1.05;border-bottom:3px solid var(--acc);padding-bottom:6px}
+.mail:hover{color:var(--acc)}
+.access p.body{margin-top:32px;font-size:21px;color:var(--ink-2);max-width:44ch}
+
+.foot{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;font-size:14px}
+
+@media (max-width:900px){
+  .top__nav a:not(.keep){display:none}
+  .top__nav{gap:0}
+  .cmp,.steps,.metrics{grid-template-columns:1fr 1fr}
+  .steps .step:nth-child(3){border-left:0;padding-left:0}
+  .steps .step:nth-child(n+3){margin-top:36px;border-top:1px solid var(--rule);padding-top:32px}
+}
+@media (max-width:640px){
+  body{font-size:18px}
+  .top{height:64px}
+  .top__nav{display:none}
+  .sec{padding-top:80px;padding-bottom:88px}
+  .cmp,.steps,.metrics{grid-template-columns:1fr}
+  .cmp>div{padding-right:0}
+  .cmp>div+div,.step+.step,.metrics>div+div{padding-left:0;border-left:0;border-top:1px solid var(--rule);margin-top:36px;padding-top:36px}
+  .steps .step:nth-child(n+3){margin-top:36px;padding-top:36px}
+  .steps .step{padding-right:0}
+  .metrics>div{padding-right:0}
+  .step+.step{border-left:0}
+  .demo__out{min-height:150px}
+  .demo button{flex:1 1 auto}
+}
+</style>
+</head>
+<body>
+
+<canvas id="intro" aria-hidden="true"></canvas>
+
+<main id="main">
+
+  <header class="top rad">
+    <a class="brand" href="#top" aria-label="Tachyon Lab, top of page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="12" r="3.2" fill="#FF3B00"/></svg>
+      <span>Tachyon Lab</span>
+    </a>
+    <nav class="top__nav" aria-label="Sections">
+      <a href="#method">Method</a>
+      <a href="#demo">Demo</a>
+      <a href="#evidence">Evidence</a>
+    </nav>
+    <a class="top__cta keep" href="mailto:leo@tachyonlab.au?subject=Tachyon-V1%20access">Request access ↗</a>
+  </header>
+
+  <section class="open wrap" id="top" aria-labelledby="top-title">
+    <p class="mono kicker rad"><i class="sq" aria-hidden="true"></i>Tachyon-V1 · light-alpha · Brisbane</p>
+    <h1 class="rad" id="top-title">AI that learns from your corrections, <span>on your own machine.</span></h1>
+    <p class="lede rad">Tachyon keeps each fix you make, trains a small adapter on the fixes you approve, and runs it locally. Nothing is uploaded. Delete removes the adapter, the traces and the key.</p>
+    <div class="row rad">
+      <a class="btn" href="mailto:leo@tachyonlab.au?subject=Tachyon-V1%20access">Request access ↗</a>
+      <a class="link" href="#method">See the loop ↓</a>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="where" aria-labelledby="where-title">
+    <span class="label mono rad">01 — Where corrections go</span>
+    <h2 class="rad" id="where-title">Two ways to handle a correction.</h2>
+    <div class="cmp">
+      <div class="rad">
+        <h3>Cloud assistant</h3>
+        <p>Your corrections are sent to a server. The provider decides what is stored, for how long, and who can read it.</p>
+      </div>
+      <div class="me rad">
+        <h3>Tachyon</h3>
+        <p>Corrections stay on your machine. They become a small adapter you own. Delete it and nothing is left behind.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="method" aria-labelledby="method-title">
+    <span class="label mono rad">02 — Method</span>
+    <h2 class="rad" id="method-title">The loop stays on your machine.</h2>
+    <div class="steps">
+      <div class="step rad">
+        <span class="mono">01</span>
+        <h3>Capture</h3>
+        <p>Every output you accept, edit or reject is saved locally as a trace.</p>
+      </div>
+      <div class="step rad">
+        <span class="mono">02</span>
+        <h3>Curate</h3>
+        <p>You choose which traces count. Nothing is learned without your say.</p>
+      </div>
+      <div class="step rad">
+        <span class="mono">03</span>
+        <h3>Train</h3>
+        <p>A small adapter is trained on the curated traces, on your own hardware.</p>
+      </div>
+      <div class="step step--end rad">
+        <span class="mono">04</span>
+        <h3>Delete</h3>
+        <p>One action removes the adapter, the traces and the key.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="demo" aria-labelledby="demo-title">
+    <span class="label mono rad">03 — Demo <span class="tag">simulated</span></span>
+    <h2 class="rad" id="demo-title">Try the loop.</h2>
+    <p class="sub rad">A walk-through with fixed steps. It calls no model and sends nothing anywhere.</p>
+    <div class="demo rad" id="demo-app">
+      <div class="demo__bar mono">
+        <span>Prompt</span>
+        <span>Draft a reply to Maya about Friday</span>
+      </div>
+      <p class="demo__out" data-out>Dear Maya, I hope this message finds you well. The deadline is Friday at noon.</p>
+      <div class="demo__row">
+        <button type="button" data-act="correct">Correct: make it shorter</button>
+        <button type="button" data-act="train" disabled>Train on traces</button>
+        <button type="button" data-act="delete">Delete everything</button>
+      </div>
+      <div class="demo__meta">
+        <span>Traces <b data-traces>0</b></span>
+        <span data-status aria-live="polite">Ready.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="evidence" aria-labelledby="evidence-title">
+    <span class="label mono rad">04 — Evidence</span>
+    <h2 class="rad" id="evidence-title">Pilot measurements.</h2>
+    <div class="metrics rad">
+      <div><b>16.2</b><span>tokens per second, decode at 512</span></div>
+      <div><b>14.6</b><span>tokens per second, decode at 16K</span></div>
+      <div><b>0.800</b><span>RAG score, base 0.317</span></div>
+      <div><b class="acc-t">0/400</b><span>canary, a target and not a result</span></div>
+    </div>
+    <p class="fine rad">20 synthetic tasks. 20.1 GB peak. The adapter is not trained yet. Gate G1: 16 November 2026.</p>
+  </section>
+
+  <section class="sec wrap access" id="access" aria-labelledby="access-title">
+    <span class="label mono rad">05 — Access</span>
+    <h2 class="rad" id="access-title">Three design partners.</h2>
+    <div class="rad" style="margin-top:56px">
+      <a class="mail" href="mailto:leo@tachyonlab.au?subject=Design%20partner">leo@tachyonlab.au ↗</a>
+      <p class="body">Tell us what you are working on, and what you would need erased.</p>
+    </div>
+  </section>
+
+  <footer class="foot wrap mono">
+    <span>Tachyon Lab · Brisbane, Australia · Self-funded</span>
+    <span>© 2026</span>
+  </footer>
+
+</main>
+
+<script src="src/intro.js"></script>
+<script src="src/app.js" defer></script>
+</body>
+</html>

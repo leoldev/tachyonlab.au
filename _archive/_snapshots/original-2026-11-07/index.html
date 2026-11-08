@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#070706">
+<title>Tachyon Lab — Local-first AI</title>
+<meta name="description" content="Independent research lab in Brisbane building local-first AI that runs on your machine. Tachyon-V1 is in light-alpha.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="canonical" href="https://tachyonlab.au/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tachyon Lab — Local-first AI">
+<meta property="og:description" content="Local-first AI that runs on your machine, not in the cloud. Tachyon-V1 is in light-alpha.">
+<meta property="og:url" content="https://tachyonlab.au/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070706'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23F4F3EE'/%3E%3Ccircle cx='16' cy='16' r='5.5' fill='none' stroke='%23F4F3EE'/%3E%3Crect x='14.5' y='14.5' width='3' height='3' fill='%23FF3B00'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="src/site.css">
+<style>#boot{position:fixed;inset:0;background:#070706;z-index:9999}</style>
+<noscript><style>#boot{display:none}.entry__title .line>span,.panel__content{transform:none!important;opacity:1!important}</style></noscript>
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<a class="skip" href="#identity">Skip to content</a>
+<div id="boot" aria-hidden="true"></div>
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="g-identity" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor"/>
+    <circle cx="16" cy="16" r="8" fill="none" stroke="currentColor"/>
+    <circle cx="16" cy="16" r="3" fill="#FF3B00"/>
+  </symbol>
+  <symbol id="g-method" viewBox="0 0 32 32">
+    <rect x="6.5" y="6.5" width="19" height="19" fill="none" stroke="currentColor"/>
+    <rect x="4.5" y="4.5" width="4" height="4" fill="currentColor"/>
+    <rect x="23.5" y="4.5" width="4" height="4" fill="currentColor"/>
+    <rect x="4.5" y="23.5" width="4" height="4" fill="currentColor"/>
+    <rect x="23.5" y="23.5" width="4" height="4" fill="currentColor"/>
+    <rect x="14.5" y="14.5" width="3" height="3" fill="#FF3B00"/>
+  </symbol>
+  <symbol id="g-evidence" viewBox="0 0 32 32">
+    <path d="M4 27.5H28" fill="none" stroke="currentColor"/>
+    <path d="M8 27V20" fill="none" stroke="currentColor"/>
+    <path d="M14 27V13" fill="none" stroke="currentColor"/>
+    <path d="M20 27V17" fill="none" stroke="currentColor"/>
+    <path d="M26 27V8" fill="none" stroke="currentColor"/>
+    <rect x="25" y="5.5" width="2.5" height="2.5" fill="#FF3B00"/>
+  </symbol>
+  <symbol id="g-uplink" viewBox="0 0 32 32">
+    <path d="M6 26L26 6" fill="none" stroke="currentColor"/>
+    <path d="M15 6H26V17" fill="none" stroke="currentColor"/>
+    <circle cx="6" cy="26" r="2.2" fill="#FF3B00"/>
+  </symbol>
+</svg>
+
+<header class="bar" id="bar">
+  <a class="brand" href="#top" aria-label="Tachyon Lab, back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor"/>
+      <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor"/>
+      <rect x="11" y="11" width="2" height="2" fill="#FF3B00"/>
+    </svg>
+    <span>Tachyon Lab</span>
+  </a>
+  <a class="bar__access" href="mailto:leo@tachyonlab.au?subject=Tachyon-V1%20access">Request access <i aria-hidden="true">↗</i></a>
+</header>
+
+<main id="main">
+
+  <!-- 00 / ENTRY -->
+  <section class="entry" id="top" aria-labelledby="entry-title">
+    <div class="entry__main">
+      <h1 class="entry__title" id="entry-title">
+        <span class="line"><span>Tachyon</span></span>
+        <span class="line"><span>Lab<span class="acc">.</span></span></span>
+      </h1>
+
+      <div class="entry__body">
+        <p class="entry__line">Local-first AI that runs on your machine, not in the cloud.</p>
+
+        <a class="access" id="access" href="mailto:leo@tachyonlab.au?subject=Tachyon-V1%20access" aria-label="Request access to Tachyon-V1 light-alpha">
+          <span class="access__meta">Tachyon-V1 / light-alpha</span>
+          <span class="access__target" aria-hidden="true">
+            <svg viewBox="0 0 200 200">
+              <circle class="target__hair" cx="100" cy="100" r="94"></circle>
+              <circle class="target__dash" cx="100" cy="100" r="70"></circle>
+              <circle class="target__arc" cx="100" cy="100" r="70"></circle>
+              <circle class="target__inner" cx="100" cy="100" r="34"></circle>
+              <path class="target__cross" d="M4 100H196M100 4V196"></path>
+              <path class="target__ticks" d="M100 0V9M100 191V200M0 100H9M191 100H200M33.5 33.5L39.8 39.8M160.2 160.2L166.5 166.5M166.5 33.5L160.2 39.8M39.8 160.2L33.5 166.5"></path>
+            </svg>
+            <i class="access__core" aria-hidden="true"></i>
+          </span>
+          <span class="access__cta">Request access <i aria-hidden="true">↗</i></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="entry__foot">
+      <nav class="glyphs" aria-label="Sections">
+        <a href="#identity">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#g-identity"></use></svg>
+          <span>Identity</span>
+        </a>
+        <a href="#method">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#g-method"></use></svg>
+          <span>Method</span>
+        </a>
+        <a href="#evidence">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#g-evidence"></use></svg>
+          <span>Evidence</span>
+        </a>
+        <a href="#uplink">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#g-uplink"></use></svg>
+          <span>Uplink</span>
+        </a>
+      </nav>
+
+      <a class="scrolldown" href="#identity">
+        <span>Scroll</span>
+        <i class="scrolldown__line" aria-hidden="true"></i>
+        <i class="scrolldown__arrow" aria-hidden="true">↓</i>
+      </a>
+    </div>
+  </section>
+
+  <!-- 01 / IDENTITY -->
+  <section class="panel" id="identity" aria-labelledby="identity-title">
+    <div class="panel__rail">
+      <svg class="panel__glyph" viewBox="0 0 32 32" aria-hidden="true"><use href="#g-identity"></use></svg>
+      <span class="panel__label">Identity</span>
+    </div>
+    <div class="panel__content">
+      <h2 id="identity-title">An independent lab for local-first AI.</h2>
+      <p>Brisbane, Australia. Self-funded. We build systems that learn on your hardware and can be erased on request.</p>
+    </div>
+  </section>
+
+  <!-- 02 / METHOD -->
+  <section class="panel" id="method" aria-labelledby="method-title">
+    <div class="panel__rail">
+      <svg class="panel__glyph" viewBox="0 0 32 32" aria-hidden="true"><use href="#g-method"></use></svg>
+      <span class="panel__label">Method</span>
+    </div>
+    <div class="panel__content">
+      <h2 id="method-title">The loop stays on your machine.</h2>
+      <div class="track">
+        <svg viewBox="0 0 900 160" aria-hidden="true">
+          <path class="track__ghost" d="M60 82C190 56 230 108 320 82S450 56 580 82S730 108 840 82"></path>
+          <path class="track__ghost" d="M60 70C190 44 230 96 320 70S450 44 580 70S730 96 840 70"></path>
+          <path class="track__rail" d="M60 96C190 70 230 122 320 96S450 70 580 96S730 122 840 96"></path>
+          <path class="track__return" d="M840 126V144H60V126"></path>
+          <g class="track__node"><rect x="55" y="91" width="10" height="10"></rect><rect x="58" y="94" width="4" height="4"></rect></g>
+          <g class="track__node"><rect x="315" y="91" width="10" height="10"></rect><rect x="318" y="94" width="4" height="4"></rect></g>
+          <g class="track__node"><rect x="575" y="91" width="10" height="10"></rect><rect x="578" y="94" width="4" height="4"></rect></g>
+          <g class="track__node"><rect x="835" y="91" width="10" height="10"></rect><rect x="838" y="94" width="4" height="4"></rect></g>
+          <circle class="track__packet" r="3">
+            <animateMotion dur="9s" repeatCount="indefinite" path="M60 96C190 70 230 122 320 96S450 70 580 96S730 122 840 96V144H60V96"></animateMotion>
+          </circle>
+        </svg>
+        <div class="track__labels" aria-hidden="true">
+          <span>Capture</span><span>Curate</span><span>Train</span><span>Delete</span>
+        </div>
+      </div>
+      <p>Every correction becomes a trace, then a weight. The loop runs locally. Delete removes the adapter, the traces, and the key.</p>
+    </div>
+  </section>
+
+  <!-- 03 / EVIDENCE -->
+  <section class="panel" id="evidence" aria-labelledby="evidence-title">
+    <div class="panel__rail">
+      <svg class="panel__glyph" viewBox="0 0 32 32" aria-hidden="true"><use href="#g-evidence"></use></svg>
+      <span class="panel__label">Evidence</span>
+    </div>
+    <div class="panel__content">
+      <h2 id="evidence-title">Pilot measurements.</h2>
+      <div class="metrics">
+        <div class="metric"><b>16.2</b><span>tok/s</span><small>decode @ 512</small></div>
+        <div class="metric"><b>14.6</b><span>tok/s</span><small>decode @ 16K</small></div>
+        <div class="metric"><b>0.800</b><span>RAG</span><small>base 0.317</small></div>
+        <div class="metric"><b class="metric__acc">0/400</b><span>canary</span><small>target, not a claim</small></div>
+      </div>
+      <p class="fine">20 synthetic tasks. 20.1 GB peak. Adapter not trained. Canary 0/400 is a target. G1: 16 November 2026.</p>
+    </div>
+  </section>
+
+  <!-- 04 / UPLINK -->
+  <section class="panel" id="uplink" aria-labelledby="uplink-title">
+    <div class="panel__rail">
+      <svg class="panel__glyph" viewBox="0 0 32 32" aria-hidden="true"><use href="#g-uplink"></use></svg>
+      <span class="panel__label">Uplink</span>
+    </div>
+    <div class="panel__content">
+      <h2 id="uplink-title">Request access.</h2>
+      <a class="mail" href="mailto:leo@tachyonlab.au?subject=Design%20partner">leo@tachyonlab.au <i aria-hidden="true">↗</i></a>
+      <p>Three design partners. Tell us what you are working on.</p>
+      <p class="fine">Brisbane, Australia</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="src/field.js"></script>
+<script src="src/intro.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>

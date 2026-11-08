@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Tachyon Lab — 01 Fahrplan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+@font-face{
+  font-family:'Tachyon Archivo Heavy';
+  src:url('../brand/fonts/TachyonArchivo-Heavy.ttf') format('truetype');
+  font-weight:800;font-style:normal;font-display:block;
+}
+:root{
+  --bg:#08080A;
+  --ink:#F2F0E9;
+  --dim:#8B8D95;
+  --rule:rgba(242,240,233,.16);
+  --signal:#2B3CFF;
+  --sans:'Inter Tight',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --pad:clamp(18px,3.2vw,44px);
+  --ease:cubic-bezier(.22,.68,.24,1);
+  --wm-bg:#08080A;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+body{display:flex;flex-direction:column;padding:0 var(--pad)}
+
+/* ---- top bar ---- */
+.bar{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:16px;
+  height:clamp(42px,6vh,56px);
+  border-bottom:1px solid var(--rule);
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.bar span:last-child{text-align:right}
+
+/* ---- main ---- */
+main{
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:clamp(18px,3.4vh,34px);
+  padding:clamp(14px,3vh,30px) 0;
+}
+.mast{display:flex;align-items:flex-end;gap:28px}
+.wm{
+  display:block;
+  width:min(64vw,860px);
+  height:auto;
+  color:var(--ink);
+  overflow:visible;
+}
+.wm .sig{fill:var(--signal)}
+.mast__meta{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding-bottom:6px;
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--dim);
+  text-align:right;
+  white-space:nowrap;
+}
+
+/* ---- departure board ---- */
+.board{border-top:1px solid var(--rule2,rgba(242,240,233,.3))}
+.board__label{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  height:clamp(26px,3.4vh,34px);
+  border-bottom:1px solid var(--rule);
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.board__label i{width:6px;height:6px;background:var(--signal);display:block}
+.board__label span:last-child{margin-left:auto;color:var(--dim)}
+
+.board__head,.row{
+  display:grid;
+  grid-template-columns:clamp(48px,5vw,72px) minmax(0,1fr) clamp(90px,12vw,150px) clamp(34px,3vw,48px);
+  align-items:center;
+  gap:clamp(10px,2vw,24px);
+}
+.board__head{
+  height:clamp(24px,3vh,30px);
+  border-bottom:1px solid var(--rule);
+  font-family:var(--mono);
+  font-size:8.5px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.board__head span:nth-child(3){text-align:left}
+
+.row{
+  position:relative;
+  min-height:clamp(56px,8.6vh,84px);
+  border-bottom:1px solid var(--rule);
+  color:var(--ink);
+  text-decoration:none;
+  transition:background .22s linear;
+}
+.row__no,.row__plat{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.1em;
+  color:var(--dim);
+}
+.row__name{
+  font-size:clamp(20px,2.3vw,30px);
+  font-weight:500;
+  letter-spacing:-.02em;
+  line-height:1;
+}
+.row__arrow{
+  justify-self:end;
+  font-family:var(--mono);
+  font-size:16px;
+  color:var(--dim);
+  transition:transform .3s var(--ease),color .22s linear;
+}
+.row:hover,.row:focus-visible{background:rgba(242,240,233,.04);outline:none}
+.row:hover .row__arrow,.row:focus-visible .row__arrow{transform:translateX(6px);color:var(--signal)}
+.row:focus-visible{box-shadow:inset 2px 0 0 var(--signal)}
+.row::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:var(--signal);
+  transform:scaleY(0);
+  transform-origin:top;
+  transition:transform .3s var(--ease);
+}
+.row:hover::before,.row:focus-visible::before{transform:scaleY(1)}
+
+/* ---- footer ---- */
+footer{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:28px;
+  padding:clamp(14px,2.6vh,24px) 0 clamp(16px,3vh,26px);
+  border-top:1px solid var(--rule);
+}
+footer p{
+  margin:0;
+  max-width:44ch;
+  font-size:clamp(12px,1.1vw,14px);
+  line-height:1.5;
+  color:var(--ink);
+}
+.access{
+  flex:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding-bottom:3px;
+  border-bottom:1px solid var(--signal);
+  color:var(--ink);
+  text-decoration:none;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.access i{font-style:normal;color:var(--signal)}
+
+/* ---- entrance ---- */
+.js .wm .wmp{opacity:0;transform:translateY(9px)}
+.js .board,.js footer{opacity:0}
+.js .row{clip-path:inset(0 100% 0 0)}
+.is-in .wm .wmp{
+  opacity:1;transform:none;
+  transition:opacity .72s var(--ease),transform .72s var(--ease);
+}
+.is-in .wm .wmp[data-i="1"]{transition-delay:.02s}
+.is-in .wm .wmp[data-i="2"]{transition-delay:.07s}
+.is-in .wm .wmp[data-i="3"]{transition-delay:.12s}
+.is-in .wm .wmp[data-i="4"]{transition-delay:.16s}
+.is-in .wm .wmp[data-i="5"]{transition-delay:.2s}
+.is-in .wm .wmp[data-i="6"]{transition-delay:.24s}
+.is-in .wm .wmp[data-i="7"]{transition-delay:.28s}
+.is-in .board{opacity:1;transition:opacity .5s linear .34s}
+.is-in .row{
+  clip-path:inset(0 0 0 0);
+  transition:clip-path .62s var(--ease),background .22s linear;
+}
+.is-in .row:nth-child(2){transition-delay:.38s,.0s}
+.is-in .row:nth-child(3){transition-delay:.44s,.0s}
+.is-in .row:nth-child(4){transition-delay:.5s,.0s}
+.is-in .row:nth-child(5){transition-delay:.56s,.0s}
+.is-in footer{opacity:1;transition:opacity .6s linear .62s}
+.settled *{transition:none!important;animation:none!important}
+
+@media (max-width:760px){
+  .bar span:nth-child(2){display:none}
+  .board{flex:1;display:flex;flex-direction:column}
+  .row{flex:1;min-height:60px;max-height:104px}
+  .mast{flex-direction:column;align-items:flex-start;gap:10px}
+  .wm{width:100%}
+  .mast__meta{flex-direction:row;gap:14px;text-align:left;padding:0}
+  .board__head,.row{grid-template-columns:38px minmax(0,1fr) 30px}
+  .board__head span:nth-child(3),.row__plat{display:none}
+  .row__name{font-size:clamp(18px,5vw,22px)}
+  footer{flex-direction:column;align-items:flex-start;gap:12px}
+}
+@media (max-height:700px){
+  .mast__meta{display:none}
+  main{gap:14px;padding:10px 0}
+  .row{min-height:48px}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <span>Tachyon Lab</span>
+  <span>Brisbane 27.47°S 153.03°E</span>
+  <span>Light-alpha / 01</span>
+</header>
+
+<main>
+  <div class="mast">
+    <svg class="wm" viewBox="0 0 1200 400" role="img" aria-label="Tachyon Lab">
+      <g class="wmp" data-i="1"><text x="19.5" y="182.7" fill="currentColor" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">TACHY</text></g>
+      <g class="wmp" data-i="2">
+        <path fill="none" style="fill:var(--wm-bg)" stroke="currentColor" stroke-width="25" stroke-miterlimit="10" d="M951.2,53.2h-64.2c-1.8,0-3.4,1-4.3,2.5l-32.1,55.6c-.9,1.5-.9,3.5,0,5l32.1,55.6c.9,1.5,2.5,2.5,4.3,2.5h64.2c1.8,0,3.4-1,4.3-2.5l32.1-55.6c.9-1.5.9-3.5,0-5l-32.1-55.6c-.9-1.5-2.5-2.5-4.3-2.5Z"/>
+        <g stroke="currentColor" stroke-width="5" stroke-miterlimit="10" fill="none">
+          <line x1="876.4" y1="113.7" x2="898.7" y2="75.7"/>
+          <line x1="897" y1="151.8" x2="941.1" y2="151.8"/>
+          <line x1="939.4" y1="75.6" x2="961.5" y2="113.8"/>
+        </g>
+      </g>
+      <g class="wmp" data-i="3"><text x="1011.1" y="185.1" fill="currentColor" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">N</text></g>
+      <g class="wmp" data-i="4"><text x="11.2" y="353.7" fill="currentColor" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">LAB</text></g>
+      <g class="wmp" data-i="5"><text x="485.7" y="353.7" class="sig" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">.</text></g>
+      <g class="wmp" data-i="6"><path fill="currentColor" d="M888.4,354.4c-6.2,3.6-16.1,7.9-28.1,7.4-27.7-1.1-62.6-27.3-62.6-70s35-68.9,62.6-70c11.7-.5,21.4,3.6,27.5,7.1.2,41.8.4,83.6.6,125.4h0Z"/></g>
+      <g class="wmp" data-i="7"><path class="sig" d="M915,242.6c-8.7,15.8-8.9,40.8-9,49.1,0,9-.3,34.7,8.5,50.6,27.1,49.1,144.8,14.7,200.3-8.9,26.3-11.1,60-25.8,59.7-44.9-.3-18.5-32.5-31.4-59.2-41.9-8.2-3.2-167.5-64.1-200.3-4.1h0Z"/></g>
+    </svg>
+  </div>
+
+  <nav class="board" aria-label="Sections">
+    <div class="board__label"><i aria-hidden="true"></i><span>Departures</span><span>04</span></div>
+    <div class="board__head" aria-hidden="true"><span>No.</span><span>Section</span><span>Platform</span><span></span></div>
+    <a class="row" href="../index.html#identity" target="_blank" rel="noopener"><span class="row__no">01</span><span class="row__name">Identity</span><span class="row__plat">A</span><span class="row__arrow" aria-hidden="true">→</span></a>
+    <a class="row" href="../index.html#method" target="_blank" rel="noopener"><span class="row__no">02</span><span class="row__name">Method</span><span class="row__plat">B</span><span class="row__arrow" aria-hidden="true">→</span></a>
+    <a class="row" href="../index.html#evidence" target="_blank" rel="noopener"><span class="row__no">03</span><span class="row__name">Evidence</span><span class="row__plat">C</span><span class="row__arrow" aria-hidden="true">→</span></a>
+    <a class="row" href="../index.html#uplink" target="_blank" rel="noopener"><span class="row__no">04</span><span class="row__name">Uplink</span><span class="row__plat">D</span><span class="row__arrow" aria-hidden="true">→</span></a>
+  </nav>
+</main>
+
+<footer>
+  <p>Local-first AI that runs on your machine, not in the cloud.</p>
+  <a class="access" href="mailto:apply@tachyonlab.au?subject=Tachyon-V1%20access">Request access <i aria-hidden="true">↗</i></a>
+</footer>
+
+<script>
+(function(){
+  var r=document.documentElement,q=location.search;
+  if(q.indexOf('still')>-1||matchMedia('(prefers-reduced-motion: reduce)').matches){
+    r.classList.add('is-in','settled');return;
+  }
+  var go=function(){r.classList.add('is-in')};
+  requestAnimationFrame(function(){requestAnimationFrame(function(){setTimeout(go,50)})});
+})();
+</script>
+</body>
+</html>

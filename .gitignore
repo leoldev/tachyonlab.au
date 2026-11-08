@@ -1,0 +1,6 @@
+# dependencies
+node_modules/
+# os
+.DS_Store
+# local captures
+_tmp/

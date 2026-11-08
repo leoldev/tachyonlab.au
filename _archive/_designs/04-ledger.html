@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Tachyon Lab — 04 Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+@font-face{
+  font-family:'Tachyon Archivo Heavy';
+  src:url('../brand/fonts/TachyonArchivo-Heavy.ttf') format('truetype');
+  font-weight:800;font-style:normal;font-display:block;
+}
+:root{
+  --bg:#F3EFE3;--ink:#1A1712;--dim:#6B6252;--rule:#CFC5AE;
+  --signal:#2B3CFF;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --serif:'Newsreader',Georgia,serif;
+  --ease:cubic-bezier(.22,.68,.24,1);
+  --wm-bg:#F3EFE3;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);-webkit-font-smoothing:antialiased;overflow:hidden}
+.spread{
+  height:100svh;display:grid;grid-template-columns:64% 36%;
+  position:relative;
+}
+.page{position:relative;padding:clamp(24px,3.4vw,46px);display:flex;flex-direction:column;min-width:0}
+.page--right{border-left:1px solid var(--rule);background:rgba(26,23,18,.018)}
+.page::before{
+  content:"";position:absolute;top:0;bottom:0;left:clamp(14px,1.6vw,22px);width:1px;
+  background:rgba(43,60,255,.32);
+}
+.folio{
+  font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+  display:flex;justify-content:space-between;gap:12px;
+}
+.left__mid{margin:auto 0;padding:clamp(16px,4vh,40px) 0}
+.wm{display:block;width:100%;height:auto;color:var(--ink);overflow:visible}
+.wm .sig{fill:var(--signal)}
+.tag{
+  margin:clamp(18px,3.4vh,32px) 0 0;
+  max-width:30ch;
+  font-size:clamp(17px,1.8vw,24px);
+  line-height:1.32;
+  font-style:italic;
+  letter-spacing:-.005em;
+}
+.imprint{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+  border-top:1px solid var(--rule);padding-top:10px;
+}
+
+/* right page */
+.entries{margin-top:clamp(24px,6vh,58px);flex:1;display:flex;flex-direction:column;min-height:0}
+.entries__head,.entry{
+  display:grid;grid-template-columns:34px minmax(0,1fr) 22px 20px;
+  align-items:baseline;gap:10px;
+}
+.entries__head{
+  padding-bottom:8px;border-bottom:1px solid var(--ink);
+  font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+}
+.entry{
+  flex:none;
+  padding:clamp(12px,2.4vh,20px) 0;
+  border-bottom:1px solid var(--rule);
+  color:var(--ink);text-decoration:none;
+  transition:background .2s linear;
+}
+.entry__no{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);font-variant-numeric:tabular-nums}
+.entry__name{font-size:clamp(17px,1.7vw,22px);line-height:1;letter-spacing:-.01em}
+.entry__ref{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);text-align:right}
+.entry__arw{font-family:var(--mono);font-size:12px;color:var(--dim);justify-self:end;transition:transform .28s var(--ease),color .2s linear}
+.entry:hover,.entry:focus-visible{background:rgba(43,60,255,.07);outline:none}
+.entry:hover .entry__arw,.entry:focus-visible .entry__arw{transform:translateX(4px);color:var(--signal)}
+.entry:focus-visible{box-shadow:inset 2px 0 0 var(--signal)}
+
+.fill{flex:1;min-height:16px;border-bottom:1px solid rgba(207,197,174,.55)}
+.fill:last-of-type{border-bottom:0}
+.close{margin-top:clamp(14px,2.6vh,24px);padding-top:0}
+.close__rule{border-top:3px double var(--ink);padding-top:14px;display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.close__k{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.access{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:7px;
+  border-bottom:1px solid var(--signal);padding-bottom:2px;
+}
+.access i{font-style:normal;color:var(--signal)}
+
+/* entrance */
+.js .wm .wmp{opacity:0;transform:translateY(8px)}
+.js .tag,.js .imprint,.js .entries,.js .close,.js .folio{opacity:0}
+.js .entry{clip-path:inset(0 100% 0 0)}
+.js .page::before{transform:scaleY(0);transform-origin:top}
+.is-in .wm .wmp{opacity:1;transform:none;transition:opacity .72s var(--ease),transform .72s var(--ease)}
+.is-in .wm .wmp[data-i="1"]{transition-delay:.08s}
+.is-in .wm .wmp[data-i="2"]{transition-delay:.14s}
+.is-in .wm .wmp[data-i="3"]{transition-delay:.2s}
+.is-in .wm .wmp[data-i="4"]{transition-delay:.26s}
+.is-in .wm .wmp[data-i="5"]{transition-delay:.32s}
+.is-in .wm .wmp[data-i="6"]{transition-delay:.38s}
+.is-in .wm .wmp[data-i="7"]{transition-delay:.44s}
+.is-in .folio{opacity:1;transition:opacity .5s linear .05s}
+.is-in .tag{opacity:1;transition:opacity .6s linear .34s}
+.is-in .imprint{opacity:1;transition:opacity .5s linear .5s}
+.is-in .entries{opacity:1;transition:opacity .4s linear .28s}
+.is-in .entry{clip-path:inset(0 0 0 0);transition:clip-path .55s var(--ease),background .2s linear}
+.is-in .entry:nth-child(2){transition-delay:.34s,0s}
+.is-in .entry:nth-child(3){transition-delay:.4s,0s}
+.is-in .entry:nth-child(4){transition-delay:.46s,0s}
+.is-in .entry:nth-child(5){transition-delay:.52s,0s}
+.is-in .close{opacity:1;transition:opacity .55s linear .58s}
+.is-in .page::before{transform:scaleY(1);transition:transform .9s var(--ease) .1s}
+.settled *{transition:none!important;animation:none!important}
+
+@media (max-width:860px){
+  body{overflow:auto;height:auto}
+  .spread{height:auto;min-height:100svh;grid-template-columns:1fr}
+  .page--right{border-left:0;border-top:1px solid var(--rule)}
+  .page{min-height:0}
+  .left__mid{margin:0;padding:clamp(18px,5vh,40px) 0}
+  .entries{margin-top:18px;flex:none;display:block}
+  .fill{display:none}
+  .close{margin-top:auto;padding-top:24px}
+}
+@media (max-width:520px){
+  .folio span:last-child{display:none}
+  .entry{grid-template-columns:28px minmax(0,1fr) 16px}
+  .entry__ref{display:none}
+  .entries__head span:nth-child(3){display:none}
+  .entries__head{grid-template-columns:28px minmax(0,1fr) 16px}
+}
+</style>
+</head>
+<body>
+<div class="spread">
+  <section class="page page--left" aria-label="Tachyon Lab">
+    <div class="folio"><span>Folio 01</span><span>Tachyon Lab / Light-alpha</span></div>
+    <div class="left__mid">
+      <svg class="wm" viewBox="0 0 1200 400" role="img" aria-label="Tachyon Lab">
+        <g class="wmp" data-i="1"><text x="19.5" y="182.7" fill="currentColor" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">TACHY</text></g>
+        <g class="wmp" data-i="2">
+          <path fill="none" style="fill:var(--wm-bg)" stroke="currentColor" stroke-width="25" stroke-miterlimit="10" d="M951.2,53.2h-64.2c-1.8,0-3.4,1-4.3,2.5l-32.1,55.6c-.9,1.5-.9,3.5,0,5l32.1,55.6c.9,1.5,2.5,2.5,4.3,2.5h64.2c1.8,0,3.4-1,4.3-2.5l32.1-55.6c.9-1.5.9-3.5,0-5l-32.1-55.6c-.9-1.5-2.5-2.5-4.3-2.5Z"/>
+          <g stroke="currentColor" stroke-width="5" stroke-miterlimit="10" fill="none">
+            <line x1="876.4" y1="113.7" x2="898.7" y2="75.7"/>
+            <line x1="897" y1="151.8" x2="941.1" y2="151.8"/>
+            <line x1="939.4" y1="75.6" x2="961.5" y2="113.8"/>
+          </g>
+        </g>
+        <g class="wmp" data-i="3"><text x="1011.1" y="185.1" fill="currentColor" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">N</text></g>
+        <g class="wmp" data-i="4"><text x="11.2" y="353.7" fill="currentColor" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">LAB</text></g>
+        <g class="wmp" data-i="5"><text x="485.7" y="353.7" class="sig" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">.</text></g>
+        <g class="wmp" data-i="6"><path fill="currentColor" d="M888.4,354.4c-6.2,3.6-16.1,7.9-28.1,7.4-27.7-1.1-62.6-27.3-62.6-70s35-68.9,62.6-70c11.7-.5,21.4,3.6,27.5,7.1.2,41.8.4,83.6.6,125.4h0Z"/></g>
+        <g class="wmp" data-i="7"><path class="sig" d="M915,242.6c-8.7,15.8-8.9,40.8-9,49.1,0,9-.3,34.7,8.5,50.6,27.1,49.1,144.8,14.7,200.3-8.9,26.3-11.1,60-25.8,59.7-44.9-.3-18.5-32.5-31.4-59.2-41.9-8.2-3.2-167.5-64.1-200.3-4.1h0Z"/></g>
+      </svg>
+      <p class="tag">Local-first AI that runs on your machine, not in the cloud.</p>
+    </div>
+    <div class="imprint">Brisbane, Australia / 27.47°S 153.03°E</div>
+  </section>
+
+  <section class="page page--right" aria-label="Sections">
+    <div class="folio"><span>Folio 02</span><span>Entries 01–04</span></div>
+    <nav class="entries">
+      <div class="entries__head" aria-hidden="true"><span>No.</span><span>Entry</span><span>Ref</span><span></span></div>
+      <a class="entry" href="../index.html#identity" target="_blank" rel="noopener"><span class="entry__no">01</span><span class="entry__name">Identity</span><span class="entry__ref">A</span><span class="entry__arw" aria-hidden="true">→</span></a>
+      <a class="entry" href="../index.html#method" target="_blank" rel="noopener"><span class="entry__no">02</span><span class="entry__name">Method</span><span class="entry__ref">B</span><span class="entry__arw" aria-hidden="true">→</span></a>
+      <a class="entry" href="../index.html#evidence" target="_blank" rel="noopener"><span class="entry__no">03</span><span class="entry__name">Evidence</span><span class="entry__ref">C</span><span class="entry__arw" aria-hidden="true">→</span></a>
+      <a class="entry" href="../index.html#uplink" target="_blank" rel="noopener"><span class="entry__no">04</span><span class="entry__name">Uplink</span><span class="entry__ref">D</span><span class="entry__arw" aria-hidden="true">→</span></a>
+      <span class="fill" aria-hidden="true"></span>
+      <span class="fill" aria-hidden="true"></span>
+      <span class="fill" aria-hidden="true"></span>
+      <span class="fill" aria-hidden="true"></span>
+      <span class="fill" aria-hidden="true"></span>
+      <span class="fill" aria-hidden="true"></span>
+    </nav>
+    <div class="close">
+      <div class="close__rule">
+        <span class="close__k">Balance carried forward</span>
+        <a class="access" href="mailto:apply@tachyonlab.au?subject=Tachyon-V1%20access">Request access <i aria-hidden="true">↗</i></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var r=document.documentElement,q=location.search;
+  if(q.indexOf('still')>-1||matchMedia('(prefers-reduced-motion: reduce)').matches){
+    r.classList.add('is-in','settled');return;
+  }
+  requestAnimationFrame(function(){requestAnimationFrame(function(){setTimeout(function(){r.classList.add('is-in')},50)})});
+})();
+</script>
+</body>
+</html>

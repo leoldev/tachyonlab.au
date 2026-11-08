@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Tachyon Lab — 10 Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+@font-face{
+  font-family:'Tachyon Archivo Heavy';
+  src:url('../brand/fonts/TachyonArchivo-Heavy.ttf') format('truetype');
+  font-weight:800;font-style:normal;font-display:block;
+}
+:root{
+  --bg:#F1EFE8;
+  --ink:#16150F;
+  --dim:#6C685C;
+  --rule:rgba(22,21,15,.5);
+  --rule-soft:rgba(22,21,15,.22);
+  --signal:#2B3CFF;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:'Archivo',system-ui,-apple-system,sans-serif;
+  --ease:cubic-bezier(.22,.68,.24,1);
+  --wm-bg:#F1EFE8;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--mono);-webkit-font-smoothing:antialiased;overflow:hidden;
+  padding:clamp(14px,2.2vw,30px);
+  display:flex;
+}
+.form{
+  flex:1;min-height:0;
+  max-width:1160px;margin:0 auto;
+  border:1px solid var(--ink);
+  display:flex;flex-direction:column;
+  background:var(--bg);
+}
+
+/* ---------- header ---------- */
+.head{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;
+  padding:10px 14px;
+  border-bottom:1px solid var(--ink);
+  font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+}
+.head__l{display:flex;align-items:baseline;gap:10px}
+.head__l b{font-weight:500;letter-spacing:.2em}
+.head__l span{color:var(--dim)}
+.head__c{font-size:9px;letter-spacing:.26em;white-space:nowrap}
+.head__r{text-align:right;color:var(--dim)}
+
+/* ---------- meta row ---------- */
+.meta{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--ink);
+}
+.meta>div{padding:7px 14px 8px;border-right:1px solid var(--rule-soft);min-width:0}
+.meta>div:last-child{border-right:0}
+.meta span{display:block;font-size:6.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.meta b{display:block;font-size:9px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- name field ---------- */
+.name{
+  position:relative;flex:1;min-height:0;
+  border-bottom:1px solid var(--ink);
+  padding:11px 14px 13px;
+  display:flex;flex-direction:column;
+}
+.k{
+  font-size:6.8px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+  display:flex;justify-content:space-between;gap:16px;
+}
+.k em{font-style:normal;letter-spacing:.14em}
+.name__body{flex:1;min-height:0;display:grid;place-items:center;padding:clamp(8px,2vh,18px) 0}
+.wm{display:block;width:min(100%,980px);height:auto;color:var(--ink);overflow:visible}
+.wm .sig{fill:var(--signal)}
+
+/* ---------- remarks + stamp ---------- */
+.row2{
+  display:grid;grid-template-columns:1fr clamp(190px,22%,250px);
+  border-bottom:1px solid var(--ink);
+}
+.remarks{
+  padding:9px 14px 11px;border-right:1px solid var(--ink);
+  display:flex;flex-direction:column;justify-content:space-between;gap:8px;min-width:0;
+}
+.remarks p{
+  margin:0;font-family:var(--sans);font-size:clamp(11px,1.02vw,13px);
+  line-height:1.5;letter-spacing:-.005em;max-width:52ch;
+}
+.stampcell{position:relative;display:grid;place-items:center;padding:6px;overflow:visible}
+.stamp{
+  position:relative;
+  transform:rotate(-6.5deg);
+  border:2px solid var(--signal);
+  color:var(--signal);
+  padding:7px 13px 8px;
+  text-align:center;
+  opacity:.9;
+  background:transparent;
+  box-shadow:inset 0 0 0 1px var(--bg),inset 0 0 0 2px var(--signal);
+}
+.stamp span{display:block;text-transform:uppercase;line-height:1.45}
+.stamp .s1{font-size:10px;letter-spacing:.22em;font-weight:500}
+.stamp .s2{font-size:6.5px;letter-spacing:.28em;margin-top:2px}
+.stamp .s3{font-size:6px;letter-spacing:.22em;color:rgba(43,60,255,.75);margin-top:3px}
+
+/* ---------- checks ---------- */
+.checks{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--ink);
+}
+.checks a{
+  display:grid;grid-template-columns:11px 22px minmax(0,1fr) 14px;
+  align-items:center;gap:9px;
+  padding:9px 14px;
+  color:var(--ink);text-decoration:none;
+  border-right:1px solid var(--rule-soft);
+  border-bottom:1px solid var(--rule-soft);
+  transition:background .18s linear;
+}
+.checks a:nth-child(2n){border-right:0}
+.checks a:nth-child(n+3){border-bottom:0}
+.checks a:hover,.checks a:focus-visible{background:rgba(43,60,255,.075);outline:none}
+.checks a:focus-visible{box-shadow:inset 0 0 0 1px var(--signal)}
+.box{
+  width:10px;height:10px;border:1px solid var(--ink);display:block;position:relative;
+  transition:border-color .18s linear;
+}
+.checks a:hover .box,.checks a:focus-visible .box{border-color:var(--signal)}
+.checks a:hover .box::after,.checks a:focus-visible .box::after{
+  content:"";position:absolute;inset:2px;background:var(--signal);
+}
+.checks .no{font-size:7.5px;letter-spacing:.14em;color:var(--dim)}
+.checks .nm{font-family:var(--sans);font-size:clamp(12px,1.05vw,14px);font-weight:500;letter-spacing:-.005em;line-height:1}
+.checks .ar{font-size:10px;color:var(--dim);justify-self:end;transition:transform .28s var(--ease),color .18s linear}
+.checks a:hover .ar,.checks a:focus-visible .ar{transform:translateX(3px);color:var(--signal)}
+
+/* ---------- footer ---------- */
+.foot{
+  display:grid;grid-template-columns:1fr auto;
+  align-items:end;gap:20px;
+  padding:10px 14px 12px;
+}
+.sig{min-width:0}
+.sig__line{display:block;height:1px;background:var(--rule);margin-bottom:4px;max-width:280px}
+.sig span{font-size:6.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.access{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;
+  padding:4px 7px;margin:-4px -7px -4px 0;
+  border:1px solid var(--signal);
+  transition:background .18s linear,color .18s linear;
+  white-space:nowrap;
+}
+.access i{font-style:normal;color:var(--signal);transition:color .18s linear}
+.access:hover,.access:focus-visible{background:var(--signal);color:#fff;outline:none}
+.access:hover i,.access:focus-visible i{color:#fff}
+
+/* ---------- entrance ---------- */
+.js .r{clip-path:inset(0 100% 0 0)}
+.js .name__body,.js .remarks p,.js .checks,.js .sig{opacity:0}
+.js .stamp{opacity:0;transform:rotate(-13deg) scale(1.55);transform-origin:center}
+.is-in .r{clip-path:inset(0 0 0 0);transition:clip-path .62s var(--ease)}
+.is-in .head.r{transition-delay:.02s}
+.is-in .meta.r{transition-delay:.1s}
+.is-in .name.r{transition-delay:.18s}
+.is-in .row2.r{transition-delay:.3s}
+.is-in .checks.r{transition-delay:.36s}
+.is-in .foot.r{transition-delay:.44s}
+.is-in .name__body{opacity:1;transition:opacity .55s linear .26s}
+.is-in .remarks p{opacity:1;transition:opacity .5s linear .36s}
+.is-in .checks{opacity:1;transition:opacity .4s linear .4s}
+.is-in .sig{opacity:1;transition:opacity .45s linear .5s}
+.is-in .stamp{
+  opacity:.9;
+  transform:rotate(-6.5deg) scale(1);
+  transition:opacity .16s linear .46s,transform .34s cubic-bezier(.2,.9,.3,1.02) .46s;
+}
+.js .wm .wmp{opacity:0}
+.is-in .wm .wmp{opacity:1;transition:opacity .6s var(--ease)}
+.is-in .wm .wmp[data-i="1"]{transition-delay:.3s}
+.is-in .wm .wmp[data-i="2"]{transition-delay:.34s}
+.is-in .wm .wmp[data-i="3"]{transition-delay:.38s}
+.is-in .wm .wmp[data-i="4"]{transition-delay:.41s}
+.is-in .wm .wmp[data-i="5"]{transition-delay:.44s}
+.is-in .wm .wmp[data-i="6"]{transition-delay:.47s}
+.is-in .wm .wmp[data-i="7"]{transition-delay:.5s}
+.settled *{transition:none!important;animation:none!important}
+.settled .stamp{opacity:.9;transform:rotate(-6.5deg) scale(1)}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  body{overflow:auto;height:auto;padding:10px}
+  .form{min-height:calc(100svh - 20px);flex:none}
+  .head{grid-template-columns:1fr auto;gap:10px}
+  .head__c{display:none}
+  .meta{grid-template-columns:1fr 1fr}
+  .meta>div:nth-child(2n){border-right:0}
+  .meta>div:nth-child(1),.meta>div:nth-child(2){border-bottom:1px solid var(--rule-soft)}
+  .name{flex:1}
+  .name__body{padding:14px 0}
+  .row2{grid-template-columns:1fr}
+  .remarks{border-right:0;border-bottom:1px solid var(--rule-soft)}
+  .stampcell{padding:16px 6px}
+  .checks{grid-template-columns:1fr}
+  .checks a{border-right:0}
+  .checks a:nth-child(3){border-bottom:1px solid var(--rule-soft)}
+  .checks a:nth-child(n+3){border-bottom:1px solid var(--rule-soft)}
+  .checks a:last-child{border-bottom:0}
+  .foot{grid-template-columns:1fr;gap:12px;align-items:start}
+}
+@media (max-width:520px){
+  .head__l span{display:none}
+  .name__body{padding:10px 0}
+}
+@media (max-height:700px) and (min-width:861px){
+  .meta b{font-size:8.5px}
+  .stamp .s2{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="form">
+
+  <header class="head r">
+    <div class="head__l"><b>Form T-01</b><span>Tachyon Lab</span></div>
+    <div class="head__c">Application for access</div>
+    <div class="head__r">Sheet 1 / 1</div>
+  </header>
+
+  <div class="meta r">
+    <div><span>Reference</span><b>TL / LA / 01</b></div>
+    <div><span>Origin</span><b>Brisbane, AU</b></div>
+    <div><span>Class</span><b>Local-first</b></div>
+    <div><span>Status</span><b>Open</b></div>
+  </div>
+
+  <section class="name r">
+    <div class="k"><span>01 — Name of applicant, in block capitals</span><em>Do not abbreviate</em></div>
+    <div class="name__body">
+      <svg class="wm" viewBox="0 0 1200 400" role="img" aria-label="Tachyon Lab">
+        <g class="wmp" data-i="1"><text x="19.5" y="182.7" fill="currentColor" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">TACHY</text></g>
+        <g class="wmp" data-i="2">
+          <path fill="none" style="fill:var(--wm-bg)" stroke="currentColor" stroke-width="25" stroke-miterlimit="10" d="M951.2,53.2h-64.2c-1.8,0-3.4,1-4.3,2.5l-32.1,55.6c-.9,1.5-.9,3.5,0,5l32.1,55.6c.9,1.5,2.5,2.5,4.3,2.5h64.2c1.8,0,3.4-1,4.3-2.5l32.1-55.6c.9-1.5.9-3.5,0-5l-32.1-55.6c-.9-1.5-2.5-2.5-4.3-2.5Z"/>
+          <g stroke="currentColor" stroke-width="5" stroke-miterlimit="10" fill="none">
+            <line x1="876.4" y1="113.7" x2="898.7" y2="75.7"/>
+            <line x1="897" y1="151.8" x2="941.1" y2="151.8"/>
+            <line x1="939.4" y1="75.6" x2="961.5" y2="113.8"/>
+          </g>
+        </g>
+        <g class="wmp" data-i="3"><text x="1011.1" y="185.1" fill="currentColor" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">N</text></g>
+        <g class="wmp" data-i="4"><text x="11.2" y="353.7" fill="currentColor" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">LAB</text></g>
+        <g class="wmp" data-i="5"><text x="485.7" y="353.7" class="sig" font-family="'Tachyon Archivo Heavy', Archivo, sans-serif" font-size="200" font-weight="800">.</text></g>
+        <g class="wmp" data-i="6"><path fill="currentColor" d="M888.4,354.4c-6.2,3.6-16.1,7.9-28.1,7.4-27.7-1.1-62.6-27.3-62.6-70s35-68.9,62.6-70c11.7-.5,21.4,3.6,27.5,7.1.2,41.8.4,83.6.6,125.4h0Z"/></g>
+        <g class="wmp" data-i="7"><path class="sig" d="M915,242.6c-8.7,15.8-8.9,40.8-9,49.1,0,9-.3,34.7,8.5,50.6,27.1,49.1,144.8,14.7,200.3-8.9,26.3-11.1,60-25.8,59.7-44.9-.3-18.5-32.5-31.4-59.2-41.9-8.2-3.2-167.5-64.1-200.3-4.1h0Z"/></g>
+      </svg>
+    </div>
+    <div class="k"><span>Independent AI laboratory</span><em>27.47°S 153.03°E</em></div>
+  </section>
+
+  <div class="row2 r">
+    <section class="remarks">
+      <div class="k"><span>02 — Remarks</span><em>Optional</em></div>
+      <p>Local-first AI that runs on your machine, not in the cloud.</p>
+    </section>
+    <div class="stampcell">
+      <div class="stamp">
+        <span class="s1">Light-alpha</span>
+        <span class="s2">Local use</span>
+        <span class="s3">Brisbane / 01</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="checks r" aria-label="Sections">
+    <a href="../index.html#identity" target="_blank" rel="noopener"><i class="box" aria-hidden="true"></i><span class="no">03</span><span class="nm">Identity</span><span class="ar" aria-hidden="true">→</span></a>
+    <a href="../index.html#method" target="_blank" rel="noopener"><i class="box" aria-hidden="true"></i><span class="no">04</span><span class="nm">Method</span><span class="ar" aria-hidden="true">→</span></a>
+    <a href="../index.html#evidence" target="_blank" rel="noopener"><i class="box" aria-hidden="true"></i><span class="no">05</span><span class="nm">Evidence</span><span class="ar" aria-hidden="true">→</span></a>
+    <a href="../index.html#uplink" target="_blank" rel="noopener"><i class="box" aria-hidden="true"></i><span class="no">06</span><span class="nm">Uplink</span><span class="ar" aria-hidden="true">→</span></a>
+  </nav>
+
+  <footer class="foot r">
+    <div class="sig">
+      <span class="sig__line" aria-hidden="true"></span>
+      <span>Signature of applicant / date</span>
+    </div>
+    <a class="access" href="mailto:apply@tachyonlab.au?subject=Tachyon-V1%20access">Request access <i aria-hidden="true">↗</i></a>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var r=document.documentElement,q=location.search;
+  if(q.indexOf('still')>-1||matchMedia('(prefers-reduced-motion: reduce)').matches){
+    r.classList.add('is-in','settled');return;
+  }
+  requestAnimationFrame(function(){requestAnimationFrame(function(){setTimeout(function(){r.classList.add('is-in')},60)})});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<title>Tachyon Lab — Cloud Doesn’t Remember You</title>
+<meta name="description" content="Tachyon Lab builds local-first AI systems that learn on your machine and can be deleted on request. Independent research, Perth, Australia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://tachyonlab.au/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tachyon Lab — Cloud Doesn’t Remember You">
+<meta property="og:description" content="Local-first AI systems that learn on your machine and can be deleted on request. Independent research, Perth, Australia.">
+<meta property="og:url" content="https://tachyonlab.au/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Crect x='6.5' y='6.5' width='19' height='19' fill='none' stroke='%23F2F2F0'/%3E%3Crect x='14' y='14' width='4' height='4' fill='%23FF3B00'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="src/site.css">
+<style>#boot{position:fixed;inset:0;background:#050505;z-index:9999}</style>
+<noscript><style>#boot{display:none}.statement__word,.section-title .line>span,.cover__title .line>span{transform:none!important}.loop__rail,.loop__return{stroke-dashoffset:0!important}</style></noscript>
+<script>document.documentElement.classList.remove('no-js');</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div id="boot" aria-hidden="true"></div>
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="hud">
+  <a class="hud__brand" href="#cover" data-cursor="TOP">
+    <span class="hud__mark" aria-hidden="true"></span>
+    <span>TACHYON</span><span class="dim">LAB</span>
+  </a>
+  <span class="hud__center">FIELD RECORDING <b>001</b></span>
+  <div class="hud__right">
+    <span id="clock">--:--:--</span>
+    <span class="dim">UTC+8</span>
+  </div>
+</header>
+
+<nav class="rail" aria-label="Contents">
+  <a href="#identity" data-sec="identity" aria-label="00 Identity"><i aria-hidden="true"></i><span>00</span></a>
+  <a href="#method" data-sec="method" aria-label="01 Method"><i aria-hidden="true"></i><span>01</span></a>
+  <a href="#index" data-sec="index" aria-label="02 Index"><i aria-hidden="true"></i><span>02</span></a>
+  <a href="#evidence" data-sec="evidence" aria-label="03 Evidence"><i aria-hidden="true"></i><span>03</span></a>
+  <a href="#uplink" data-sec="uplink" aria-label="04 Uplink"><i aria-hidden="true"></i><span>04</span></a>
+</nav>
+
+<div class="meter" aria-hidden="true">
+  <span class="meter__num" id="meterNum">000</span>
+  <span class="meter__track"><i id="meterFill"></i></span>
+</div>
+
+<main id="main">
+
+  <!-- 00 / COVER — a contents page, not a hero -->
+  <section class="cover" id="cover" aria-labelledby="cover-title">
+    <div class="cover__meta">
+      <span>Tachyon Lab / Independent AI research</span>
+      <span>Perth, Australia / 31.95°S 115.86°E</span>
+      <span>Est. 2026 / Field recording 001</span>
+    </div>
+
+    <div class="cover__head">
+      <h1 class="cover__title" id="cover-title">
+        <span class="line"><span>Tachyon Lab<span class="acc">.</span></span></span>
+      </h1>
+      <span class="cover__figure" aria-hidden="true">001</span>
+    </div>
+
+    <ol class="contents">
+      <li class="contents__row">
+        <a href="#identity" data-cursor="OPEN">
+          <span class="contents__n">00</span>
+          <span class="contents__name">Identity</span>
+          <span class="contents__desc">Cloud doesn’t remember you</span>
+          <span class="contents__meta">Tachyon-V1 / light-alpha</span>
+          <span class="contents__arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li class="contents__row">
+        <a href="#method" data-cursor="OPEN">
+          <span class="contents__n">01</span>
+          <span class="contents__name">Method</span>
+          <span class="contents__desc">Capture, curate, train, delete</span>
+          <span class="contents__meta">Local loop / no cloud</span>
+          <span class="contents__arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li class="contents__row">
+        <a href="#index" data-cursor="OPEN">
+          <span class="contents__n">02</span>
+          <span class="contents__name">Index</span>
+          <span class="contents__desc">What we sell, and what state it is in</span>
+          <span class="contents__meta">Three products / one system</span>
+          <span class="contents__arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li class="contents__row">
+        <a href="#evidence" data-cursor="OPEN">
+          <span class="contents__n">03</span>
+          <span class="contents__name">Evidence</span>
+          <span class="contents__desc">Measured, not promised</span>
+          <span class="contents__meta">Pilot data / G1 16 Nov 2026</span>
+          <span class="contents__arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li class="contents__row">
+        <a href="#uplink" data-cursor="OPEN">
+          <span class="contents__n">04</span>
+          <span class="contents__name">Uplink</span>
+          <span class="contents__desc">Write to the founder</span>
+          <span class="contents__meta">Open channel / 3 slots</span>
+          <span class="contents__arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+    </ol>
+
+    <div class="cover__foot">
+      <span>2026-11-05 / Rev 1.0</span>
+      <span class="cover__play"><i aria-hidden="true"></i> Scroll to play</span>
+      <span>No cookies / no analytics</span>
+    </div>
+  </section>
+
+  <!-- 00 / IDENTITY -->
+  <section class="identity" id="identity" data-shape="cone" aria-labelledby="identity-title">
+    <div class="identity__sticky">
+      <div class="identity__top">
+        <span class="label">00 / Identity</span>
+        <span class="label">Tachyon-V1 / Light-alpha / 2026</span>
+      </div>
+
+      <h2 class="statement" id="identity-title" aria-label="Cloud doesn’t remember you">
+        <span class="statement__line" data-line="1"><span class="statement__clip"><span class="statement__word">Cloud</span></span></span>
+        <span class="statement__line" data-line="2"><span class="statement__clip"><span class="statement__word">doesn’t</span></span></span>
+        <span class="statement__line" data-line="3"><span class="statement__clip"><span class="statement__word">remember</span></span></span>
+        <span class="statement__line" data-line="4"><span class="statement__clip"><span class="statement__word">you</span></span></span>
+      </h2>
+
+      <div class="identity__bottom">
+        <p class="identity__body">A rented model can read your context. It cannot keep what you teach it. And it cannot forget you. We moved the learning loop onto the machine in front of you.</p>
+        <div class="identity__aside">
+          <span class="label">Axiom 01</span>
+          <p>Personal state is bounded: an adapter, a trace store, a memory index. Deletion is an inventory operation, not a policy.</p>
+        </div>
+      </div>
+
+      <div class="identity__cue" aria-hidden="true">
+        <span class="label">01 / Method</span>
+        <span class="identity__cue-line"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 / METHOD -->
+  <section class="method" id="method" data-shape="sphere" aria-labelledby="method-title">
+    <header class="section-head">
+      <span class="label">01 / Method</span>
+      <h2 class="section-title" id="method-title">
+        <span class="line"><span>The loop,</span></span>
+        <span class="line"><span>on your machine.</span></span>
+      </h2>
+      <span class="label section-head__note">No cloud<br>in the learning path</span>
+    </header>
+
+    <div class="method__layout">
+      <div class="method__figure">
+        <svg class="loop" viewBox="0 0 900 320" aria-hidden="true">
+          <path class="loop__rail" d="M112.5 90 H787.5"></path>
+          <path class="loop__return" d="M787.5 90 V280 H112.5 V90"></path>
+          <g class="loop__node" data-node="0"><rect x="106.5" y="84" width="12" height="12"></rect><circle cx="112.5" cy="90" r="2"></circle></g>
+          <g class="loop__node" data-node="1"><rect x="331.5" y="84" width="12" height="12"></rect><circle cx="337.5" cy="90" r="2"></circle></g>
+          <g class="loop__node" data-node="2"><rect x="556.5" y="84" width="12" height="12"></rect><circle cx="562.5" cy="90" r="2"></circle></g>
+          <g class="loop__node" data-node="3"><rect x="781.5" y="84" width="12" height="12"></rect><circle cx="787.5" cy="90" r="2"></circle></g>
+          <circle class="loop__packet" r="3">
+            <animateMotion dur="9s" repeatCount="indefinite" path="M112.5 90 H787.5 V280 H112.5 V90"></animateMotion>
+          </circle>
+        </svg>
+        <div class="method__labels">
+          <button class="step" type="button" data-step="0" aria-pressed="true">Capture</button>
+          <button class="step" type="button" data-step="1" aria-pressed="false">Curate</button>
+          <button class="step" type="button" data-step="2" aria-pressed="false">Train</button>
+          <button class="step" type="button" data-step="3" aria-pressed="false">Delete</button>
+        </div>
+      </div>
+
+      <aside class="readout">
+        <div class="readout__top">
+          <span class="label" id="stepIndex">Step 01 / 04</span>
+          <span class="label" id="stepState">On device</span>
+        </div>
+        <h3 class="readout__title" id="stepTitle">Capture</h3>
+        <p class="readout__body" id="stepBody">Every correction, file and decision becomes a trace. It is written to the device, not to a request log.</p>
+        <ul class="readout__meta" id="stepMeta">
+          <li><span>Storage</span><b>Local SSD</b></li>
+          <li><span>Egress</span><b>0 bytes</b></li>
+        </ul>
+      </aside>
+    </div>
+
+    <p class="method__note">Execution may be delegated. Learning is not. <span class="dim">Canary target 0/400, measured at G2.</span></p>
+  </section>
+
+  <!-- 02 / INDEX -->
+  <section class="index" id="index" data-shape="torus" aria-labelledby="index-title">
+    <header class="section-head">
+      <span class="label">02 / Index</span>
+      <h2 class="section-title" id="index-title">
+        <span class="line"><span>What we sell,</span></span>
+        <span class="line"><span>and what state it is in.</span></span>
+      </h2>
+      <span class="label section-head__note">No demo<br>no sales team</span>
+    </header>
+
+    <div class="manifest" aria-label="Products">
+      <div class="manifest__head">
+        <span>#</span>
+        <span>Product</span>
+        <span>Type</span>
+        <span>State</span>
+        <span>Access</span>
+      </div>
+
+      <a class="manifest__row" href="mailto:leo@tachyonlab.au?subject=Tachyon-V1%20access" data-cursor="WRITE">
+        <span class="manifest__n">01</span>
+        <span class="manifest__name">Tachyon-V1</span>
+        <span class="manifest__type">Local AI system</span>
+        <span class="manifest__state">Light-alpha / G1 16 Nov 2026</span>
+        <span class="manifest__access">Request access <i aria-hidden="true">↗</i></span>
+        <span class="manifest__fill" aria-hidden="true"></span>
+      </a>
+
+      <a class="manifest__row" href="mailto:leo@tachyonlab.au?subject=Tachyon%20Box%20interest" data-cursor="WRITE">
+        <span class="manifest__n">02</span>
+        <span class="manifest__name">Tachyon Box</span>
+        <span class="manifest__type">24GB local compute</span>
+        <span class="manifest__state">Demand-gated / concept</span>
+        <span class="manifest__access">Register interest <i aria-hidden="true">↗</i></span>
+        <span class="manifest__fill" aria-hidden="true"></span>
+      </a>
+
+      <a class="manifest__row" href="mailto:leo@tachyonlab.au?subject=Minilab%20brief" data-cursor="WRITE">
+        <span class="manifest__n">03</span>
+        <span class="manifest__name">Tachyon Minilab</span>
+        <span class="manifest__type">AI-controlled bench</span>
+        <span class="manifest__state">Concept / no ODM quote</span>
+        <span class="manifest__access">Request brief <i aria-hidden="true">↗</i></span>
+        <span class="manifest__fill" aria-hidden="true"></span>
+      </a>
+
+      <a class="manifest__row" href="#evidence" data-cursor="READ">
+        <span class="manifest__n">04</span>
+        <span class="manifest__name">Open evidence</span>
+        <span class="manifest__type">Eval + repository</span>
+        <span class="manifest__state">Public at G1 / 16 Nov 2026</span>
+        <span class="manifest__access">Read <i aria-hidden="true">↗</i></span>
+        <span class="manifest__fill" aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <p class="index__note">Tachyon-V1 is the system. The box and the minilab are hardware that may follow it. <span class="dim">Hardware is demand-gated; no ODM quote exists.</span></p>
+  </section>
+
+  <!-- 03 / EVIDENCE -->
+  <section class="evidence" id="evidence" data-shape="plane" aria-labelledby="evidence-title">
+    <header class="section-head">
+      <span class="label">03 / Evidence</span>
+      <h2 class="section-title" id="evidence-title">
+        <span class="line"><span>Measured,</span></span>
+        <span class="line"><span>not promised.</span></span>
+      </h2>
+      <span class="label section-head__note">Pilot<br>not powered</span>
+    </header>
+
+    <div class="metrics">
+      <figure class="metric">
+        <span class="metric__n">01</span>
+        <b class="metric__v">16.2</b>
+        <figcaption><span>tok/s</span>Decode @ 512</figcaption>
+        <em>Measured / 2026-11-01</em>
+      </figure>
+      <figure class="metric">
+        <span class="metric__n">02</span>
+        <b class="metric__v">14.6</b>
+        <figcaption><span>tok/s</span>Decode @ 16K</figcaption>
+        <em>20.1 GB peak</em>
+      </figure>
+      <figure class="metric">
+        <span class="metric__n">03</span>
+        <b class="metric__v">0.800</b>
+        <figcaption><span>RAG</span>20 synthetic tasks</figcaption>
+        <em>Base 0.317</em>
+      </figure>
+      <figure class="metric">
+        <span class="metric__n">04</span>
+        <b class="metric__v">0/400</b>
+        <figcaption><span>Canary</span>Residue target</figcaption>
+        <em>Target, not a claim</em>
+      </figure>
+    </div>
+
+    <div class="memory">
+      <div class="memory__bar">
+        <span class="label">Memory / canary ORBIT-7319</span>
+        <span class="label"><b id="memCount">288</b> records</span>
+        <span class="label" id="memState" aria-live="polite">Armed</span>
+      </div>
+      <div class="memory__grid" id="memGrid" aria-hidden="true"></div>
+      <div class="memory__foot">
+        <p>Every record has its own key. Destroy the key and the record becomes unreadable. The adapter is quarantined. This is the whole deletion story.</p>
+        <div class="memory__actions">
+          <button class="btn btn--danger" id="eraseBtn" type="button" data-cursor="ERASE">Erase key</button>
+          <button class="btn" id="resetBtn" type="button">Reset</button>
+        </div>
+      </div>
+      <div class="receipt" id="receipt" role="status" hidden>
+        <span class="receipt__row"><b>Erasure receipt</b><span>0x6D11 / ORBIT-7319</span></span>
+        <span class="receipt__row"><span>DEK destroyed</span><span>Ciphertext unreadable</span></span>
+        <span class="receipt__row"><span>Adapter quarantined &lt; 60s</span><span>Canary probe 0/400</span></span>
+      </div>
+    </div>
+
+    <p class="fine">Adapter not trained. Canary 0/400 is a target, not a claim. RAG 0.800 vs base 0.317 on 20 synthetic tasks. G1 is 16 November 2026.</p>
+  </section>
+
+  <!-- 04 / UPLINK -->
+  <section class="uplink" id="uplink" aria-labelledby="uplink-title">
+    <div class="uplink__bar">
+      <span class="label">04 / Uplink</span>
+      <span class="label">Open / 3 design partners</span>
+    </div>
+
+    <h2 class="uplink__title" id="uplink-title">Write back<span class="acc">.</span></h2>
+
+    <a class="uplink__mail" href="mailto:leo@tachyonlab.au?subject=Design%20partner" data-cursor="MAIL">
+      leo@tachyonlab.au <span class="acc" aria-hidden="true">↗</span>
+    </a>
+
+    <div class="uplink__cols">
+      <div>
+        <span class="label">Location</span>
+        <p>Perth, Australia<br>31.95°S 115.86°E<br>UTC+8</p>
+      </div>
+      <div>
+        <span class="label">Terms</span>
+        <p>Private alpha. Three design partners. Real work, a weekly call, no cost.</p>
+      </div>
+      <div>
+        <span class="label">Company</span>
+        <p>Independent. Self-funded. Solo. No sales team.</p>
+      </div>
+    </div>
+
+    <footer class="colophon">
+      <span>© 2026 Tachyon Lab</span>
+      <span>No cookies / no analytics</span>
+      <span>Built in Perth</span>
+      <a href="#cover">Back to 00 ↑</a>
+    </footer>
+  </section>
+
+</main>
+
+<footer class="deck" aria-hidden="true">
+  <span class="deck__rec"><i></i>REC</span>
+  <span class="deck__id">FIELD 001</span>
+  <div class="deck__ticker">
+    <div class="deck__track">
+      <span>Cloud doesn’t remember you — Tachyon-V1 light-alpha — Perth 31.95°S 115.86°E — No cloud in the learning path — </span>
+      <span>Cloud doesn’t remember you — Tachyon-V1 light-alpha — Perth 31.95°S 115.86°E — No cloud in the learning path — </span>
+    </div>
+  </div>
+  <span class="deck__scroll"><b id="deckPct">000</b> / 100</span>
+</footer>
+
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__h"></span>
+  <span class="cursor__v"></span>
+  <span class="cursor__dot"></span>
+  <span class="cursor__label" id="cursorLabel"></span>
+</div>
+
+<script src="src/field.js"></script>
+<script src="src/intro.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
