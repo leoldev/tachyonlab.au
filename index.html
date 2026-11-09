@@ -131,7 +131,7 @@ body.menu .stage{padding-right:calc(var(--rail-open) + clamp(16px,2vw,30px))}
 .cdots button{appearance:none;border:0;cursor:pointer;width:8px;height:8px;background:var(--iron);padding:0;transition:background .2s linear}
 .cdots button.on{background:var(--signal)}
 .cdots button:focus-visible{outline:2px solid var(--phosphor);outline-offset:2px}
-.keys{display:grid;grid-template-columns:repeat(5,1fr)}
+.keys{display:grid;grid-template-columns:repeat(4,1fr)}
 .key{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
   min-height:184px;padding:16px 10px;text-align:center;
   color:var(--bone);text-decoration:none}
@@ -173,7 +173,7 @@ body.menu .stage{padding-right:calc(var(--rail-open) + clamp(16px,2vw,30px))}
 .is-in .strip{opacity:1;transition:opacity .6s linear .95s}
 
 /* ───────── directory (mobile fallback) ───────── */
-.dir{display:none;grid-template-columns:repeat(5,minmax(0,1fr));align-content:end;border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);flex:none;margin-top:auto;align-self:flex-start;width:min(920px,100%)}
+.dir{display:none;grid-template-columns:repeat(4,minmax(0,1fr));align-content:end;border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);flex:none;margin-top:auto;align-self:flex-start;width:min(920px,100%)}
 .dir__c{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:12px;
   min-height:148px;padding:16px 18px 18px;
   border-left:1px solid var(--ash);color:var(--bone);text-decoration:none}
@@ -375,7 +375,7 @@ body.form-open .stage{cursor:pointer}
   .rail{display:none}
   .identity{flex:none}
   .dock{left:0;right:0;bottom:0}
-  body.menu .stage{padding-right:calc(var(--rail) + 14px)}
+  body.menu .stage{padding-right:var(--pad)}
   body.menu .identity,body.menu .dir{opacity:.2}
   .dock.open{height:min(520px,calc(100svh - 104px))}
   .dock__bar{padding:0 16px;gap:12px}
@@ -391,7 +391,6 @@ body.form-open .stage{cursor:pointer}
   .strip{display:none}
   .mhero{display:block}
   .dir{display:grid;grid-template-columns:1fr 1fr;border-bottom:0}
-  .dir__c:last-child{grid-column:1/-1}
   .dir__c{min-height:96px;padding:14px 14px 16px;border-bottom:1px solid var(--ash)}
   .dir__c:nth-child(odd){border-left:0;padding-left:0}
   .dir__t{font-size:clamp(17px,4.8vw,21px)}
@@ -807,10 +806,6 @@ body.form-open .stage{cursor:pointer}
         <svg class="key__ic ic-uplink" viewBox="0 0 24 24" aria-hidden="true"><rect class="cu-box" x="3.5" y="8.5" width="11" height="12"/><g class="cu-arrow"><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></g><circle class="cu-ring" cx="17.5" cy="6.5" r="3"/></svg>
         <span class="key__t">Connect</span>
       </a>
-        <a class="key" href="hiring/">
-      <svg class="key__ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="9.5" width="15" height="9.5" style="stroke-width:1.5"/><path d="M9.5 9.5V7h5v2.5" style="stroke-width:1.5"/></svg>
-      <span class="key__t">Hiring</span>
-    </a>
   </nav>
   </div>
 
@@ -830,10 +825,6 @@ body.form-open .stage{cursor:pointer}
     <a class="dir__c" href="connect.html">
       <svg class="dir__ic ic-uplink" viewBox="0 0 24 24" aria-hidden="true"><circle class="cu-ring" cx="17.5" cy="6.5" r="3"/><g class="cu-arrow"><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></g></svg>
       <span class="dir__t">Connect</span>
-    </a>
-      <a class="dir__c" href="hiring/">
-      <svg class="dir__ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="9.5" width="15" height="9.5" style="stroke-width:1.5"/><path d="M9.5 9.5V7h5v2.5" style="stroke-width:1.5"/></svg>
-      <span class="dir__t">Hiring</span>
     </a>
   </nav>
 

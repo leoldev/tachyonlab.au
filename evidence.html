@@ -46,39 +46,40 @@ footer a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--si
 .rail:hover .rail__foot,.rail:focus-within .rail__foot{opacity:1}
 .rail__foot a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--signal);align-self:flex-start}
 .rail__foot span{color:var(--smoke)}
-@media(max-width:760px){:root{--rail:48px}.rail:hover,.rail:focus-within{width:170px}}.mstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:26px 0;max-width:560px}.mstrip i{display:block;height:30px}.mstrip i:nth-child(1){background:#FF2E63}.mstrip i:nth-child(2){background:#3DF5C4}.mstrip i:nth-child(3){background:#FFB020}.mstrip i:nth-child(4){background:#4D7CFF}.keys{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);margin:40px 0 0}.key{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 8px;text-decoration:none;color:var(--bone);transition:background .2s linear,color .2s linear}.key__ic{width:40px;height:40px;stroke:#B9B9C6;fill:none;stroke-width:2.2;stroke-linecap:square;stroke-linejoin:miter;transition:stroke .2s linear}.key:hover,.key:focus-visible{background:var(--signal);color:var(--void);outline:none}.key:hover .key__ic,.key:focus-visible .key__ic{stroke:var(--void)}.key span{font-size:14px;font-weight:500;letter-spacing:-.02em}ul.roles{list-style:none;margin:6px 0 18px;padding:0;max-width:62ch}ul.roles li{position:relative;padding:10px 0 10px 22px;border-top:1px solid var(--ash);line-height:1.6;color:#C9C9D2;font-size:16px}ul.roles li:last-child{border-bottom:1px solid var(--ash)}ul.roles li::before{content:"";position:absolute;left:0;top:19px;width:7px;height:7px;background:var(--signal)}figure.pt{--ph:320px;position:relative;margin:18px 0 0;max-width:820px;padding:0 0 0 34px}
-.pt-plot{position:relative;height:var(--ph);border-left:1px solid var(--ash);border-bottom:1px solid var(--ash);margin:0 34px 0 0}
-.pt-yaxis{position:absolute;left:0;top:0;height:var(--ph);width:32px;pointer-events:none}
-.pt-yt{position:absolute;left:0;transform:translateY(50%);font-family:var(--mono);font-size:10.5px;color:var(--smoke)}
-.pt-xaxis{position:relative;height:26px;margin:0 34px 0 0;pointer-events:none}
-.pt-xt{position:absolute;top:6px;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;color:var(--smoke)}
-.pt-xlab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin:10px 0 0 0}
-.pt-gl{position:absolute;left:0;right:0;height:0;border-top:1px solid rgba(38,38,44,.55)}
-.pt-gv{position:absolute;top:0;bottom:0;width:0;border-left:1px solid rgba(38,38,44,.4)}
-.pt-dot{position:absolute;width:7px;height:7px;margin:0 0 -3.5px -3.5px;background:#8A8A96;border-radius:50%;opacity:.75}
+@media(max-width:760px){:root{--rail:48px}.rail:hover,.rail:focus-within{width:170px}}.mstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:26px 0;max-width:560px}.mstrip i{display:block;height:30px}.mstrip i:nth-child(1){background:#FF2E63}.mstrip i:nth-child(2){background:#3DF5C4}.mstrip i:nth-child(3){background:#FFB020}.mstrip i:nth-child(4){background:#4D7CFF}.keys{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);margin:40px 0 0}.key{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 8px;text-decoration:none;color:var(--bone);transition:background .2s linear,color .2s linear}.key__ic{width:40px;height:40px;stroke:#B9B9C6;fill:none;stroke-width:2.2;stroke-linecap:square;stroke-linejoin:miter;transition:stroke .2s linear}.key:hover,.key:focus-visible{background:var(--signal);color:var(--void);outline:none}.key:hover .key__ic,.key:focus-visible .key__ic{stroke:var(--void)}.key span{font-size:14px;font-weight:500;letter-spacing:-.02em}ul.roles{list-style:none;margin:6px 0 18px;padding:0;max-width:62ch}ul.roles li{position:relative;padding:10px 0 10px 22px;border-top:1px solid var(--ash);line-height:1.6;color:#C9C9D2;font-size:16px}ul.roles li:last-child{border-bottom:1px solid var(--ash)}ul.roles li::before{content:"";position:absolute;left:0;top:19px;width:7px;height:7px;background:var(--signal)}figure
+
+
+
+
+
+
+
+
+
 .pt-lb{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9px;font-weight:400;line-height:1;white-space:nowrap;color:var(--smoke);letter-spacing:0}
-.pt-dot.lf .pt-lb{left:auto;right:8px}
-.pt-dot.up .pt-lb{left:50%;right:auto;top:auto;bottom:9px;transform:translateX(-50%)}
-.pt-dot.dn .pt-lb{left:auto;right:8px;top:9px;bottom:auto;transform:none}
-.pt-dot.on .pt-lb{color:#F5C97A}
-.pt-dot.on{background:#FFB020;opacity:1;box-shadow:0 0 0 2px rgba(255,176,32,.16)}
-.pt-line{position:absolute;inset:0;width:100%;height:100%}
-.pt-line polyline{fill:none;stroke:#FFB020;stroke-width:1.2;opacity:.85;vector-effect:non-scaling-stroke}
-.pt-note{font-family:var(--mono);font-size:11px;line-height:1.75;color:var(--smoke);max-width:74ch;margin:16px 0 0}
-.pt-key{display:inline-block;width:18px;height:2px;background:#FFB020;vertical-align:3px;margin-right:8px;opacity:.9}
+
+
+
+
+
+
+
+
+
 @media(max-width:760px){
-.hr{grid-template-columns:118px minmax(0,1fr) 40px;gap:6px}
+.pair{grid-template-columns:1fr;gap:34px}
+.hr{grid-template-columns:104px minmax(0,1fr) 38px;gap:6px}
 .hr__lb{font-size:12px}
 .hr__lb em{display:none}
 .hr__v{font-size:10.5px}
-.pt{padding-left:26px}
-.pt{--ph:230px}
-.pt-plot{margin-right:12px}
-.pt-yaxis{width:24px}
-.pt-xaxis{margin:0 12px 0 0}
-.pt-xlab{margin-left:0}
-.pt-yt,.pt-xt{font-size:9.5px}
-.pt-dot{width:6px;height:6px;margin:0 0 -3px -3px}
+
+
+
+
+
+
+.pt-yt,
+
 .pt-lb{display:none}
 }
 </style><style>.wrap h2{font-size:21px;font-weight:500;letter-spacing:-.02em;margin:46px 0 8px;color:var(--bone)}.tbl{width:100%;border-collapse:collapse;margin:14px 0 10px;max-width:820px}.tbl th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--smoke);padding:0 18px 10px 0;border-bottom:1px solid var(--ash);font-weight:400}.tbl td{padding:15px 18px 15px 0;border-bottom:1px solid var(--ash);color:#C9C9D2;vertical-align:top;line-height:1.6;font-size:15px}.tbl td:first-child{color:var(--bone);width:31%}.rules{list-style:none;counter-reset:r;margin:14px 0 0;padding:0;max-width:72ch}.rules li{counter-increment:r;position:relative;padding:16px 0 16px 46px;border-top:1px solid var(--ash);line-height:1.65;color:#C9C9D2;font-size:16px}.rules li:last-child{border-bottom:1px solid var(--ash)}.rules li::before{content:counter(r);position:absolute;left:0;top:16px;font-family:var(--mono);font-size:12px;color:var(--signal)}.rules b{color:var(--bone);font-weight:500}.rt{width:100%;border-collapse:collapse;margin:20px 0;max-width:720px}.rt td{padding:16px 18px 16px 0;border-top:1px solid var(--ash);vertical-align:top;line-height:1.6;font-size:15px}.rt td:first-child{width:34%;color:var(--bone)}.rt span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-top:6px}.tbl a,.rt a,.body a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--signal)}</style><style>@media(max-width:760px){
@@ -110,10 +111,46 @@ h1{font-size:clamp(29px,8.6vw,38px);line-height:1.04}
 }
 </style>
 <style>.chart__val{font-family:var(--mono);font-size:12px;color:var(--bone);text-align:right;font-variant-numeric:tabular-nums}
-.hbars{margin:14px 0 6px;max-width:820px}
-.hr{display:grid;grid-template-columns:clamp(112px,17vw,168px) minmax(0,1fr) 52px;gap:clamp(8px,1.4vw,16px);
+.sc__title{font-size:21px;font-weight:500;letter-spacing:-.02em;margin:34px 0 6px;color:var(--bone)}
+.sc{margin:8px 0 6px;max-width:820px;--ph:420px}
+.sc__cap{font-size:15px;color:var(--bone);margin:0 0 2px;letter-spacing:-.01em}
+.sc__cap span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--smoke);margin-top:5px;line-height:1.5}
+.sc__yaxis{position:relative;float:left;width:30px;height:var(--ph);margin-top:16px}
+.sc__plot{position:relative;height:var(--ph);margin:8px 18px 0 30px;border-left:1px solid var(--ash);border-bottom:1px solid var(--ash)}
+.sc__xaxis{position:relative;height:20px;margin:0 18px 0 30px}
+.sc__xlab{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin:2px 0 0 30px}
+.sc__legend{display:flex;gap:16px;margin:12px 0 0 30px;font-family:var(--mono);font-size:10px;color:var(--smoke)}
+.sc__legend span{display:flex;align-items:center;gap:6px}
+.sc__legend b{width:8px;height:8px;border-radius:50%;display:block}
+.k-s{background:#3DF5C4}.k-m{background:#4D7CFF}.k-l{background:#FFB020}
+.y-tk{position:absolute;right:8px;transform:translateY(50%);font-family:var(--mono);font-size:10px;color:var(--smoke)}
+.x-tk{position:absolute;top:5px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--smoke)}
+.gl{position:absolute;left:0;right:0;height:0;border-top:1px solid rgba(38,38,44,.5)}
+.gv{position:absolute;top:0;bottom:0;width:0;border-left:1px solid rgba(38,38,44,.35)}
+.sc__line{position:absolute;inset:0;width:100%;height:100%}
+.sc__line polyline{fill:none;stroke:#7A7A88;stroke-width:1.1;opacity:.75;vector-effect:non-scaling-stroke}
+.dot.lb-r span{left:12px;top:-5px}
+.dot.lb-l span{right:12px;top:-5px}
+.dot.lb-u span{left:0;bottom:13px}
+.dot.lb-d span{left:0;top:13px}
+.dot.on span{color:var(--bone)}
+.dot{position:absolute;width:8px;height:8px;margin:0 0 -4px -4px;border-radius:50%;background:#8A8A96}
+.dot.s{background:#3DF5C4}.dot.m{background:#4D7CFF}.dot.l{background:#FFB020}
+.dot.on{box-shadow:0 0 0 2px rgba(239,236,228,.18)}
+.dot span{position:absolute;font-family:var(--mono);font-size:9.5px;line-height:1.2;white-space:nowrap;color:#C4C4CE}
+.dot u{position:absolute;font-family:var(--mono);font-size:8.5px;line-height:1.2;white-space:nowrap;color:var(--smoke);text-decoration:none}
+
+
+
+
+
+
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,44px);margin:38px 0 0;max-width:820px}
+.pair h2{margin-top:0}
+.hbars{margin:6px 0 0}
+.hr{display:grid;grid-template-columns:clamp(72px,7vw,96px) minmax(0,1fr) 36px;gap:7px;
  align-items:center;padding:5px 0}
-.hr__lb{font-size:13.5px;letter-spacing:-.01em;color:#D6D6DF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hr__lb{font-size:12.5px;letter-spacing:-.01em;color:#D6D6DF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hr__lb em{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--smoke);margin-left:6px}
 .hr__bar{display:block;height:11px;position:relative}
 .hr__bar i{display:block;height:100%;background:var(--bone);opacity:.9;transition:opacity .15s linear}
@@ -122,7 +159,7 @@ h1{font-size:clamp(29px,8.6vw,38px);line-height:1.04}
 .hr__bar2 i{display:block;height:7px;background:var(--bone)}
 .hr__bar2 .b2{opacity:.34}
 .hr__bar2 .b3{opacity:.92}
-.hr__v{font-family:var(--mono);font-size:11.5px;color:var(--bone);text-align:right;font-variant-numeric:tabular-nums}
+.hr__v{font-family:var(--mono);font-size:11px;color:var(--bone);text-align:right;font-variant-numeric:tabular-nums}
 .legend b{width:14px;height:7px;display:block;background:var(--bone)}
 .legend{display:flex;gap:18px;margin:10px 0 0;font-family:var(--mono);font-size:10.5px;color:var(--smoke)}
 .legend span{display:flex;align-items:center;gap:7px}
@@ -145,61 +182,77 @@ h1{font-size:clamp(29px,8.6vw,38px);line-height:1.04}
   <p class="lede">Where the models you can actually use sit, on two indexes that publish their methods.</p>
   <div class="mstrip" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
-  <h2>Open weights</h2>
-  <p class="chart__sub">Open weights only &middot; Artificial Analysis index &middot; size in grey</p>
-  <div class="hbars" role="img" aria-label="Bar chart of Artificial Analysis intelligence scores for eight open weights models, from Kimi K3.1 Pro at 46 down to Nemotron 3.5 Super VL at 14.">
-      <div class="hr" title="Kimi K3.1 Pro — 46 (2,800B)"><span class="hr__lb">Kimi K3.1 Pro <em>2,800B</em></span><span class="hr__bar"><i style="width:92.00%"></i></span><span class="hr__v">46</span></div>
-      <div class="hr" title="DeepSeek V4.1 Flash — 33 (552B)"><span class="hr__lb">DeepSeek V4.1 Flash <em>552B</em></span><span class="hr__bar"><i style="width:66.00%"></i></span><span class="hr__v">33</span></div>
-      <div class="hr" title="GLM-5.3 — 32 (753B)"><span class="hr__lb">GLM-5.3 <em>753B</em></span><span class="hr__bar"><i style="width:64.00%"></i></span><span class="hr__v">32</span></div>
-      <div class="hr" title="MiMo-V2.6-Pro — 30 (1,020B)"><span class="hr__lb">MiMo-V2.6-Pro <em>1,020B</em></span><span class="hr__bar"><i style="width:60.00%"></i></span><span class="hr__v">30</span></div>
-      <div class="hr" title="Mistral Large 4 — 26 (1,050B)"><span class="hr__lb">Mistral Large 4 <em>1,050B</em></span><span class="hr__bar"><i style="width:52.00%"></i></span><span class="hr__v">26</span></div>
-      <div class="hr" title="Qwen3.8 27B — 20 (27B)"><span class="hr__lb">Qwen3.8 27B <em>27B</em></span><span class="hr__bar"><i style="width:40.00%"></i></span><span class="hr__v">20</span></div>
-      <div class="hr" title="Beam 1.0 — 18 (501B)"><span class="hr__lb">Beam 1.0 <em>501B</em></span><span class="hr__bar"><i style="width:36.00%"></i></span><span class="hr__v">18</span></div>
-      <div class="hr" title="Nemotron 3.5 Super VL — 14 (120B)"><span class="hr__lb">Nemotron 3.5 SV <em>120B</em></span><span class="hr__bar"><i style="width:28.00%"></i></span><span class="hr__v">14</span></div>
-  </div>
-
-  <h2>Hard reasoning</h2>
-  <p class="chart__sub">ARC-AGI-2 and ARC-AGI-3, percent solved &middot; frontier models at max effort</p>
-  <div class="hbars" role="img" aria-label="Grouped bar chart comparing ARC-AGI-2 and ARC-AGI-3 scores. ARC-AGI-2 is close to saturation above 90 percent; ARC-AGI-3 falls from 81.2 to 0.2.">
-      <div class="hr hr--grp" title="Claude Fable 5.2: ARC-AGI-2 93.8, ARC-AGI-3 81.2"><span class="hr__lb">Claude Fable 5.2</span><span class="hr__bar2"><i class="b2" style="width:93.80%"></i><i class="b3" style="width:81.20%"></i></span><span class="hr__v">81.2</span></div>
-      <div class="hr hr--grp" title="GPT-6 Astra: ARC-AGI-2 95.0, ARC-AGI-3 62.7"><span class="hr__lb">GPT-6 Astra</span><span class="hr__bar2"><i class="b2" style="width:95.00%"></i><i class="b3" style="width:62.70%"></i></span><span class="hr__v">62.7</span></div>
-      <div class="hr hr--grp" title="GPT-6.1 Sol: ARC-AGI-2 94.2, ARC-AGI-3 52.7"><span class="hr__lb">GPT-6.1 Sol</span><span class="hr__bar2"><i class="b2" style="width:94.20%"></i><i class="b3" style="width:52.70%"></i></span><span class="hr__v">52.7</span></div>
-      <div class="hr hr--grp" title="Gemini 4 Argon: ARC-AGI-2 91.3, ARC-AGI-3 49.8"><span class="hr__lb">Gemini 4 Argon</span><span class="hr__bar2"><i class="b2" style="width:91.30%"></i><i class="b3" style="width:49.80%"></i></span><span class="hr__v">49.8</span></div>
-      <div class="hr hr--grp" title="Claude Opus 5: ARC-AGI-2 90.4, ARC-AGI-3 30.2"><span class="hr__lb">Claude Opus 5</span><span class="hr__bar2"><i class="b2" style="width:90.40%"></i><i class="b3" style="width:30.20%"></i></span><span class="hr__v">30.2</span></div>
-      <div class="hr hr--grp" title="Gemini 3.8 Flash: ARC-AGI-2 89.2, ARC-AGI-3 10.4"><span class="hr__lb">Gemini 3.8 Flash</span><span class="hr__bar2"><i class="b2" style="width:89.20%"></i><i class="b3" style="width:10.40%"></i></span><span class="hr__v">10.4</span></div>
-      <div class="hr hr--grp" title="DeepSeek V4.1 Flash: ARC-AGI-2 78.1, ARC-AGI-3 0.2"><span class="hr__lb">DeepSeek V4.1 Flash</span><span class="hr__bar2"><i class="b2" style="width:78.10%"></i><i class="b3" style="width:0.20%"></i></span><span class="hr__v">0.2</span></div>
-  </div>
-  <div class="legend"><span><b class="sw2"></b>ARC-AGI-2</span><span><b class="sw3"></b>ARC-AGI-3</span></div>
-
-  <h2>Capability per parameter</h2>
-  <p class="chart__sub">Open weights, 4B to 40B &middot; Progress Index against size &middot; up and to the left is better</p>
-  <figure class="pt" role="img" aria-label="Scatter plot of Artificial Analysis Progress Index against parameter count for ten open weights models between 4B and 40B. Three points form a frontier: K2 Horizon 7B at 263, Qwen3.8 27B at 303 and Nanbeige4.3 33B at 306.">
-    <div class="pt-yaxis"><span class="pt-yt" style="bottom:13.33%">250</span><span class="pt-yt" style="bottom:40.00%">270</span><span class="pt-yt" style="bottom:66.67%">290</span><span class="pt-yt" style="bottom:93.33%">310</span></div>
-    <div class="pt-plot">
-      <b class="pt-gl" style="bottom:13.33%"></b>
-      <b class="pt-gl" style="bottom:40.00%"></b>
-      <b class="pt-gl" style="bottom:66.67%"></b>
-      <b class="pt-gl" style="bottom:93.33%"></b>
-<b class="pt-gv" style="left:1.50%"></b>
-      <b class="pt-gv" style="left:26.32%"></b>
-      <b class="pt-gv" style="left:52.63%"></b>
-      <b class="pt-gv" style="left:78.95%"></b>
-      <svg class="pt-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="86.84,12.00 71.05,16.00 18.42,69.33"/></svg>
-        <i class="pt-dot on" style="left:86.84%;bottom:88.00%" title="Nanbeige 33B — 306 points, 33B"><b><b class="pt-lb">Nanbeige 33B</b></b></i>
-        <i class="pt-dot on" style="left:71.05%;bottom:84.00%" title="Qwen 27B — 303 points, 27B"><b><b class="pt-lb">Qwen 27B</b></b></i>
-        <i class="pt-dot" style="left:94.74%;bottom:54.67%" title="K2 36B-A4B — 281 points, 36B"></i>
-        <i class="pt-dot" style="left:71.05%;bottom:44.00%" title="Qwen3.6 27B — 273 points, 27B"></i>
-        <i class="pt-dot" style="left:78.95%;bottom:36.00%" title="Muse Glimmer 30B — 267 points, 30B"></i>
-        <i class="pt-dot" style="left:71.05%;bottom:36.00%" title="Qwen3.5 27B — 267 points, 27B"></i>
-        <i class="pt-dot on" style="left:18.42%;bottom:30.67%" title="K2 7B — 263 points, 7B"><b><b class="pt-lb">K2 7B</b></b></i>
-        <i class="pt-dot" style="left:94.74%;bottom:28.00%" title="Qwen3.6 35B-A3B — 261 points, 36B"></i>
-        <i class="pt-dot" style="left:81.58%;bottom:18.67%" title="Gemma 4 31B — 254 points, 31B"></i>
-        <i class="pt-dot" style="left:94.74%;bottom:10.67%" title="Qwen3.5 35B-A3B — 248 points, 36B"></i>
+  <h2 class="sc__title">Capability per parameter</h2>
+  <p class="chart__sub">Artificial Analysis Progress Index &middot; open weights, 5B to 500B &middot; log scale &middot; the line is the frontier</p>
+  <figure class="sc" role="img" aria-label="Scatter plot of Artificial Analysis Progress Index against parameter count on a log scale from 5B to 500B. Twenty open weights models are plotted and coloured by size. Five form a frontier: K2 Horizon 7B at 263, Qwen3.8 27B at 303, Nanbeige4.3 33B at 306, DeepSeek V4 Flash 284B at 309 and GLM-5.3 Flash 320B at 319.">
+    <div class="sc__yaxis"><span class="y-tk" style="bottom:21.74%">240</span><span class="y-tk" style="bottom:47.83%">270</span><span class="y-tk" style="bottom:73.91%">300</span><span class="y-tk" style="bottom:100.00%">330</span></div>
+    <div class="sc__plot">
+        <b class="gl" style="bottom:21.74%"></b>
+        <b class="gl" style="bottom:47.83%"></b>
+        <b class="gl" style="bottom:73.91%"></b>
+        <b class="gl" style="bottom:100.00%"></b>
+        <b class="gv" style="left:15.05%"></b>
+        <b class="gv" style="left:38.91%"></b>
+        <b class="gv" style="left:65.05%"></b>
+        <b class="gv" style="left:88.91%"></b>
+        <b class="gv" style="left:100.00%"></b>
+        <svg class="sc__line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="7.31,58.26 36.62,23.48 40.98,20.87 87.72,18.26 90.31,9.57"/></svg>
+        <i class="dot s on lb-r" style="left:7.31%;bottom:41.74%" title="K2 7B, 7B, 263"><span>K2 7B &middot; 263</span></i>
+        <i class="dot s on lb-l" style="left:36.62%;bottom:76.52%" title="Qwen3.8 27B, 27B, 303"><span>Qwen3.8 27B &middot; 303</span></i>
+        <i class="dot s lb-l" style="left:37.25%;bottom:50.43%" title="Qwen3.6 27B, 27.8B, 273"><span>Qwen3.6 27B &middot; 273</span></i>
+        <i class="dot s lb-l" style="left:38.91%;bottom:45.22%" title="Muse 30B, 30B, 267"><span>Muse 30B &middot; 267</span></i>
+        <i class="dot s on lb-r" style="left:40.98%;bottom:79.13%" title="Nanbeige 33B, 33B, 306"><span>Nanbeige 33B &middot; 306</span></i>
+        <i class="dot s lb-u" style="left:42.87%;bottom:40.00%" title="Qwen3.6 35B, 36B, 261"><span>Qwen3.6 35B &middot; 261</span></i>
+        <i class="dot s lb-l" style="left:39.41%;bottom:33.91%" title="Gemma 31B, 30.7B, 254"><span>Gemma 31B &middot; 254</span></i>
+        <i class="dot m lb-l" style="left:58.51%;bottom:46.96%" title="Bolt 74B, 74B, 269"><span>Bolt 74B &middot; 269</span></i>
+        <i class="dot m lb-r" style="left:60.12%;bottom:10.43%" title="Coder 80B, 79.7B, 227"><span>Coder 80B &middot; 227</span></i>
+        <i class="dot m lb-r" style="left:68.46%;bottom:21.74%" title="gpt-oss 117B, 117B, 240"><span>gpt-oss 117B &middot; 240</span></i>
+        <i class="dot m lb-u" style="left:69.01%;bottom:60.00%" title="Nemotron SV, 120B, 284"><span>Nemotron SV &middot; 284</span></i>
+        <i class="dot m lb-r" style="left:69.72%;bottom:46.09%" title="Ling 3.0 124B, 124B, 268"><span>Ling 3.0 124B &middot; 268</span></i>
+        <i class="dot m lb-r" style="left:69.90%;bottom:40.00%" title="Qwen3.5 122B, 125B, 261"><span>Qwen3.5 122B &middot; 261</span></i>
+        <i class="dot m lb-l" style="left:70.41%;bottom:36.52%" title="Mistral 128B, 128B, 257"><span>Mistral 128B &middot; 257</span></i>
+        <i class="dot l on lb-l" style="left:87.72%;bottom:81.74%" title="V4 Flash 284B, 284B, 309"><span>V4 Flash 284B &middot; 309</span></i>
+        <i class="dot l lb-l" style="left:89.90%;bottom:67.83%" title="Motif 314B, 314B, 293"><span>Motif 314B &middot; 293</span></i>
+        <i class="dot l on lb-l" style="left:90.31%;bottom:90.43%" title="GLM-F 320B, 320B, 319"><span>GLM-F 320B &middot; 319</span></i>
+        <i class="dot l lb-d" style="left:93.75%;bottom:68.70%" title="K2 375B, 375B, 294"><span>K2 375B &middot; 294</span></i>
+        <i class="dot l lb-d" style="left:96.62%;bottom:89.57%" title="MiniMax 428B, 428B, 318"><span>MiniMax 428B &middot; 318</span></i>
+        <i class="dot l lb-u" style="left:99.20%;bottom:70.43%" title="Beam 501B, 501B, 296"><span>Beam 501B &middot; 296</span></i>
     </div>
-    <div class="pt-xaxis"><span class="pt-xt" style="left:1.50%">0</span><span class="pt-xt" style="left:26.32%">10</span><span class="pt-xt" style="left:52.63%">20</span><span class="pt-xt" style="left:78.95%">30</span></div>
-    <div class="pt-xlab">total parameters, billions</div>
+    <div class="sc__xaxis"><span class="x-tk" style="left:15.05%">10B</span><span class="x-tk" style="left:38.91%">30B</span><span class="x-tk" style="left:65.05%">100B</span><span class="x-tk" style="left:88.91%">300B</span><span class="x-tk" style="left:100.00%">500B</span></div>
+    <div class="sc__xlab">total parameters &middot; log scale</div>
+    <div class="sc__legend"><span><b class="k-s"></b>4&ndash;40B</span><span><b class="k-m"></b>40&ndash;150B</span><span><b class="k-l"></b>&gt;150B</span></div>
   </figure>
-  <p class="pt-note"><span class="pt-key"></span>Frontier: K2 Horizon 7B (7B, 263) &rarr; Qwen3.8 27B (27B, 303) &rarr; Nanbeige4.3 (33B, 306). Everything else in that range scores the same or worse at a larger size.</p>
+
+  <div class="pair">
+    <div>
+      <h2>Open weights</h2>
+      <p class="chart__sub">Artificial Analysis index</p>
+      <div class="hbars">
+        <div class="hr" title="Kimi K3.1 Pro — 46"><span class="hr__lb">Kimi K3.1</span><span class="hr__bar"><i style="width:92.0%"></i></span><span class="hr__v">46</span></div>
+        <div class="hr" title="DeepSeek V4.1 Flash — 33"><span class="hr__lb">DeepSeek V4.1</span><span class="hr__bar"><i style="width:66.0%"></i></span><span class="hr__v">33</span></div>
+        <div class="hr" title="GLM-5.3 — 32"><span class="hr__lb">GLM-5.3</span><span class="hr__bar"><i style="width:64.0%"></i></span><span class="hr__v">32</span></div>
+        <div class="hr" title="MiMo-V2.6-Pro — 30"><span class="hr__lb">MiMo V2.6</span><span class="hr__bar"><i style="width:60.0%"></i></span><span class="hr__v">30</span></div>
+        <div class="hr" title="Mistral Large 4 — 26"><span class="hr__lb">Mistral L4</span><span class="hr__bar"><i style="width:52.0%"></i></span><span class="hr__v">26</span></div>
+        <div class="hr" title="Qwen3.8 27B — 20"><span class="hr__lb">Qwen3.8 27B</span><span class="hr__bar"><i style="width:40.0%"></i></span><span class="hr__v">20</span></div>
+        <div class="hr" title="Beam 1.0 — 18"><span class="hr__lb">Beam 1.0</span><span class="hr__bar"><i style="width:36.0%"></i></span><span class="hr__v">18</span></div>
+        <div class="hr" title="Nemotron 3.5 SV — 14"><span class="hr__lb">Nemotron SV</span><span class="hr__bar"><i style="width:28.0%"></i></span><span class="hr__v">14</span></div>
+      </div>
+    </div>
+    <div>
+      <h2>Hard reasoning</h2>
+      <p class="chart__sub">ARC-AGI-2 vs ARC-AGI-3, percent solved</p>
+      <div class="hbars">
+        <div class="hr hr--g" title="Claude Fable 5.2: ARC-AGI-2 93.8, ARC-AGI-3 81.2"><span class="hr__lb">Fable 5.2</span><span class="hr__bar2"><i class="b2" style="width:93.8%"></i><i class="b3" style="width:81.2%"></i></span><span class="hr__v">81.2</span></div>
+        <div class="hr hr--g" title="GPT-6 Astra: ARC-AGI-2 95.0, ARC-AGI-3 62.7"><span class="hr__lb">GPT-6 Astra</span><span class="hr__bar2"><i class="b2" style="width:95.0%"></i><i class="b3" style="width:62.7%"></i></span><span class="hr__v">62.7</span></div>
+        <div class="hr hr--g" title="GPT-6.1 Sol: ARC-AGI-2 94.2, ARC-AGI-3 52.7"><span class="hr__lb">GPT-6.1 Sol</span><span class="hr__bar2"><i class="b2" style="width:94.2%"></i><i class="b3" style="width:52.7%"></i></span><span class="hr__v">52.7</span></div>
+        <div class="hr hr--g" title="Gemini 4 Argon: ARC-AGI-2 91.3, ARC-AGI-3 49.8"><span class="hr__lb">Gemini Argon</span><span class="hr__bar2"><i class="b2" style="width:91.3%"></i><i class="b3" style="width:49.8%"></i></span><span class="hr__v">49.8</span></div>
+        <div class="hr hr--g" title="Claude Opus 5: ARC-AGI-2 90.4, ARC-AGI-3 30.2"><span class="hr__lb">Opus 5</span><span class="hr__bar2"><i class="b2" style="width:90.4%"></i><i class="b3" style="width:30.2%"></i></span><span class="hr__v">30.2</span></div>
+        <div class="hr hr--g" title="Gemini 3.8 Flash: ARC-AGI-2 89.2, ARC-AGI-3 10.4"><span class="hr__lb">3.8 Flash</span><span class="hr__bar2"><i class="b2" style="width:89.2%"></i><i class="b3" style="width:10.4%"></i></span><span class="hr__v">10.4</span></div>
+        <div class="hr hr--g" title="DeepSeek V4.1 Flash: ARC-AGI-2 78.1, ARC-AGI-3 0.2"><span class="hr__lb">DeepSeek V4.1</span><span class="hr__bar2"><i class="b2" style="width:78.1%"></i><i class="b3" style="width:0.2%"></i></span><span class="hr__v">0.2</span></div>
+      </div>
+      <div class="legend"><span><b class="sw2"></b>ARC-AGI-2</span><span><b class="sw3"></b>ARC-AGI-3</span></div>
+    </div>
+  </div>
 
   <h2>What this page is not</h2>
   <p class="body">These are independent scores for models anyone can use today. None of them are ours, and none of them are a result for Tachyon. Our own pilot measurements stay in the report until they can be published with their conditions attached.</p>
