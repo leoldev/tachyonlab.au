@@ -90,7 +90,7 @@ body.menu .stage{padding-right:calc(var(--rail-open) + clamp(16px,2vw,30px))}
 
 /* ───────── identity (small, top-left) ───────── */
 .identity{display:flex;align-items:flex-start;justify-content:flex-start;min-height:0;flex:none;margin-top:2px}
-.mhero{display:none;margin:14px 0 0;color:#B9B9C6;font-size:16.5px;line-height:1.55;max-width:30ch}
+
 .wm{display:block;width:100%;height:auto;overflow:visible}
 .wm text{font-family:'Tachyon Archivo Heavy','Archivo',sans-serif;font-size:200px;font-weight:800;fill:var(--bone)}
 .wm .sig{fill:var(--signal)}
@@ -371,8 +371,20 @@ body.form-open .stage{cursor:pointer}
 }
 @media (max-width:760px){
   :root{--rail:48px;--rail-open:170px;--pad:16px;--dock-h:52px;--dock-r:18px}
-  .stage{padding:18px var(--pad) calc(var(--dock-h) + 34px) var(--pad);gap:16px}
+  .stage{padding:64px var(--pad) calc(var(--dock-h) + 30px) var(--pad);gap:0}
   .rail{display:none}
+  .mnav{display:flex}
+  .identity{justify-content:center;margin-top:6px}
+  .strip{display:block;margin-top:14px;padding-bottom:14px;border-top:1px solid var(--ash);border-bottom:1px solid var(--ash)}
+  .strip .keys{display:none}
+  .car{min-height:0;padding:14px 0 4px}
+  .slide{display:none;position:static;padding:0;opacity:1;pointer-events:auto}
+  .slide.on{display:block}
+  .slide p{position:static;width:auto;transform:none;font-size:15.5px;line-height:1.5;max-width:none}
+  .shot{display:none}
+  .cdots{position:static;display:flex;gap:8px;margin:14px 0 0}
+  .cdots button{width:9px;height:9px}
+  .dir{margin-top:16px}
   .identity{flex:none}
   .dock{left:0;right:0;bottom:0}
   body.menu .stage{padding-right:var(--pad)}
@@ -385,13 +397,12 @@ body.form-open .stage{cursor:pointer}
   .wm{width:min(304px,78vw)}
   .identity{margin-top:0}
   .dir__c{min-height:64px;padding:12px 14px}
-  .dir__c{min-height:118px}
+  .dir__c{min-height:84px}
   .dir__t{font-size:clamp(15px,4.4vw,19px)}
   .dir__ic{width:34px;height:34px}
-  .strip{display:none}
-  .mhero{display:block}
+  .strip{display:block}
   .dir{display:grid;grid-template-columns:1fr 1fr;border-bottom:0}
-  .dir__c{min-height:96px;padding:14px 14px 16px;border-bottom:1px solid var(--ash)}
+  .dir__c{min-height:84px;padding:14px 14px 16px;border-bottom:1px solid var(--ash)}
   .dir__c:nth-child(odd){border-left:0;padding-left:0}
   .dir__t{font-size:clamp(17px,4.8vw,21px)}
   .form{grid-template-columns:1fr;gap:10px}
@@ -423,11 +434,32 @@ body.form-open .stage{cursor:pointer}
 .settled *{animation:none!important;transition:none!important}
 .settled .wm .ring{stroke-dasharray:none}
 
+
+.mnav{display:none}
+@media(max-width:760px){
+  .mnav{position:fixed;top:0;left:0;right:0;z-index:55;height:54px;
+    display:flex;align-items:center;justify-content:space-between;padding:0 14px;
+    background:rgba(5,5,6,.9);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--ash)}
+  .mnav__mk{display:flex;align-items:center;gap:8px;text-decoration:none}
+  .mnav__mk svg{width:30px;height:auto;display:block;color:var(--bone)}
+  .mnav__mk b{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--bone);font-weight:500}
+  .mnav__ls{display:flex;gap:clamp(8px,2.6vw,16px);font-family:var(--mono);font-size:10px;
+    letter-spacing:.07em;text-transform:uppercase}
+  .mnav__ls a{color:#9C9CAB;text-decoration:none;white-space:nowrap}
+  .mnav__ls a:active{color:var(--signal)}
+}
 </style>
 <style>.wrap h2{font-size:21px;font-weight:500;letter-spacing:-.02em;margin:46px 0 8px;color:var(--bone)}.tbl{width:100%;border-collapse:collapse;margin:14px 0 10px;max-width:820px}.tbl th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--smoke);padding:0 18px 10px 0;border-bottom:1px solid var(--ash);font-weight:400}.tbl td{padding:15px 18px 15px 0;border-bottom:1px solid var(--ash);color:#C9C9D2;vertical-align:top;line-height:1.6;font-size:15px}.tbl td:first-child{color:var(--bone);width:31%}.rules{list-style:none;counter-reset:r;margin:14px 0 0;padding:0;max-width:72ch}.rules li{counter-increment:r;position:relative;padding:16px 0 16px 46px;border-top:1px solid var(--ash);line-height:1.65;color:#C9C9D2;font-size:16px}.rules li:last-child{border-bottom:1px solid var(--ash)}.rules li::before{content:counter(r);position:absolute;left:0;top:16px;font-family:var(--mono);font-size:12px;color:var(--signal)}.rules b{color:var(--bone);font-weight:500}.rt{width:100%;border-collapse:collapse;margin:20px 0;max-width:720px}.rt td{padding:16px 18px 16px 0;border-top:1px solid var(--ash);vertical-align:top;line-height:1.6;font-size:15px}.rt td:first-child{width:34%;color:var(--bone)}.rt span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-top:6px}.tbl a,.rt a,.body a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--signal)}</style></head>
 <body>
 
 <main class="stage" id="stage">
+<nav class="mnav" aria-label="Sections">
+  <a class="mnav__mk" href="index.html" aria-label="Home"><svg viewBox="790 208 392 167" aria-hidden="true"><path fill="currentColor" d="M888.4,354.4c-6.2,3.6-16.1,7.9-28.1,7.4-27.7-1.1-62.6-27.3-62.6-70s35-68.9,62.6-70c11.7-.5,21.4,3.6,27.5,7.1.2,41.8.4,83.6.6,125.4h0Z"/><path fill="#FF2E63" d="M915,242.6c-8.7,15.8-8.9,40.8-9,49.1,0,9-.3,34.7,8.5,50.6,27.1,49.1,144.8,14.7,200.3-8.9,26.3-11.1,60-25.8,59.7-44.9-.3-18.5-32.5-31.4-59.2-41.9-8.2-3.2-167.5-64.1-200.3-4.1h0Z"/></svg><b>TACHYON</b></a>
+  <div class="mnav__ls">
+    <a href="about.html">About</a><a href="method.html">Method</a><a href="evidence.html">Evidence</a><a href="connect.html">Connect</a>
+  </div>
+</nav>
+
 
   <div class="identity" id="identity">
     <svg class="wm" viewBox="0 0 1200 400" role="img" aria-label="Tachyon Lab">
@@ -518,8 +550,6 @@ body.form-open .stage{cursor:pointer}
       </g>
     </svg>
   </div>
-
-  <p class="mhero">Local AI that runs on your machine &mdash; and can show you what it deleted.</p>
 
   <div class="strip" id="strip">
     <div class="car" id="car" aria-roledescription="carousel" aria-label="Sections overview">
