@@ -90,6 +90,7 @@ body.menu .stage{padding-right:calc(var(--rail-open) + clamp(16px,2vw,30px))}
 
 /* ───────── identity (small, top-left) ───────── */
 .identity{display:flex;align-items:flex-start;justify-content:flex-start;min-height:0;flex:none;margin-top:2px}
+.mhero{display:none;margin:14px 0 0;color:#B9B9C6;font-size:16.5px;line-height:1.55;max-width:30ch}
 .wm{display:block;width:100%;height:auto;overflow:visible}
 .wm text{font-family:'Tachyon Archivo Heavy','Archivo',sans-serif;font-size:200px;font-weight:800;fill:var(--bone)}
 .wm .sig{fill:var(--signal)}
@@ -130,7 +131,7 @@ body.menu .stage{padding-right:calc(var(--rail-open) + clamp(16px,2vw,30px))}
 .cdots button{appearance:none;border:0;cursor:pointer;width:8px;height:8px;background:var(--iron);padding:0;transition:background .2s linear}
 .cdots button.on{background:var(--signal)}
 .cdots button:focus-visible{outline:2px solid var(--phosphor);outline-offset:2px}
-.keys{display:grid;grid-template-columns:repeat(4,1fr)}
+.keys{display:grid;grid-template-columns:repeat(5,1fr)}
 .key{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
   min-height:184px;padding:16px 10px;text-align:center;
   color:var(--bone);text-decoration:none}
@@ -172,7 +173,7 @@ body.menu .stage{padding-right:calc(var(--rail-open) + clamp(16px,2vw,30px))}
 .is-in .strip{opacity:1;transition:opacity .6s linear .95s}
 
 /* ───────── directory (mobile fallback) ───────── */
-.dir{display:none;grid-template-columns:repeat(4,minmax(0,1fr));align-content:end;border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);flex:none;margin-top:auto;align-self:flex-start;width:min(920px,100%)}
+.dir{display:none;grid-template-columns:repeat(5,minmax(0,1fr));align-content:end;border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);flex:none;margin-top:auto;align-self:flex-start;width:min(920px,100%)}
 .dir__c{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:12px;
   min-height:148px;padding:16px 18px 18px;
   border-left:1px solid var(--ash);color:var(--bone);text-decoration:none}
@@ -370,7 +371,8 @@ body.form-open .stage{cursor:pointer}
 }
 @media (max-width:760px){
   :root{--rail:48px;--rail-open:170px;--pad:16px;--dock-h:52px;--dock-r:18px}
-  .stage{padding:18px calc(var(--rail) + 14px) calc(var(--dock-h) + 34px) var(--pad);gap:16px}
+  .stage{padding:18px var(--pad) calc(var(--dock-h) + 34px) var(--pad);gap:16px}
+  .rail{display:none}
   .identity{flex:none}
   .dock{left:0;right:0;bottom:0}
   body.menu .stage{padding-right:calc(var(--rail) + 14px)}
@@ -380,15 +382,17 @@ body.form-open .stage{cursor:pointer}
   .dock__name{font-size:clamp(22px,6.4vw,30px)}
   .dock__cta{padding:12px 15px;font-size:8.5px;letter-spacing:.12em;gap:9px;border-radius:10px}
   .dock__body{padding:0 16px}
-  .wm{width:min(340px,84vw)}
+  .wm{width:min(304px,78vw)}
   .identity{margin-top:0}
   .dir__c{min-height:64px;padding:12px 14px}
   .dir__c{min-height:118px}
   .dir__t{font-size:clamp(15px,4.4vw,19px)}
   .dir__ic{width:34px;height:34px}
   .strip{display:none}
+  .mhero{display:block}
   .dir{display:grid;grid-template-columns:1fr 1fr;border-bottom:0}
-  .dir__c{min-height:118px;padding:14px 14px 16px;border-bottom:1px solid var(--ash)}
+  .dir__c:last-child{grid-column:1/-1}
+  .dir__c{min-height:96px;padding:14px 14px 16px;border-bottom:1px solid var(--ash)}
   .dir__c:nth-child(odd){border-left:0;padding-left:0}
   .dir__t{font-size:clamp(17px,4.8vw,21px)}
   .form{grid-template-columns:1fr;gap:10px}
@@ -421,7 +425,7 @@ body.form-open .stage{cursor:pointer}
 .settled .wm .ring{stroke-dasharray:none}
 
 </style>
-</head>
+<style>.wrap h2{font-size:21px;font-weight:500;letter-spacing:-.02em;margin:46px 0 8px;color:var(--bone)}.tbl{width:100%;border-collapse:collapse;margin:14px 0 10px;max-width:820px}.tbl th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--smoke);padding:0 18px 10px 0;border-bottom:1px solid var(--ash);font-weight:400}.tbl td{padding:15px 18px 15px 0;border-bottom:1px solid var(--ash);color:#C9C9D2;vertical-align:top;line-height:1.6;font-size:15px}.tbl td:first-child{color:var(--bone);width:31%}.rules{list-style:none;counter-reset:r;margin:14px 0 0;padding:0;max-width:72ch}.rules li{counter-increment:r;position:relative;padding:16px 0 16px 46px;border-top:1px solid var(--ash);line-height:1.65;color:#C9C9D2;font-size:16px}.rules li:last-child{border-bottom:1px solid var(--ash)}.rules li::before{content:counter(r);position:absolute;left:0;top:16px;font-family:var(--mono);font-size:12px;color:var(--signal)}.rules b{color:var(--bone);font-weight:500}.rt{width:100%;border-collapse:collapse;margin:20px 0;max-width:720px}.rt td{padding:16px 18px 16px 0;border-top:1px solid var(--ash);vertical-align:top;line-height:1.6;font-size:15px}.rt td:first-child{width:34%;color:var(--bone)}.rt span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-top:6px}.tbl a,.rt a,.body a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--signal)}</style></head>
 <body>
 
 <main class="stage" id="stage">
@@ -515,6 +519,8 @@ body.form-open .stage{cursor:pointer}
       </g>
     </svg>
   </div>
+
+  <p class="mhero">Local AI that runs on your machine &mdash; and can show you what it deleted.</p>
 
   <div class="strip" id="strip">
     <div class="car" id="car" aria-roledescription="carousel" aria-label="Sections overview">
@@ -776,8 +782,8 @@ body.form-open .stage{cursor:pointer}
       <div class="slide">
         <p>We&rsquo;re hiring! (and raising!) <br>Join our team today. YCs welcome. <br><a href="mailto:apply@tachyonlab.au">Contact Us</a> for consumer inquiries.</p>
         <div class="shot links" aria-label="Contact links">
-          <a href="mailto:apply@tachyon.au?subject=job%20inquiry">Jobs &rarr; apply@tachyon.au</a>
-          <a href="mailto:business@tachyon.au?subject=sponsorship">Sponsorship &rarr; business@tachyon.au</a>
+          <a href="mailto:apply@tachyonlab.au?subject=job%20inquiry">Jobs &rarr; apply@tachyonlab.au</a>
+          <a href="mailto:business@tachyonlab.au?subject=sponsorship">Sponsorship &rarr; business@tachyonlab.au</a>
         </div>
       </div>
       <div class="cdots" role="tablist" aria-label="Choose slide">
@@ -801,7 +807,11 @@ body.form-open .stage{cursor:pointer}
         <svg class="key__ic ic-uplink" viewBox="0 0 24 24" aria-hidden="true"><rect class="cu-box" x="3.5" y="8.5" width="11" height="12"/><g class="cu-arrow"><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></g><circle class="cu-ring" cx="17.5" cy="6.5" r="3"/></svg>
         <span class="key__t">Connect</span>
       </a>
-    </nav>
+        <a class="key" href="hiring/">
+      <svg class="key__ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="9.5" width="15" height="9.5" style="stroke-width:1.5"/><path d="M9.5 9.5V7h5v2.5" style="stroke-width:1.5"/></svg>
+      <span class="key__t">Hiring</span>
+    </a>
+  </nav>
   </div>
 
   <nav class="dir" id="dir" aria-label="Sections">
@@ -820,6 +830,10 @@ body.form-open .stage{cursor:pointer}
     <a class="dir__c" href="connect.html">
       <svg class="dir__ic ic-uplink" viewBox="0 0 24 24" aria-hidden="true"><circle class="cu-ring" cx="17.5" cy="6.5" r="3"/><g class="cu-arrow"><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></g></svg>
       <span class="dir__t">Connect</span>
+    </a>
+      <a class="dir__c" href="hiring/">
+      <svg class="dir__ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="9.5" width="15" height="9.5" style="stroke-width:1.5"/><path d="M9.5 9.5V7h5v2.5" style="stroke-width:1.5"/></svg>
+      <span class="dir__t">Hiring</span>
     </a>
   </nav>
 
@@ -906,9 +920,9 @@ body.form-open .stage{cursor:pointer}
       <span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="8.5" width="11" height="12"/><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></svg></span><span class="rail__lb">Connect</span>
       <svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg>
     </a>
-    <div class="rail__foot">
-      <a href="mailto:apply@tachyon.au?subject=hello">apply@tachyon.au</a>
-      <a href="mailto:business@tachyon.au?subject=hello">business@tachyon.au</a>
+    <a class="rail__item" href="hiring/"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><rect x="4.5" y="9.5" width="15" height="9.5" style="stroke-width:1.5"/><path d="M9.5 9.5V7h5v2.5" style="stroke-width:1.5"/></svg></span><span class="rail__lb">Hiring</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><div class="rail__foot">
+      <a href="mailto:apply@tachyonlab.au?subject=hello">apply@tachyonlab.au</a>
+      <a href="mailto:business@tachyonlab.au?subject=hello">business@tachyonlab.au</a>
       <a href="https://x.com/TachyonLabAI" target="_blank" rel="noopener">X — @TachyonLabAI</a>
       <span>&copy; 2026 Tachyon Lab
       <br>Brisbane, Australia</span>
@@ -1274,7 +1288,8 @@ function yclearHot(){Array.prototype.forEach.call(logoBlock.querySelectorAll('.m
     else{seed();cycle()}
   }
   try{
-    if(document.fonts&&document.fonts.ready){
+    if(still){boot()}
+    else if(document.fonts&&document.fonts.ready){
       var bootTo=setTimeout(boot,1200);
       document.fonts.ready.then(function(){clearTimeout(bootTo);refitGrid();boot()});
     }else{boot()}

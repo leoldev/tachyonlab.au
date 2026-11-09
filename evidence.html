@@ -46,27 +46,152 @@ footer a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--si
 .rail:hover .rail__foot,.rail:focus-within .rail__foot{opacity:1}
 .rail__foot a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--signal);align-self:flex-start}
 .rail__foot span{color:var(--smoke)}
-@media(max-width:760px){:root{--rail:48px}.rail:hover,.rail:focus-within{width:170px}}.mstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:26px 0;max-width:560px}.mstrip i{display:block;height:30px}.mstrip i:nth-child(1){background:#FF2E63}.mstrip i:nth-child(2){background:#3DF5C4}.mstrip i:nth-child(3){background:#FFB020}.mstrip i:nth-child(4){background:#4D7CFF}.keys{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);margin:40px 0 0}.key{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 8px;text-decoration:none;color:var(--bone);transition:background .2s linear,color .2s linear}.key__ic{width:40px;height:40px;stroke:#B9B9C6;fill:none;stroke-width:2.2;stroke-linecap:square;stroke-linejoin:miter;transition:stroke .2s linear}.key:hover,.key:focus-visible{background:var(--signal);color:var(--void);outline:none}.key:hover .key__ic,.key:focus-visible .key__ic{stroke:var(--void)}.key span{font-size:14px;font-weight:500;letter-spacing:-.02em}ul.roles{list-style:none;margin:6px 0 18px;padding:0;max-width:62ch}ul.roles li{position:relative;padding:10px 0 10px 22px;border-top:1px solid var(--ash);line-height:1.6;color:#C9C9D2;font-size:16px}ul.roles li:last-child{border-bottom:1px solid var(--ash)}ul.roles li::before{content:"";position:absolute;left:0;top:19px;width:7px;height:7px;background:var(--signal)}</style></head>
-<body><nav class="rail" aria-label="Sections"><a class="rail__head" href="index.html" aria-label="Home"><svg viewBox="790 208 392 167" aria-hidden="true"><path fill="currentColor" d="M888.4,354.4c-6.2,3.6-16.1,7.9-28.1,7.4-27.7-1.1-62.6-27.3-62.6-70s35-68.9,62.6-70c11.7-.5,21.4,3.6,27.5,7.1.2,41.8.4,83.6.6,125.4h0Z"/><path fill="#FF2E63" d="M915,242.6c-8.7,15.8-8.9,40.8-9,49.1,0,9-.3,34.7,8.5,50.6,27.1,49.1,144.8,14.7,200.3-8.9,26.3-11.1,60-25.8,59.7-44.9-.3-18.5-32.5-31.4-59.2-41.9-8.2-3.2-167.5-64.1-200.3-4.1h0Z"/></svg></a><div class="rail__list"><a class="rail__item" href="about.html"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.5c.8-3.8 3.2-5.5 6.5-5.5s5.7 1.7 6.5 5.5"/></svg></span><span class="rail__lb">About</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><a class="rail__item" href="method.html"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><path d="M18.06,15.5 A7,7 0 1,1 18.06,8.5"/><path d="M18.03,6.4 L18.06,8.5 L16.2,7.4"/></svg></span><span class="rail__lb">Method</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><a class="rail__item" href="evidence.html"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 19.5v-6"/><path d="M12 19.5V4.5"/><path d="M19 19.5V9.5"/></svg></span><span class="rail__lb">Evidence</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><a class="rail__item" href="connect.html"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="8.5" width="11" height="12"/><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></svg></span><span class="rail__lb">Connect</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><div class="rail__foot"><a href="mailto:apply@tachyon.au">apply@tachyon.au</a><a href="mailto:business@tachyon.au">business@tachyon.au</a><a href="https://x.com/TachyonLabAI" target="_blank" rel="noopener">X — @TachyonLabAI</a><span>&copy; 2026 Tachyon Lab<br>Brisbane, Australia</span></div></div></nav>
+@media(max-width:760px){:root{--rail:48px}.rail:hover,.rail:focus-within{width:170px}}.mstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:26px 0;max-width:560px}.mstrip i{display:block;height:30px}.mstrip i:nth-child(1){background:#FF2E63}.mstrip i:nth-child(2){background:#3DF5C4}.mstrip i:nth-child(3){background:#FFB020}.mstrip i:nth-child(4){background:#4D7CFF}.keys{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);margin:40px 0 0}.key{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 8px;text-decoration:none;color:var(--bone);transition:background .2s linear,color .2s linear}.key__ic{width:40px;height:40px;stroke:#B9B9C6;fill:none;stroke-width:2.2;stroke-linecap:square;stroke-linejoin:miter;transition:stroke .2s linear}.key:hover,.key:focus-visible{background:var(--signal);color:var(--void);outline:none}.key:hover .key__ic,.key:focus-visible .key__ic{stroke:var(--void)}.key span{font-size:14px;font-weight:500;letter-spacing:-.02em}ul.roles{list-style:none;margin:6px 0 18px;padding:0;max-width:62ch}ul.roles li{position:relative;padding:10px 0 10px 22px;border-top:1px solid var(--ash);line-height:1.6;color:#C9C9D2;font-size:16px}ul.roles li:last-child{border-bottom:1px solid var(--ash)}ul.roles li::before{content:"";position:absolute;left:0;top:19px;width:7px;height:7px;background:var(--signal)}figure.pt{--ph:320px;position:relative;margin:18px 0 0;max-width:820px;padding:0 0 0 34px}
+.pt-plot{position:relative;height:var(--ph);border-left:1px solid var(--ash);border-bottom:1px solid var(--ash);margin:0 34px 0 0}
+.pt-yaxis{position:absolute;left:0;top:0;height:var(--ph);width:32px;pointer-events:none}
+.pt-yt{position:absolute;left:0;transform:translateY(50%);font-family:var(--mono);font-size:10.5px;color:var(--smoke)}
+.pt-xaxis{position:relative;height:26px;margin:0 34px 0 0;pointer-events:none}
+.pt-xt{position:absolute;top:6px;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;color:var(--smoke)}
+.pt-xlab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin:10px 0 0 0}
+.pt-gl{position:absolute;left:0;right:0;height:0;border-top:1px solid rgba(38,38,44,.55)}
+.pt-gv{position:absolute;top:0;bottom:0;width:0;border-left:1px solid rgba(38,38,44,.4)}
+.pt-dot{position:absolute;width:7px;height:7px;margin:0 0 -3.5px -3.5px;background:#8A8A96;border-radius:50%;opacity:.75}
+.pt-lb{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9px;font-weight:400;line-height:1;white-space:nowrap;color:var(--smoke);letter-spacing:0}
+.pt-dot.lf .pt-lb{left:auto;right:8px}
+.pt-dot.up .pt-lb{left:50%;right:auto;top:auto;bottom:9px;transform:translateX(-50%)}
+.pt-dot.dn .pt-lb{left:auto;right:8px;top:9px;bottom:auto;transform:none}
+.pt-dot.on .pt-lb{color:#9BE8D4}
+.pt-dot.on{background:#3DF5C4;opacity:1;box-shadow:0 0 0 2px rgba(61,245,196,.16)}
+.pt-line{position:absolute;inset:0;width:100%;height:100%}
+.pt-line polyline{fill:none;stroke:#3DF5C4;stroke-width:1.2;opacity:.75;vector-effect:non-scaling-stroke}
+.pt-note{font-family:var(--mono);font-size:11px;line-height:1.75;color:var(--smoke);max-width:74ch;margin:16px 0 0}
+.pt-key{display:inline-block;width:18px;height:2px;background:#3DF5C4;vertical-align:3px;margin-right:8px;opacity:.9}
+@media(max-width:760px){
+.pt{padding-left:26px}
+.pt{--ph:230px}
+.pt-plot{margin-right:12px}
+.pt-yaxis{width:24px}
+.pt-xaxis{margin:0 12px 0 0}
+.pt-xlab{margin-left:0}
+.pt-yt,.pt-xt{font-size:9.5px}
+.pt-dot{width:6px;height:6px;margin:0 0 -3px -3px}
+.pt-lb{display:none}
+}
+</style><style>.wrap h2{font-size:21px;font-weight:500;letter-spacing:-.02em;margin:46px 0 8px;color:var(--bone)}.tbl{width:100%;border-collapse:collapse;margin:14px 0 10px;max-width:820px}.tbl th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--smoke);padding:0 18px 10px 0;border-bottom:1px solid var(--ash);font-weight:400}.tbl td{padding:15px 18px 15px 0;border-bottom:1px solid var(--ash);color:#C9C9D2;vertical-align:top;line-height:1.6;font-size:15px}.tbl td:first-child{color:var(--bone);width:31%}.rules{list-style:none;counter-reset:r;margin:14px 0 0;padding:0;max-width:72ch}.rules li{counter-increment:r;position:relative;padding:16px 0 16px 46px;border-top:1px solid var(--ash);line-height:1.65;color:#C9C9D2;font-size:16px}.rules li:last-child{border-bottom:1px solid var(--ash)}.rules li::before{content:counter(r);position:absolute;left:0;top:16px;font-family:var(--mono);font-size:12px;color:var(--signal)}.rules b{color:var(--bone);font-weight:500}.rt{width:100%;border-collapse:collapse;margin:20px 0;max-width:720px}.rt td{padding:16px 18px 16px 0;border-top:1px solid var(--ash);vertical-align:top;line-height:1.6;font-size:15px}.rt td:first-child{width:34%;color:var(--bone)}.rt span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-top:6px}.tbl a,.rt a,.body a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--signal)}</style><style>@media(max-width:760px){
+.rail{display:none}
+.wrap{max-width:none;padding:18px 18px 34px}
+h1{font-size:clamp(29px,8.6vw,38px);line-height:1.04}
+.lede{font-size:16.5px}
+.tbl,.tbl tbody,.tbl tr,.tbl td,.tbl th{display:block;width:auto;max-width:none}
+.tbl tr:first-child{display:none}
+.tbl tr{border-bottom:1px solid var(--ash);padding:16px 0}
+.tbl td{border:0;padding:0;width:auto !important;font-size:15.5px;line-height:1.55}
+.tbl td+td{margin-top:7px}
+.t-method td:first-child,.t-about td:first-child{font-family:inherit;font-size:16.5px;letter-spacing:-.015em;text-transform:none;color:var(--bone);margin:0 0 6px;font-weight:500}
+.t-about td+td::before,.t-method td+td::before,.t-ev td:nth-child(2)::before,.t-ev td:nth-child(3)::before{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--smoke);margin:0 0 3px}
+.t-about td+td::before{content:"Not built"}
+.t-method td+td::before{content:"What would make us wrong"}
+.t-ev td:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--smoke);margin:0 0 5px}
+.t-ev td:nth-child(2)::before{content:"Result"}
+.t-ev td:nth-child(3)::before{content:"Limit"}
+.rt,.rt tbody,.rt tr,.rt td{display:block;width:auto;max-width:none}
+.rt tr{border-top:1px solid var(--ash);padding:16px 0}
+.rt td{border:0;padding:0;width:auto !important}
+.rt td+td{margin-top:7px}
+.rules li{padding:15px 0 15px 40px;font-size:15.5px}
+.keys{margin-top:34px}
+.key{padding:15px 4px;gap:8px}
+.key__ic{width:30px;height:30px}
+.key span{font-size:11.5px}
+}
+</style>
+<style>.chart{margin:16px 0 8px;max-width:820px;border-top:1px solid var(--ash)}
+.chart__row{display:grid;grid-template-columns:minmax(0,1fr) 232px 54px;align-items:center;gap:16px;padding:8px 0;border-bottom:1px solid rgba(38,38,44,.65)}
+.chart__lb{font-size:14.5px;letter-spacing:-.01em;color:#D6D6DF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chart__track{height:9px;background:#17171C;position:relative}
+.chart__track i{display:block;height:100%;background:var(--bone);opacity:.92}
+.chart__val{font-family:var(--mono);font-size:12px;color:var(--bone);text-align:right;font-variant-numeric:tabular-nums}
+.chart__sub{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--smoke);margin:0 0 14px}
+.src{font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--smoke);max-width:70ch;margin:14px 0 0}
+@media(max-width:760px){
+.chart__row{grid-template-columns:1fr 46px;grid-template-areas:"lb val" "bar bar";gap:5px 10px;padding:11px 0}
+.chart__lb{grid-area:lb;white-space:normal;font-size:14px;line-height:1.35}
+.chart__val{grid-area:val;font-size:11.5px;align-self:end}
+.chart__track{grid-area:bar;height:7px}
+}
+</style>
+</head>
+<body><nav class="rail" aria-label="Sections"><a class="rail__head" href="index.html" aria-label="Home"><svg viewBox="790 208 392 167" aria-hidden="true"><path fill="currentColor" d="M888.4,354.4c-6.2,3.6-16.1,7.9-28.1,7.4-27.7-1.1-62.6-27.3-62.6-70s35-68.9,62.6-70c11.7-.5,21.4,3.6,27.5,7.1.2,41.8.4,83.6.6,125.4h0Z"/><path fill="#FF2E63" d="M915,242.6c-8.7,15.8-8.9,40.8-9,49.1,0,9-.3,34.7,8.5,50.6,27.1,49.1,144.8,14.7,200.3-8.9,26.3-11.1,60-25.8,59.7-44.9-.3-18.5-32.5-31.4-59.2-41.9-8.2-3.2-167.5-64.1-200.3-4.1h0Z"/></svg></a><div class="rail__list"><a class="rail__item" href="about.html"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.5c.8-3.8 3.2-5.5 6.5-5.5s5.7 1.7 6.5 5.5"/></svg></span><span class="rail__lb">About</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><a class="rail__item" href="method.html"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><path d="M18.06,15.5 A7,7 0 1,1 18.06,8.5"/><path d="M18.03,6.4 L18.06,8.5 L16.2,7.4"/></svg></span><span class="rail__lb">Method</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><a class="rail__item" href="evidence.html"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 19.5v-6"/><path d="M12 19.5V4.5"/><path d="M19 19.5V9.5"/></svg></span><span class="rail__lb">Evidence</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><a class="rail__item" href="connect.html"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="8.5" width="11" height="12"/><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></svg></span><span class="rail__lb">Connect</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><a class="rail__item" href="hiring/"><span class="rail__no"><svg class="rail__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"><rect x="4.5" y="9.5" width="15" height="9.5" style="stroke-width:1.5"/><path d="M9.5 9.5V7h5v2.5" style="stroke-width:1.5"/></svg></span><span class="rail__lb">Hiring</span><svg class="rail__ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4"/><path d="M5.5 4H12v6.5"/></svg></a><div class="rail__foot"><a href="mailto:apply@tachyonlab.au">apply@tachyonlab.au</a><a href="mailto:business@tachyonlab.au">business@tachyonlab.au</a><a href="https://x.com/TachyonLabAI" target="_blank" rel="noopener">X — @TachyonLabAI</a><span>&copy; 2026 Tachyon Lab<br>Brisbane, Australia</span></div></div></nav>
 <div class="wrap">
   <a class="back" href="index.html">&larr; Back</a>
-  <div class="kick">03 — EVIDENCE</div>
-  <h1>Numbers first, claims second.</h1>
-  <p class="lede">We publish pilot measurements with the caveats stated — what ran, on what, and what didn’t.</p>
+  <h1>Evidence</h1>
+  <p class="lede">Where the models you can actually use sit, on an index that publishes its method.</p>
   <div class="mstrip" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <p class="body">Every result ships with its conditions: hardware, dataset size, and the limits of what we tested. Small bars now; we’ll grow them or say why we couldn’t.</p><p class="body">No benchmarks without context, no charts without methods. If a number can’t be reproduced from our notes, it doesn’t go up.</p><figure><svg viewBox="0 0 150 118" fill="none">
-          <g stroke="#26262C"><line x1="14" y1="25" x2="142" y2="25"/><line x1="14" y1="50" x2="142" y2="50"/><line x1="14" y1="75" x2="142" y2="75"/></g>
-          <path d="M14,8 L14,92 M14,92 L142,92" stroke="#3C3C46" stroke-width="2"/>
-          <g>
-            <rect x="24" y="70" width="16" height="22" fill="#B9B9C6"/>
-            <rect x="48" y="56" width="16" height="36" fill="#B9B9C6"/>
-            <rect x="72" y="44" width="16" height="48" fill="#B9B9C6"/>
-            <rect x="96" y="30" width="16" height="62" fill="#B9B9C6"/>
-            <rect x="120" y="14" width="16" height="78" fill="#FF2E63"/>
-          </g>
-          <svg x="116" y="96" width="24" height="10.2" viewBox="790 208 392 167"><path fill="#EFECE4" d="M888.4,354.4c-6.2,3.6-16.1,7.9-28.1,7.4-27.7-1.1-62.6-27.3-62.6-70s35-68.9,62.6-70c11.7-.5,21.4,3.6,27.5,7.1.2,41.8.4,83.6.6,125.4h0Z"/><path fill="#FF2E63" d="M915,242.6c-8.7,15.8-8.9,40.8-9,49.1,0,9-.3,34.7,8.5,50.6,27.1,49.1,144.8,14.7,200.3-8.9,26.3-11.1,60-25.8,59.7-44.9-.3-18.5-32.5-31.4-59.2-41.9-8.2-3.2-167.5-64.1-200.3-4.1h0Z"/></svg>
-        </svg></figure>
-  <nav class="keys" aria-label="Sections"><a class="key" href="about.html"><svg class="key__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.5c.8-3.8 3.2-5.5 6.5-5.5s5.7 1.7 6.5 5.5"/></svg><span>About</span></a><a class="key" href="method.html"><svg class="key__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M18.06,15.5 A7,7 0 1,1 18.06,8.5" style="stroke-linecap:butt"/><path d="M18.03,6.4 L18.06,8.5 L16.2,7.4"/></svg><span>Method</span></a><a class="key" href="evidence.html"><svg class="key__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 19.5v-6"/><path d="M12 19.5V4.5"/><path d="M19 19.5V9.5"/></svg><span>Evidence</span></a><a class="key" href="connect.html"><svg class="key__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><rect x="3.5" y="8.5" width="11" height="12"/><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></svg><span>Connect</span></a></nav>
+
+  <h2>Intelligence</h2>
+  <p class="chart__sub">Artificial Analysis Intelligence Index v5.0.1 &middot; higher is better</p>
+  <div class="chart" role="img" aria-label="Bar chart of Artificial Analysis Intelligence Index scores for 28 models, from Gemini 4 Carbon at 60 down to Nemotron 3.5 Super VL at 14.">
+    <div class="chart__row"><div class="chart__lb">Gemini 4 Carbon (high)</div><div class="chart__track"><i style="width:100.0%"></i></div><div class="chart__val">60</div></div>
+    <div class="chart__row"><div class="chart__lb">Claude Opus 5.5 (max)</div><div class="chart__track"><i style="width:98.3%"></i></div><div class="chart__val">59</div></div>
+    <div class="chart__row"><div class="chart__lb">GPT-6 Astra (max)</div><div class="chart__track"><i style="width:95.0%"></i></div><div class="chart__val">57</div></div>
+    <div class="chart__row"><div class="chart__lb">GPT-6.1 Sol (max)</div><div class="chart__track"><i style="width:91.7%"></i></div><div class="chart__val">55</div></div>
+    <div class="chart__row"><div class="chart__lb">Claude Sonnet 5.5 (max)</div><div class="chart__track"><i style="width:91.7%"></i></div><div class="chart__val">55</div></div>
+    <div class="chart__row"><div class="chart__lb">GPT-6.1 Terra (max)</div><div class="chart__track"><i style="width:85.0%"></i></div><div class="chart__val">51</div></div>
+    <div class="chart__row"><div class="chart__lb">Muse Wonder Full (max)</div><div class="chart__track"><i style="width:83.3%"></i></div><div class="chart__val">50</div></div>
+    <div class="chart__row"><div class="chart__lb">Claude Fable 5.1 (max)</div><div class="chart__track"><i style="width:81.7%"></i></div><div class="chart__val">49</div></div>
+    <div class="chart__row"><div class="chart__lb">Kimi K3.1 Pro</div><div class="chart__track"><i style="width:76.7%"></i></div><div class="chart__val">46</div></div>
+    <div class="chart__row"><div class="chart__lb">Muse Wonder (max)</div><div class="chart__track"><i style="width:73.3%"></i></div><div class="chart__val">44</div></div>
+    <div class="chart__row"><div class="chart__lb">Claude Haiku 5.5 (max)</div><div class="chart__track"><i style="width:60.0%"></i></div><div class="chart__val">36</div></div>
+    <div class="chart__row"><div class="chart__lb">Grok 4.7 (xhigh)</div><div class="chart__track"><i style="width:58.3%"></i></div><div class="chart__val">35</div></div>
+    <div class="chart__row"><div class="chart__lb">Tencent Hy4</div><div class="chart__track"><i style="width:58.3%"></i></div><div class="chart__val">35</div></div>
+    <div class="chart__row"><div class="chart__lb">Qwen3.8 Max (0902)</div><div class="chart__track"><i style="width:56.7%"></i></div><div class="chart__val">34</div></div>
+    <div class="chart__row"><div class="chart__lb">DeepSeek V4.1 Flash 1017 (max)</div><div class="chart__track"><i style="width:55.0%"></i></div><div class="chart__val">33</div></div>
+    <div class="chart__row"><div class="chart__lb">GLM-5.3 (max)</div><div class="chart__track"><i style="width:53.3%"></i></div><div class="chart__val">32</div></div>
+    <div class="chart__row"><div class="chart__lb">Gemini 3.8 Flash (high)</div><div class="chart__track"><i style="width:51.7%"></i></div><div class="chart__val">31</div></div>
+    <div class="chart__row"><div class="chart__lb">Inkling 2 Small</div><div class="chart__track"><i style="width:51.7%"></i></div><div class="chart__val">31</div></div>
+    <div class="chart__row"><div class="chart__lb">MiMo-V2.6-Pro</div><div class="chart__track"><i style="width:50.0%"></i></div><div class="chart__val">30</div></div>
+    <div class="chart__row"><div class="chart__lb">Ling 3.1 Flash 1019</div><div class="chart__track"><i style="width:50.0%"></i></div><div class="chart__val">30</div></div>
+    <div class="chart__row"><div class="chart__lb">MiniMax-M3.1-Flash</div><div class="chart__track"><i style="width:48.3%"></i></div><div class="chart__val">29</div></div>
+    <div class="chart__row"><div class="chart__lb">GPT-6 Luna (max)</div><div class="chart__track"><i style="width:46.7%"></i></div><div class="chart__val">28</div></div>
+    <div class="chart__row"><div class="chart__lb">Mistral Large 4 (high)</div><div class="chart__track"><i style="width:43.3%"></i></div><div class="chart__val">26</div></div>
+    <div class="chart__row"><div class="chart__lb">Muse Spark Open (xhigh)</div><div class="chart__track"><i style="width:41.7%"></i></div><div class="chart__val">25</div></div>
+    <div class="chart__row"><div class="chart__lb">Qwen3.8 27B (xhigh)</div><div class="chart__track"><i style="width:33.3%"></i></div><div class="chart__val">20</div></div>
+    <div class="chart__row"><div class="chart__lb">K2 Horizon 375B A23B</div><div class="chart__track"><i style="width:30.0%"></i></div><div class="chart__val">18</div></div>
+    <div class="chart__row"><div class="chart__lb">Beam 1.0</div><div class="chart__track"><i style="width:30.0%"></i></div><div class="chart__val">18</div></div>
+    <div class="chart__row"><div class="chart__lb">Nemotron 3.5 Super VL</div><div class="chart__track"><i style="width:23.3%"></i></div><div class="chart__val">14</div></div>
+  </div>
+  <p class="src">28 of 727 models. The index averages nine evaluations: AA-Briefcase, AutomationBench, Terminal-Bench 4.0, FrontierCode 2.0, AA-Omniscience, GDP.pdf, HLE-Diamond, CritPt v2 and Terminal-Bench-Science.</p>
+
+  <h2>Intelligence against cost</h2>
+  <p class="chart__sub">Artificial Analysis index score vs cost per index task &middot; up and to the left is better</p>
+  <figure class="pt" role="img" aria-label="Scatter plot of intelligence score against cost per index task for eleven models. Five models form a frontier from MiMo-V2.6-Pro at 30 points and 26 cents up to Gemini 4 Carbon at 60 points and 7 dollars 76. The other six sit below that line.">
+    <div class="pt-yaxis"><span class="pt-yt" style="bottom:4.17%">20</span><span class="pt-yt" style="bottom:25.00%">30</span><span class="pt-yt" style="bottom:45.83%">40</span><span class="pt-yt" style="bottom:66.67%">50</span><span class="pt-yt" style="bottom:87.50%">60</span></div>
+    <div class="pt-plot">
+      <b class="pt-gl" style="bottom:4.17%"></b><b class="pt-gl" style="bottom:25.00%"></b><b class="pt-gl" style="bottom:45.83%"></b><b class="pt-gl" style="bottom:66.67%"></b><b class="pt-gl" style="bottom:87.50%"></b></b><b class="pt-gl" style="bottom:27.27%"></b><b class="pt-gl" style="bottom:50.00%"></b><b class="pt-gl" style="bottom:72.73%"></b><b class="pt-gl" style="bottom:95.45%"></b><b class="pt-gv" style="left:0.00%"></b><b class="pt-gv" style="left:28.57%"></b><b class="pt-gv" style="left:57.14%"></b><b class="pt-gv" style="left:85.71%"></b>
+      <svg class="pt-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="1.86,72.73 4.29,65.91 9.07,15.91 44.57,11.36 55.43,4.55"/></svg>
+      <i class= up"pt-dot on" style="left:1.86%;bottom:27.27%" title="MiMo-V2.6-Pro — 30, $0.26"><b class="pt-lb">MiMo-V2.6</b></i>
+      <i class="pt-dot on" style="left:1.86%;bottom:25.00%" title="MiMo-V2.6-Pro — 30, $0.26"><b class="pt-lb">MiMo-V2.6</b></i>
+      <i class="pt-dot on" style="left:4.29%;bottom:31.25%" title="DeepSeek V4.1 Flash 1017 (max) — 33, $0.60"><b class="pt-lb">DeepSeek V4.1 Flash</b></i>
+      <i class="pt-dot on up" style="left:9.07%;bottom:77.08%" title="GPT-6.1 Sol (max) — 55, $1.27"><b class="pt-lb">GPT-6.1 Sol</b></i>
+      <i class="pt-dot" style="left:26.29%;bottom:58.33%" title="Kimi K3.1 Pro — 46, $3.68"><b class="pt-lb">Kimi K3.1</b></i>
+      <i class="pt-dot" style="left:35.79%;bottom:29.17%" title="GLM-5.3 (max) — 32, $5.01"><b class="pt-lb">GLM-5.3</b></i>
+      <i class="pt-dot on up" style="left:44.57%;bottom:81.25%" title="GPT-6 Astra (max) — 57, $6.24"><b class="pt-lb">GPT-6 Astra</b></i>
+      <i class="pt-dot" style="left:49.64%;bottom:54.17%" title="Muse Wonder (max) — 44, $6.95"><b class="pt-lb">Muse Wonder</b></i>
+      <i class="pt-dot on up" style="left:55.43%;bottom:87.50%" title="Gemini 4 Carbon (high) — 60, $7.76"><b class="pt-lb">Gemini 4 Carbon</b></i>
+      <i class="pt-dot" style="left:55.50%;bottom:35.42%" title="Grok 4.7 (xhigh) — 35, $7.77"><b class="pt-lb">Grok 4.7</b></i>
+      <i class="pt-dot" style="left:71.71%;bottom:85.42%" title="Claude Opus 5.5 (max) — 59, $10.04"><b class="pt-lb">Claude Opus 5.5</b></i>
+      <i class="pt-dot lf" style="left:92.79%;bottom:64.58%" title="Claude Fable 5.1 (max) — 49, $12.99"><b class="pt-lb">Claude Fable 5.1</b></i>
+    </div>
+    <div class="pt-xaxis"><span class="pt-xt" style="left:0.00%">$0</span><span class="pt-xt" style="left:28.57%">$4</span><span class="pt-xt" style="left:57.14%">$8</span><span class="pt-xt" style="left:85.71%">$12</span></div>
+    <div class="pt-xlab">cost per index task, USD</div>
+  </figure>
+    <p class="pt-note"><span class="pt-key"></span>The line is the frontier: MiMo-V2.6-Pro ($0.26, 30) &rarr; DeepSeek V4.1 Flash ($0.60, 33) &rarr; GPT-6.1 Sol ($1.27, 55) &rarr; GPT-6 Astra ($6.24, 57) &rarr; Gemini 4 Carbon ($7.76, 60). Everything below it is dominated &mdash; more money for less model.</p>
+
+  <h2>What this page is not</h2>
+  <p class="body">These are independent scores for models anyone can use today. None of them are ours, and none of them are a result for Tachyon. Our own pilot measurements stay in the report until they can be published with their conditions attached.</p>
+  <p class="src">Source: <a href="https://artificialanalysis.ai" target="_blank" rel="noopener">artificialanalysis.ai</a> &mdash; Intelligence Index v5.0.1 and cost per index task, retrieved 10 November 2026. The bar chart and the scatter plot use the same index scores.</p>
+
+  <nav class="keys" aria-label="Sections"><a class="key" href="about.html"><svg class="key__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.5c.8-3.8 3.2-5.5 6.5-5.5s5.7 1.7 6.5 5.5"/></svg><span>About</span></a><a class="key" href="method.html"><svg class="key__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M18.06,15.5 A7,7 0 1,1 18.06,8.5" style="stroke-linecap:butt"/><path d="M18.03,6.4 L18.06,8.5 L16.2,7.4"/></svg><span>Method</span></a><a class="key" href="evidence.html"><svg class="key__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 19.5v-6"/><path d="M12 19.5V4.5"/><path d="M19 19.5V9.5"/></svg><span>Evidence</span></a><a class="key" href="connect.html"><svg class="key__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><rect x="3.5" y="8.5" width="11" height="12"/><path d="M8.7 15.5 18.4 5.8"/><path d="M15 5.2H19V9.2"/></svg><span>Connect</span></a><a class="key" href="hiring/"><svg class="key__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><rect x="4.5" y="9.5" width="15" height="9.5" style="stroke-width:1.5"/><path d="M9.5 9.5V7h5v2.5" style="stroke-width:1.5"/></svg><span>Hiring</span></a></nav>
   <div class="pn"><a href="method.html">&larr; Method</a><a href="connect.html">Connect &rarr;</a></div>
-  <footer><span>&copy; 2026 Tachyon Lab<br>Brisbane, Australia</span><a href="mailto:apply@tachyon.au">apply@tachyon.au</a><a href="mailto:business@tachyon.au">business@tachyon.au</a><a href="https://x.com/TachyonLabAI" target="_blank" rel="noopener">X — @TachyonLabAI</a></footer>
+  <footer><span>&copy; 2026 Tachyon Lab<br>Brisbane, Australia</span><a href="mailto:apply@tachyonlab.au">apply@tachyonlab.au</a><a href="mailto:business@tachyonlab.au">business@tachyonlab.au</a><a href="https://x.com/TachyonLabAI" target="_blank" rel="noopener">X — @TachyonLabAI</a></footer>
 </div></body></html>

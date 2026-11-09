@@ -4,3 +4,6 @@ node_modules/
 .DS_Store
 # local captures
 _tmp/
+# local working captures
+_shots/
+_preview/
