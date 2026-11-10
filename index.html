@@ -371,7 +371,7 @@ body.form-open .stage{cursor:pointer}
 }
 .mft{display:none}
 @media (max-width:760px){
-  :root{--rail:48px;--rail-open:170px;--pad:16px;--dock-h:52px;--dock-r:18px}
+  :root{--rail:48px;--rail-open:170px;--pad:14px;--dock-h:52px;--dock-r:18px}
   .stage{padding:58px var(--pad) calc(var(--dock-h) + 16px) var(--pad);gap:0}
   .rail{display:none}
   .mnav{display:flex}
@@ -399,7 +399,7 @@ body.form-open .stage{cursor:pointer}
   .dock__name{font-size:clamp(22px,6.4vw,30px)}
   .dock__cta{padding:12px 15px;font-size:8.5px;letter-spacing:.12em;gap:9px;border-radius:10px}
   .dock__body{padding:0 16px}
-  .wm{width:min(304px,78vw)}
+  .wm{width:min(100%,460px)}
   .identity{margin-top:0}
   .dir__c{min-height:64px;padding:12px 14px}
   .dir__c{min-height:84px}
@@ -1010,6 +1010,16 @@ body.form-open .stage{cursor:pointer}
         el.setAttribute('width',CW);
         el.setAttribute('height',RH);
       });
+      /* the font may arrive after the blocks are already moving: the grid moves
+         with it, so re-seat the roaming blocks or they stay on the old geometry */
+      if(blobs.length){
+        blobs.forEach(function(b){
+          var u=blobRect(b);
+          b.el.setAttribute('x',u.x);b.el.setAttribute('y',u.y);
+          b.el.setAttribute('width',u.w);b.el.setAttribute('height',u.h);
+          for(var jj=0;jj<jobs.length;jj++) if(jobs[jj].el===b.el) jobs[jj].cancelled=true;
+        });
+      }
     }catch(e){}
   }
   var jobs=[];
@@ -1017,6 +1027,7 @@ body.form-open .stage{cursor:pointer}
   function tick(now){
     var rest=[];
     for(var i=0;i<jobs.length;i++){var j=jobs[i];
+      if(j.cancelled)continue;
       var t=(now-j.t0)/j.dur;
       if(t<0){rest.push(j);continue}
       if(t>1)t=1;
@@ -1031,11 +1042,23 @@ body.form-open .stage{cursor:pointer}
     if(jobs.length)requestAnimationFrame(tick);
   }
   function tw(el,props,dur,delay,done){
+    /* one rect, one tween. A second tween on the same rect cancels the first —
+       otherwise both write the same attributes every frame and the rect drifts
+       to a blend of the two targets instead of landing on a cell. */
+    for(var i=0;i<jobs.length;i++){var cj=jobs[i];
+      if(cj.el!==el||cj.cancelled)continue;
+      cj.cancelled=true;
+      /* settle any property the new tween does not touch, so a cancelled size
+         morph does not leave the block half grown */
+      for(var pk in cj.props){
+        if(!(pk in props)) el.setAttribute(pk==='w'?'width':(pk==='h'?'height':pk),Math.round(cj.props[pk]*10)/10);
+      }
+    }
     var from={}, k, t0=performance.now()+(delay||0);
     for(k in props){
       from[k]=parseFloat(el.getAttribute(k==='w'?'width':(k==='h'?'height':k)));
     }
-    jobs.push({el:el,props:props,from:from,t0:t0,dur:dur||600,done:done});
+    jobs.push({el:el,props:props,from:from,t0:t0,dur:dur||600,done:done,cancelled:false});
     if(jobs.length===1)requestAnimationFrame(tick);
   }
   var NS='http://www.w3.org/2000/svg';
@@ -1053,12 +1076,12 @@ body.form-open .stage{cursor:pointer}
   function inHome(b){return b.cc>=4*b.si&&b.cc+b.cw<=4*b.si+4}
   function blobRect(b){return {x:mxx(b.cc),y:mxy(b.rr),w:(b.cw-1)*P+CW,h:(b.rh-1)*RYP+RH}}
   function blobDraw(b,dur,delay){var u=blobRect(b);tw(b.el,{x:u.x,y:u.y,w:u.w,h:u.h},dur||500,delay||0)}
-  function touching(a,b){
-    var ox0=Math.max(a.cc,b.cc), ox1=Math.min(a.cc+a.cw,b.cc+b.cw);
-    var oy0=Math.max(a.rr,b.rr), oy1=Math.min(a.rr+b.rh,b.rr+b.rh);
-    if(ox1>ox0&&oy1>oy0)return true;
-    if(ox1===ox0&&oy1>oy0)return true;
-    if(oy1===oy0&&ox1>ox0)return true;
+  /* two blocks may only merge when their union is a perfect rectangle. Merging a
+     diagonal pair fills the two corner cells as well, which is how a small cell
+     ends up sitting inside a bigger one. */
+  function mergeable(a,b){
+    if(a.rr===b.rr && a.rh===b.rh && (a.cc+a.cw===b.cc || b.cc+b.cw===a.cc))return true;
+    if(a.cc===b.cc && a.cw===b.cw && (a.rr+a.rh===b.rr || b.rr+b.rh===a.rr))return true;
     return false;
   }
   function combine(a,b){
@@ -1084,6 +1107,10 @@ body.form-open .stage{cursor:pointer}
   function seed(){
     blobs.forEach(function(b){b.el.remove()});blobs=[];
     var taken={};
+    /* reserve every lane's home cell before any colour picks its own cells,
+       otherwise a colour can pick a cell that is another colour's home and
+       two blocks end up sitting in the same square */
+    YPAL.forEach(function(col,si){taken[(si*4+1)+','+1]=1});
     function freeCell(){
       for(var t=0;t<400;t++){
         var c=Math.floor(Math.random()*16), r=Math.floor(Math.random()*4);
@@ -1095,23 +1122,20 @@ body.form-open .stage{cursor:pointer}
     }
     YPAL.forEach(function(col,si){
       var hc=si*4+1, hr=1;
-      taken[hc+','+hr]=1;
       var spots=[[hc,hr]];
       for(var k=0;k<3;k++)spots.push(freeCell());
       spots.forEach(function(q,i){
-        var b={col:col,si:si,cc:hc,rr:hr,cw:1,rh:1,_id:++bid,_m:false,
+        /* the block is placed on its own cell straight away and only the drawing
+           starts at the lane centre. Scheduling the move for later means the cell
+           is free when it is chosen and taken by the time the block arrives. */
+        var b={col:col,si:si,cc:q[0],rr:q[1],cw:1,rh:1,_id:++bid,_m:false,
           el:mkRect(mxx(hc),mxy(hr),1,1,col)};
         blobs.push(b);
-        (function(bb,qq,ii){
-          tw(bb.el,{x:mxx(hc),y:mxy(hr),w:CW,h:RH},420,ii*80+si*40,function(){
-            if(blobs.indexOf(bb)<0)return;
-            bb.cc=qq[0];bb.rr=qq[1];
-            glide(bb,qq[0],qq[1],0);
-          });
-        })(b,q,i);
+        tw(b.el,{x:mxx(q[0]),y:mxy(q[1]),w:CW,h:RH},460,i*80+si*40);
       });
     });
   }
+
   function shuffleTick(){
     blobs.forEach(function(b){b._m=false});
     blobs.slice().sort(function(){return Math.random()-.5}).forEach(function(b){
@@ -1161,10 +1185,15 @@ body.form-open .stage{cursor:pointer}
         var cx=mxx(bb.cc)+CW/2, cy=mxy(bb.rr)+RH/2;
         tw(bb.el,{x:cx,y:cy,w:1,h:1},320,i*30,function(){
           bb.el.remove();var ix=blobs.indexOf(bb);if(ix>=0)blobs.splice(ix,1);
-          for(var t=0;t<60;t++){
-            var hc=bb.si*4+Math.floor(Math.random()*4), hr=Math.floor(Math.random()*4);
-            if(!occAt(hc,hr,null))break;
+          /* look for a free cell in this lane. If the lane is already full the
+             block has formed and there is nothing to come back to — putting a
+             cell back anyway is what leaves a small square inside a big one. */
+          var hc=-1,hr=-1;
+          for(var t=0;t<200;t++){
+            var pc=bb.si*4+Math.floor(Math.random()*4), pr=Math.floor(Math.random()*4);
+            if(!occAt(pc,pr,null)){hc=pc;hr=pr;break}
           }
+          if(hc<0)return;
           var nb={col:bb.col,si:bb.si,cc:hc,rr:hr,cw:1,rh:1,_id:++bid,_m:false,
             el:mkRect(mxx(hc),mxy(hr),1,1,bb.col)};
           blobs.push(nb);
@@ -1180,7 +1209,7 @@ body.form-open .stage{cursor:pointer}
       for(var p=0;p<mine.length;p++)for(var q=p+1;q<mine.length;q++){
         if(blobs.indexOf(mine[p])<0||blobs.indexOf(mine[q])<0)continue;
         var A=mine[p], B=mine[q];
-        if(!touching(A,B))continue;
+        if(!mergeable(A,B))continue;
         if(A.cw*A.rh>=B.cw*B.rh)combine(A,B);else combine(B,A);
       }
       var mine2=blobs.filter(function(b){return b.col===col})
@@ -1200,8 +1229,12 @@ body.form-open .stage{cursor:pointer}
           var o=occAt(fresh[f][0],fresh[f][1],big);
           if(o&&occs.indexOf(o)<0)occs.push(o);
         }
+        for(var pi=0;pi<occs.length;pi++) if(occs[pi].col!==big.col)return false;
         for(var oi=0;oi<occs.length;oi++){
           var ob=occs[oi];
+          /* check the whole growth before applying any of it: a blob of another
+             colour in the way aborts it, and a half applied growth leaves the
+             blocks in the wrong place */
           if(ob.col!==big.col)return false;
           var bc=cellsOf(ob), rem=[];
           bc.forEach(function(q){
@@ -1239,6 +1272,7 @@ body.form-open .stage{cursor:pointer}
     });
   }
   function settlePhase(){
+    var bigs=[];
     YPAL.forEach(function(col,si){
       var lane=si*4;
       var home=blobs.filter(function(b){return b.col===col&&b.cc>=lane&&b.cc+b.cw<=lane+4})
@@ -1249,22 +1283,30 @@ body.form-open .stage{cursor:pointer}
           el:mkRect(mxx(lane),mxy(0),1,1,col)};
         blobs.push(big);
       }
-      blobs.filter(function(b){return b.col===col&&b!==big}).forEach(function(sm,idx){
-        (function(o,n){
-          var ocx=mxx(o.cc)+((o.cw-1)*P+CW)/2, ocy=mxy(o.rr)+((o.rh-1)*RYP+RH)/2;
-          tw(o.el,{x:ocx,y:ocy,w:1,h:1},320,n*70,function(){
-            o.el.remove();var ix=blobs.indexOf(o);if(ix>=0)blobs.splice(ix,1);
-          });
-        })(sm,idx);
+      bigs.push(big);
+    });
+    /* every lane ends up as one solid 4x4 block, so everything still roaming has
+       to go first, including another colour's cell sitting inside this lane, and
+       the block only grows once they are gone. Otherwise a small square is left
+       sitting inside a big one. */
+    blobs.slice().forEach(function(o,idx){
+      if(bigs.indexOf(o)>=0)return;
+      var ocx=mxx(o.cc)+((o.cw-1)*P+CW)/2, ocy=mxy(o.rr)+((o.rh-1)*RYP+RH)/2;
+      tw(o.el,{x:ocx,y:ocy,w:1,h:1},300,Math.min(idx,6)*45,function(){
+        o.el.remove();var ix=blobs.indexOf(o);if(ix>=0)blobs.splice(ix,1);
       });
+    });
+    YPAL.forEach(function(col,si){
+      var lane=si*4, big=bigs[si];
       later(function(){
         if(blobs.indexOf(big)<0)return;
         big.cc=lane;big.rr=0;big.cw=4;big.rh=4;
         tw(big.el,{x:mxx(lane),y:RY0,
           w:Math.round((3*P+CW)*10)/10,h:FH},650,0);
-      },700);
+      },1150);
     });
   }
+
   function collapsePhase(){
     blobs.forEach(function(b,i){
       var cx=mxx(b.cc)+((b.cw-1)*P+CW)/2;
@@ -1319,10 +1361,25 @@ function yclearHot(){Array.prototype.forEach.call(logoBlock.querySelectorAll('.m
   }
   try{
     if(still){boot()}
-    else if(document.fonts&&document.fonts.ready){
-      var bootTo=setTimeout(boot,1200);
-      document.fonts.ready.then(function(){clearTimeout(bootTo);refitGrid();boot()});
-    }else{boot()}
+    else{
+      var fired=false;
+      function go(){
+        if(fired){ try{refitGrid()}catch(e){} return; }
+        fired=true; boot();
+      }
+      var bootTo=setTimeout(go,1200);
+      function onFont(){
+        try{document.fonts.ready.then(go)}catch(e){go()}
+      }
+      if(document.fonts&&document.fonts.load){
+        /* wait for the real wordmark font before measuring the grid, otherwise the
+           blocks are placed against the fallback and the late swap moves the grid
+           out from under them */
+        document.fonts.load('800 200px "Tachyon Archivo Heavy"').then(onFont,function(){clearTimeout(bootTo);go()});
+      }else if(document.fonts&&document.fonts.ready){
+        document.fonts.ready.then(onFont);
+      }else{clearTimeout(bootTo);go()}
+    }
   }catch(e){boot()}
 
   /* ── right navbar ──────────────────────────────────────────── */
