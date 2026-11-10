@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" role="img" aria-label="Tachyon Lab">
+  <title>Tachyon Lab</title>
+  <desc>TACHYON over LAB. The O is the hexagonal mark; four colour squares follow LAB.</desc>
+
+  <!-- Hexagonal O mark -->
+  <g fill="none" stroke="#F4F3EE" stroke-miterlimit="10">
+    <path stroke-width="25" d="M951.2,53.2h-64.2c-1.8,0-3.4,1-4.3,2.5l-32.1,55.6c-.9,1.5-.9,3.5,0,5l32.1,55.6c.9,1.5,2.5,2.5,4.3,2.5h64.2c1.8,0,3.4-1,4.3-2.5l32.1-55.6c.9-1.5.9-3.5,0-5l-32.1-55.6c-.9-1.5-2.5-2.5-4.3-2.5Z"/>
+    <g stroke-width="5">
+      <line x1="876.4" y1="113.7" x2="898.7" y2="75.7"/>
+      <line x1="897" y1="151.8" x2="941.1" y2="151.8"/>
+      <line x1="939.4" y1="75.6" x2="961.5" y2="113.8"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <g fill="#F4F3EE" font-family="'Tachyon Archivo Heavy', Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="200" font-weight="800" letter-spacing="0">
+    <text x="19.5" y="182.7">TACHY</text>
+    <text x="998.3" y="182.7">N</text>
+    <text x="11.2" y="353.7">LAB</text>
+  </g>
+
+  <!-- Four-square mark -->
+  <g>
+    <rect x="505.1" y="216.3" width="149.5" height="137.5" fill="#FF2E63"/>
+    <rect x="674.7" y="216.3" width="149.5" height="137.5" fill="#3DF5C4"/>
+    <rect x="844.4" y="216.3" width="149.5" height="137.5" fill="#FFB020"/>
+    <rect x="1014" y="216.3" width="149.5" height="137.5" fill="#4D7CFF"/>
+  </g>
+</svg>
